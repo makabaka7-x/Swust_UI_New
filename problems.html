@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>题库 - SwustOJ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #2d3748;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 导航栏 */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      object-fit: contain;
+    }
+
+    .welcome-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #4a5568;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 12px;
+      padding: 8px 2px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #3498db;
+    }
+
+    .user-avatar {
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .avatar-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #3498db;
+      padding: 0;
+    }
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline {
+      border: 1px solid #3498db;
+      color: #3498db;
+      background-color: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    /* 主要内容区域 */
+    .main {
+      flex-grow: 1;
+    }
+
+    /* 问题列表区域 */
+    .problems-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .section-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .problem-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .problem-tab {
+      padding: 8px 16px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+
+    .problem-tab.active {
+      color: #3498db;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .problem-filters {
+      display: flex;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .filter-dropdown {
+      position: relative;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      background-color: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover {
+      border-color: #cbd5e0;
+    }
+
+    .search-bar {
+      flex-grow: 1;
+      display: flex;
+    }
+
+    .search-input {
+      flex-grow: 1;
+      height: 32px;
+      padding: 0 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+
+    /* 问题表格 */
+    .problems-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .problems-table th,
+    .problems-table td {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 14px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .problems-table th {
+      background-color: #f8f9fa;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .problems-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .problems-table tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .problem-status {
+      width: 30px;
+    }
+
+    .problem-status .status-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .status-easy {
+      background-color: #5cb85c;
+    }
+
+    .status-medium {
+      background-color: #f0ad4e;
+    }
+
+    .status-hard {
+      background-color: #d9534f;
+    }
+
+    .problem-title {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .problem-title:hover {
+      text-decoration: underline;
+    }
+
+    .problem-tags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .problem-tag {
+      background-color: #edf2f7;
+      color: #4a5568;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    /* 分页 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .pagination-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 38px;
+      margin: 0 4px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #4a5568;
+      font-size: 14px;
+      border: 1px solid #e2e8f0;
+      background-color: white;
+      padding: 0 12px;
+    }
+
+    .pagination-item:hover {
+      border-color: #3498db;
+      color: #3498db;
+    }
+
+    .pagination-item.active {
+      background-color: #3498db;
+      color: white;
+      border-color: #3498db;
+    }
+
+    /* 页脚 */
+    .footer {
+      background-color: white;
+      border-top: 1px solid #e2e8f0;
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .footer-link {
+      color: #4a5568;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-link:hover {
+      color: #3498db;
+    }
+
+    .copyright {
+      color: #4a5568;
+      font-size: 14px;
+    }
+
+    /* 媒体查询 */
+    @media (max-width: 768px) {
+      .navbar {
+        height: auto;
+        padding: 15px 0;
+      }
+
+      .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .auth-buttons {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .problem-filters {
+        flex-direction: column;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="SwustOJ Logo" class="logo-img">
+        <span class="welcome-text">欢迎来到SwustOJ</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="problems.html" class="nav-link active">题库</a>
+        <a href="contest.html" class="nav-link">竞赛</a>
+        <a href="homework.html" class="nav-link">作业</a>
+        <a href="discussion.html" class="nav-link">讨论</a>
+        <a href="ranking.html" class="nav-link">排行榜</a>
+        <a href="learning.html" class="nav-link">学习</a>
+      </div>
+      <div class="auth-buttons">
+        <a href="index.html#login" class="btn btn-outline">登录</a>
+        <a href="index.html#register" class="btn btn-primary">注册</a>
+        <div class="user-avatar">
+          <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main">
+    <div class="problems-container">
+      <div class="section-header">
+        <h1 class="section-title">题目列表</h1>
+        <div class="section-actions">
+          <a href="#" class="btn btn-primary">开始做题</a>
+        </div>
+      </div>
+      
+      <div class="problem-tabs">
+        <div class="problem-tab active">全部题目</div>
+        <div class="problem-tab">算法</div>
+        <div class="problem-tab">数据结构</div>
+        <div class="problem-tab">数据库</div>
+        <div class="problem-tab">Shell</div>
+      </div>
+      
+      <div class="problem-filters">
+        <div class="filter-dropdown">
+          <button class="filter-btn">难度</button>
+        </div>
+        <div class="filter-dropdown">
+          <button class="filter-btn">状态</button>
+        </div>
+        <div class="filter-dropdown">
+          <button class="filter-btn">标签</button>
+        </div>
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="搜索题目...">
+        </div>
+      </div>
+      
+      <table class="problems-table">
+        <thead>
+          <tr>
+            <th>状态</th>
+            <th>题目</th>
+            <th>难度</th>
+            <th>通过率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-easy"></span></td>
+            <td><a href="#" class="problem-title">1. 两数之和</a></td>
+            <td>简单</td>
+            <td>45.3%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-medium"></span></td>
+            <td><a href="#" class="problem-title">2. 两数相加</a></td>
+            <td>中等</td>
+            <td>36.8%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-medium"></span></td>
+            <td><a href="#" class="problem-title">3. 无重复字符的最长子串</a></td>
+            <td>中等</td>
+            <td>33.2%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-hard"></span></td>
+            <td><a href="#" class="problem-title">4. 寻找两个正序数组的中位数</a></td>
+            <td>困难</td>
+            <td>37.9%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-medium"></span></td>
+            <td><a href="#" class="problem-title">5. 最长回文子串</a></td>
+            <td>中等</td>
+            <td>30.5%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-medium"></span></td>
+            <td><a href="#" class="problem-title">6. Z 字形变换</a></td>
+            <td>中等</td>
+            <td>46.7%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-medium"></span></td>
+            <td><a href="#" class="problem-title">7. 整数反转</a></td>
+            <td>中等</td>
+            <td>34.8%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-medium"></span></td>
+            <td><a href="#" class="problem-title">8. 字符串转换整数 (atoi)</a></td>
+            <td>中等</td>
+            <td>21.3%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-easy"></span></td>
+            <td><a href="#" class="problem-title">9. 回文数</a></td>
+            <td>简单</td>
+            <td>57.6%</td>
+          </tr>
+          <tr>
+            <td class="problem-status"><span class="status-icon status-hard"></span></td>
+            <td><a href="#" class="problem-title">10. 正则表达式匹配</a></td>
+            <td>困难</td>
+            <td>28.7%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 分页 -->
+      <div class="pagination">
+        <a href="#" class="pagination-item active">1</a>
+        <a href="#" class="pagination-item">2</a>
+        <a href="#" class="pagination-item">3</a>
+        <a href="#" class="pagination-item">4</a>
+        <a href="#" class="pagination-item">5</a>
+        <a href="#" class="pagination-item">下一页</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <ul class="footer-links">
+        <li><a href="#" class="footer-link">关于我们</a></li>
+        <li><a href="#" class="footer-link">帮助中心</a></li>
+        <li><a href="#" class="footer-link">学习资料</a></li>
+        <li><a href="#" class="footer-link">联系我们</a></li>
+      </ul>
+      <div class="copyright">
+        © 2023 SwustOJ - 西南科技大学在线编程评测平台
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 页面加载时
+    window.addEventListener('load', function() {
+      // 修改导航栏按钮事件
+      const loginBtn = document.querySelector('.auth-buttons .btn-outline');
+      if (loginBtn) {
+        loginBtn.href = 'index.html#login';
+      }
+      
+      // 替换注册按钮链接
+      const registerBtn = document.querySelector('.auth-buttons .btn-primary');
+      if (registerBtn) {
+        registerBtn.href = 'index.html#register';
+      }
+      
+      // 点击问题标签切换激活状态
+      const problemTabs = document.querySelectorAll('.problem-tab');
+      problemTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          problemTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // 处理开始做题按钮
+      const startBtn = document.querySelector('.section-actions .btn-primary');
+      if (startBtn) {
+        startBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          // 随机选择一个问题链接并点击
+          const problemLinks = document.querySelectorAll('.problem-title');
+          if (problemLinks.length > 0) {
+            const randomIndex = Math.floor(Math.random() * problemLinks.length);
+            problemLinks[randomIndex].click();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html> 

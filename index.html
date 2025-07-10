@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwustOJ - 在线编程学习平台</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #2d3748;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 导航栏 */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      object-fit: contain;
+    }
+
+    .welcome-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #4a5568;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 12px;
+      padding: 8px 2px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #3498db;
+    }
+
+    .user-avatar {
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .avatar-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #3498db;
+      padding: 0;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline {
+      border: 1px solid #3498db;
+      color: #3498db;
+      background-color: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    /* 英雄区域 */
+    .hero {
+      background-color: white;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 60px 40px;
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .hero-content {
+      max-width: 550px;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      color: #4a5568;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .hero-buttons .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .hero-image {
+      flex-shrink: 0;
+      width: 400px;
+      height: 280px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0; /* 移除内边距以便轮播图填充整个区域 */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      align-self: center;
+    }
+    
+    /* 时钟和日历样式 */
+    .clock-container {
+      width: 100%;
+      background-color: rgba(52, 152, 219, 0.9);
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    
+    .clock-time {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    
+    .clock-date {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    
+    .calendar {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 0;
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+
+    .current-month {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      text-align: center;
+    }
+
+    .calendar-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-weight: 500;
+      color: #3498db;
+      padding: 5px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .weekday {
+      padding: 2px;
+      font-size: 0.7rem;
+    }
+
+    .days {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      gap: 1px;
+      padding: 5px 0;
+    }
+
+    .day {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #4a5568;
+      height: 26px;
+      width: 26px;
+      margin: 0 auto;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .day:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+
+    .day.today {
+      background-color: #3498db;
+      color: white;
+      font-weight: 600;
+    }
+
+    .day.other-month {
+      color: #cbd5e0;
+    }
+
+    .calendar-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px;
+      background-color: rgba(52, 152, 219, 0.05);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    .calendar-info {
+      font-size: 0.65rem;
+      color: #4a5568;
+      text-align: center;
+    }
+
+    .calendar-info span {
+      color: #3498db;
+      font-weight: 600;
+    }
+
+    /* 英雄区轮播图样式 */
+    .hero-slideshow {
+      flex-shrink: 0;
+      width: 900px;
+      height: 300px;
+      position: relative;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      margin-right: 0;
+      align-self: flex-start;
+    }
+
+    .slideshow-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      object-fit: cover;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide-controls {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .slide-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .slide-dot.active {
+      background-color: #3498db;
+    }
+
+    .prev-btn, .next-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.3);
+      color: #3498db;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
+    }
+
+    .prev-btn:hover, .next-btn:hover {
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* 特点区域 */
+    .features {
+      padding: 60px 0;
+    }
+
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: #4a5568;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      color: #3498db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(52, 152, 219, 0.1);
+      border-radius: 8px;
+    }
+
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 12px;
+    }
+
+    .feature-description {
+      font-size: 0.9rem;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    /* 推荐区域 */
+    .recommendations {
+      background-color: white;
+      padding: 60px 0;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .recommendations-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .problems-preview {
+      margin-top: 30px;
+    }
+
+    .problems-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .problems-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .view-all {
+      color: #3498db;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .view-all:hover {
+      text-decoration: underline;
+    }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .problem-card {
+      background-color: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .problem-card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .problem-difficulty {
+      display: inline-block;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .difficulty-easy {
+      background-color: rgba(92, 184, 92, 0.1);
+      color: #5cb85c;
+    }
+
+    .difficulty-medium {
+      background-color: rgba(240, 173, 78, 0.1);
+      color: #f0ad4e;
+    }
+
+    .difficulty-hard {
+      background-color: rgba(217, 83, 79, 0.1);
+      color: #d9534f;
+    }
+
+    .problem-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 10px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .problem-name:hover {
+      color: #3498db;
+    }
+
+    .problem-info {
+      font-size: 0.8rem;
+      color: #4a5568;
+    }
+
+    /* 页脚 */
+    .footer {
+      background-color: white;
+      border-top: 1px solid #e2e8f0;
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .footer-link {
+      color: #4a5568;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-link:hover {
+      color: #3498db;
+    }
+
+    .copyright {
+      color: #4a5568;
+      font-size: 14px;
+    }
+
+    /* 媒体查询 */
+    @media (max-width: 992px) {
+      .hero-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-image {
+        width: 100%;
+        max-width: 450px;
+        margin-bottom: 30px;
+      }
+      
+      .hero-slideshow {
+        width: 100%;
+        max-width: 900px;
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        height: auto;
+        padding: 15px 0;
+      }
+
+      .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+      
+      .user-avatar {
+        margin-left: 5px;
+      }
+
+      .auth-buttons {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+
+    /* 弹窗样式 */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: flex;
+        justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background-color: white;
+      width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      position: relative;
+      transform: translateY(-20px);
+      transition: transform 0.3s;
+    }
+    
+    /* 较小的弹窗 */
+    .modal-small {
+      width: 360px;
+      padding: 30px;
+    }
+    
+    .modal-small .modal-logo {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+    
+    .modal-small .modal-header {
+      margin-bottom: 15px;
+    }
+    
+    .modal-small .form-group {
+      margin-bottom: 12px;
+    }
+    
+    .modal-small input {
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+    
+    .modal-small label {
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+    
+    .modal-small .submit-btn {
+        margin-top: 15px;
+      padding: 8px 0;
+    }
+    
+    .modal-small .verification-row button {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+    
+    .modal-small .instruction-text {
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
+      color: #a0aec0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 30px;
+      display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modal-logo {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .modal-header h2 {
+      color: #2c3e50;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .modal-title {
+      color: #3498db;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #4a5568;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      height: 40px;
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #2d3748;
+      transition: all 0.2s ease;
+      background-color: white;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+    }
+
+    .verification-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .verification-row .form-control {
+      flex-grow: 1;
+    }
+
+    .verification-row button {
+      width: 120px;
+      height: 40px;
+      background-color: #3498db;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .verification-row button:hover {
+      background-color: #2980b9;
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 40px;
+      background-color: #3498db;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .auth-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .auth-footer a,
+    .login-link a,
+    .modal-switch {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .auth-footer a:hover,
+    .login-link a:hover,
+    .modal-switch:hover {
+      text-decoration: underline;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .instruction-text {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #4a5568;
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 0 5px;
+      word-break: keep-all;
+    }
+
+    /* 扫码登录相关样式 */
+    .login-tabs {
+      display: flex;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .login-tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      color: #4a5568;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .login-tab.active {
+      color: #3498db;
+    }
+
+    .login-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      background-color: #3498db;
+    }
+
+    .login-content > div {
+      display: none;
+    }
+
+    .login-content > div.active {
+      display: block;
+    }
+
+    .qrcode-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 0;
+    }
+
+    .qrcode {
+      width: 180px;
+      height: 180px;
+      background-color: #f8f9fa;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .qrcode img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .qrcode-info {
+      text-align: center;
+      color: #4a5568;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .scan-icon {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.5;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .scan-icon.wechat {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M8.691 2c-1.612.073-5.604.614-7.02 3.636c-.958 1.995-.589 4.043.089 5.508c.803 1.73 2.253 3.047 3.76 3.93c-.268.712-.804 1.804-.536 2.679c.135.44.456.783.971.93c.9.223.82.223 1.031.223c.356 0 .713-.134 1.249-.491c1.159-.759 2.253-1.875 2.253-1.875s.134.179.356.357c.178.134.356.268.535.357c1.784 1.34 3.794 1.696 5.47 1.607c1.965-.089 3.705-.8 4.931-1.518c2.309-1.34 3.883-3.437 4.04-5.686c.18-2.59-1.518-5.091-3.883-6.342c-1.16-.58-2.675-.936-3.705-1.072c-.223-.044-.713-.089-1.16-.134C15.942 3.383 12.28 1.82 8.691 2'/%3E%3C/svg%3E");
+    }
+
+    .scan-icon.dingtalk {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M12.09 1.28a10.21 10.21 0 0 0-10.24 10.18c0 5.64 4.59 10.24 10.23 10.24c5.65 0 10.24-4.6 10.24-10.24c0-5.64-4.59-10.18-10.23-10.18z'/%3E%3C/svg%3E");
+    }
+
+    .oauth-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .oauth-divider {
+      display: flex;
+      align-items: center;
+      color: #8c98a4;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .oauth-divider::before,
+    .oauth-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #e2e8f0;
+    }
+
+    .oauth-divider::before {
+      margin-right: 15px;
+    }
+
+    .oauth-divider::after {
+      margin-left: 15px;
+    }
+
+    .oauth-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .oauth-button {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+      background-color: white;
+      color: #4a5568;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .oauth-button:hover {
+      border-color: #3498db;
+      color: #3498db;
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    .icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .icon-dingtalk {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M12.09 1.28a10.21 10.21 0 0 0-10.24 10.18c0 5.64 4.59 10.24 10.23 10.24c5.65 0 10.24-4.6 10.24-10.24c0-5.64-4.59-10.18-10.23-10.18zm1.95 13.34H9.33c-.5 0-.9-.39-.9-.88c0-.49.4-.89.9-.89h1.86v-4h-1.19c-.5 0-.9-.4-.9-.89s.4-.89.9-.89h4.1c.5 0 .9.4.9.9c0 .48-.4.88-.9.88h-1.2v4.89h1.15c.5 0 .9.4.9.89c0 .49-.4.88-.9.88zm1.2-9.01l-3.25.93l-3.32-.93c-.42-.14-.85.22-.74.68l.13.48c.06.18.22.32.41.37l3.25.93c.17.05.35.05.53 0l3.25-.93c.18-.05.35-.19.41-.37l.13-.48c.1-.46-.33-.82-.74-.68z'/%3E%3C/svg%3E");
+    }
+
+    .icon-wechat {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M8.691 2c-1.612.073-5.604.614-7.02 3.636c-.958 1.995-.589 4.043.089 5.508c.803 1.73 2.253 3.047 3.76 3.93c-.268.712-.804 1.804-.536 2.679c.135.44.456.783.971.93c.9.223.82.223 1.031.223c.356 0 .713-.134 1.249-.491c1.159-.759 2.253-1.875 2.253-1.875s.134.179.356.357c.178.134.356.268.535.357c1.784 1.34 3.794 1.696 5.47 1.607c1.965-.089 3.705-.8 4.931-1.518c2.309-1.34 3.883-3.437 4.04-5.686c.18-2.59-1.518-5.091-3.883-6.342c-1.16-.58-2.675-.936-3.705-1.072c-.223-.044-.713-.089-1.16-.134C15.942 3.383 12.28 1.82 8.691 2m.178 5c.803 0 1.428.67 1.428 1.474c0 .803-.625 1.428-1.428 1.428c-.848 0-1.517-.625-1.517-1.428c0-.803.67-1.474 1.517-1.474zm6.877 0c.802 0 1.428.67 1.428 1.474c0 .803-.626 1.428-1.428 1.428c-.848 0-1.517-.625-1.517-1.428c0-.803.669-1.474 1.517-1.474zm-6.877 7.59c.4 0 .758.223 1.026.58c.223.313.402.759.402 1.25c0 .178-.45.312-.09.49c-.089-.044-.133-.089-.223-.178c-.357-.267-.714-.535-1.115-.535c-.445 0-.848.268-1.16.535c-.089.09-.134.134-.223.178c-.044-.178-.089-.312-.089-.49c0-.491.178-.937.401-1.25c.268-.357.625-.58 1.071-.58zm6.877 0c.401 0 .759.223 1.026.58c.223.313.401.759.401 1.25c0 .178-.044.312-.089.49c-.089-.044-.133-.089-.223-.178c-.356-.267-.714-.535-1.115-.535c-.445 0-.848.268-1.159.535c-.09.09-.134.134-.223.178c-.045-.178-.09-.312-.09-.49c0-.491.179-.937.402-1.25c.267-.357.625-.58 1.07-.58z'/%3E%3C/svg%3E");
+    }
+    /* 分页 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .pagination-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 38px;
+      margin: 0 4px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #4a5568;
+      font-size: 14px;
+      border: 1px solid #e2e8f0;
+      background-color: white;
+      padding: 0 12px;
+    }
+
+    .pagination-item:hover {
+      border-color: #3498db;
+      color: #3498db;
+    }
+
+    .pagination-item.active {
+      background-color: #3498db;
+      color: white;
+      border-color: #3498db;
+    }
+
+    /* 问题相关样式 */
+    .popular-problems {
+      margin-top: 60px;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .problem-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .problem-difficulty {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .easy {
+      background-color: rgba(72, 187, 120, 0.1);
+      color: #48bb78;
+    }
+
+    .medium {
+      background-color: rgba(236, 201, 75, 0.1);
+      color: #ecc94b;
+    }
+
+    .hard {
+      background-color: rgba(245, 101, 101, 0.1);
+      color: #f56565;
+    }
+
+    .problem-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 12px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .problem-title:hover {
+      color: #3498db;
+    }
+
+    .problem-description {
+      font-size: 14px;
+      color: #4a5568;
+      margin-bottom: 16px;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .problem-stats {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      font-size: 13px;
+      color: #718096;
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: #4a5568;
+    }
+
+    .problem-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background-color: rgba(52, 152, 219, 0.1);
+      color: #3498db;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="SwustOJ Logo" class="logo-img">
+        <span class="welcome-text">欢迎来到SwustOJ</span>
+      </a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link active">首页</a>
+        <a href="problems.html" class="nav-link">题库</a>
+        <a href="contest.html" class="nav-link">竞赛</a>
+        <a href="homework.html" class="nav-link">作业</a>
+        <a href="discussion.html" class="nav-link">讨论</a>
+        <a href="ranking.html" class="nav-link">排行榜</a>
+        <a href="learning.html" class="nav-link">学习</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="btn btn-outline">登录</a>
+      <a href="register.html" class="btn btn-primary">注册</a>
+    </div>
+    <div class="user-avatar">
+      <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
+    </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-slideshow">
+        <div class="slideshow-container">
+          <img src="images/hero-slide1.jpg" alt="SwustOJ Hero Image 1" class="slide active">
+          <img src="images/hero-slide2.jpg" alt="SwustOJ Hero Image 2" class="slide">
+          <img src="images/hero-slide3.jpg" alt="SwustOJ Hero Image 3" class="slide">
+          <img src="images/hero-slide4.jpg" alt="SwustOJ Hero Image 4" class="slide">
+          <div class="slide-controls">
+            <span class="slide-dot active" onclick="heroCurrentSlide(1)"></span>
+            <span class="slide-dot" onclick="heroCurrentSlide(2)"></span>
+            <span class="slide-dot" onclick="heroCurrentSlide(3)"></span>
+            <span class="slide-dot" onclick="heroCurrentSlide(4)"></span>
+          </div>
+          <button class="prev-btn" onclick="heroPlusSlides(-1)">&#10094;</button>
+          <button class="next-btn" onclick="heroPlusSlides(1)">&#10095;</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="calendar">
+          <div class="clock-container">
+            <div class="clock">
+              <div class="clock-time" id="current-time">00:00:00</div>
+              <div class="clock-date" id="current-date">2023年10月27日 星期五</div>
+            </div>
+          </div>
+          <div class="calendar-header">
+            <span class="current-month" id="current-month">2023年10月</span>
+          </div>
+          <div class="calendar-body">
+            <div class="weekdays">
+              <div class="weekday">日</div>
+              <div class="weekday">一</div>
+              <div class="weekday">二</div>
+              <div class="weekday">三</div>
+              <div class="weekday">四</div>
+              <div class="weekday">五</div>
+              <div class="weekday">六</div>
+            </div>
+            <div class="days" id="calendar-days">
+              <!-- 日期将通过JavaScript动态生成 -->
+            </div>
+          </div>
+          <div class="calendar-footer">
+            <div class="calendar-info" id="today-info">
+              今天是 <span>2023年10月27日</span>
+            </div>
+            <div class="calendar-info" id="month-days">
+              本月共 <span>31</span> 天
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 推荐题目区域 -->
+  <section class="recommendations">
+    <div class="recommendations-container">
+      <div class="section-header">
+        <h2 class="section-title">热门题目</h2>
+        <p class="section-subtitle">开始你的编程之旅，尝试解决这些热门题目</p>
+      </div>
+      <div class="problems-preview">
+        <div class="problems-header">
+          <h3 class="problems-title">新手推荐</h3>
+          <a href="problems.html" class="view-all">查看全部 →</a>
+        </div>
+        <div class="problems-grid">
+          <div class="problem-card">
+            <span class="problem-difficulty difficulty-easy">简单</span>
+            <a href="#" class="problem-name">1. 两数之和</a>
+            <p class="problem-info">提交次数: 9823 | 通过率: 45.3%</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-difficulty difficulty-easy">简单</span>
+            <a href="#" class="problem-name">9. 回文数</a>
+            <p class="problem-info">提交次数: 7651 | 通过率: 57.6%</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-difficulty difficulty-medium">中等</span>
+            <a href="#" class="problem-name">3. 无重复字符的最长子串</a>
+            <p class="problem-info">提交次数: 8932 | 通过率: 33.2%</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-difficulty difficulty-medium">中等</span>
+            <a href="#" class="problem-name">5. 最长回文子串</a>
+            <p class="problem-info">提交次数: 6754 | 通过率: 30.5%</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="problems-preview">
+        <div class="problems-header">
+          <h3 class="problems-title">本周热门</h3>
+          <a href="problems.html" class="view-all">查看全部 →</a>
+        </div>
+        <div class="problems-grid">
+          <div class="problem-card">
+            <span class="problem-difficulty difficulty-medium">中等</span>
+            <a href="#" class="problem-name">2. 两数相加</a>
+            <p class="problem-info">提交次数: 8271 | 通过率: 36.8%</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-difficulty difficulty-hard">困难</span>
+            <a href="#" class="problem-name">4. 寻找两个正序数组的中位数</a>
+            <p class="problem-info">提交次数: 5482 | 通过率: 37.9%</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-difficulty difficulty-medium">中等</span>
+            <a href="#" class="problem-name">6. Z 字形变换</a>
+            <p class="problem-info">提交次数: 4932 | 通过率: 46.7%</p>
+          </div>
+          <div class="problem-card">
+            <span class="problem-difficulty difficulty-hard">困难</span>
+            <a href="#" class="problem-name">10. 正则表达式匹配</a>
+            <p class="problem-info">提交次数: 3987 | 通过率: 28.7%</p>
+          </div>
+        </div>
+      </div>
+      <!-- 热门问题 -->
+      <div class="popular-problems">
+        <div class="section-header">
+          <h2 class="section-title">热门问题</h2>
+          <a href="problems.html" class="btn btn-outline">查看全部</a>
+        </div>
+        <div class="problem-grid">
+          <!-- 问题卡片 -->
+          <div class="problem-card">
+            <div class="problem-difficulty easy">简单</div>
+            <a href="#" class="problem-title">两数之和</a>
+            <p class="problem-description">给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。</p>
+            <div class="problem-stats">
+              <div class="stat">
+                <span class="stat-label">通过率:</span>
+                <span class="stat-value">46.2%</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">提交:</span>
+                <span class="stat-value">3.8k</span>
+              </div>
+            </div>
+            <div class="problem-tags">
+              <span class="tag">数组</span>
+              <span class="tag">哈希表</span>
+            </div>
+          </div>
+          
+          <div class="problem-card">
+            <div class="problem-difficulty medium">中等</div>
+            <a href="#" class="problem-title">无重复字符的最长子串</a>
+            <p class="problem-description">给定一个字符串 s，请你找出其中不含有重复字符的最长子串的长度。</p>
+            <div class="problem-stats">
+              <div class="stat">
+                <span class="stat-label">通过率:</span>
+                <span class="stat-value">38.7%</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">提交:</span>
+                <span class="stat-value">2.5k</span>
+              </div>
+            </div>
+            <div class="problem-tags">
+              <span class="tag">哈希表</span>
+              <span class="tag">字符串</span>
+              <span class="tag">滑动窗口</span>
+            </div>
+          </div>
+          
+          <div class="problem-card">
+            <div class="problem-difficulty hard">困难</div>
+            <a href="#" class="problem-title">寻找两个正序数组的中位数</a>
+            <p class="problem-description">给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的中位数。</p>
+            <div class="problem-stats">
+              <div class="stat">
+                <span class="stat-label">通过率:</span>
+                <span class="stat-value">28.3%</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">提交:</span>
+                <span class="stat-value">1.9k</span>
+              </div>
+            </div>
+            <div class="problem-tags">
+              <span class="tag">数组</span>
+              <span class="tag">二分查找</span>
+              <span class="tag">分治</span>
+            </div>
+          </div>
+          
+          <div class="problem-card">
+            <div class="problem-difficulty medium">中等</div>
+            <a href="#" class="problem-title">最长回文子串</a>
+            <p class="problem-description">给你一个字符串 s，找到 s 中最长的回文子串。如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。</p>
+            <div class="problem-stats">
+              <div class="stat">
+                <span class="stat-label">通过率:</span>
+                <span class="stat-value">35.9%</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">提交:</span>
+                <span class="stat-value">2.3k</span>
+              </div>
+            </div>
+            <div class="problem-tags">
+              <span class="tag">字符串</span>
+              <span class="tag">动态规划</span>
+            </div>
+          </div>
+          
+          <div class="problem-card">
+            <div class="problem-difficulty easy">简单</div>
+            <a href="#" class="problem-title">回文数</a>
+            <p class="problem-description">给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+            <div class="problem-stats">
+              <div class="stat">
+                <span class="stat-label">通过率:</span>
+                <span class="stat-value">58.6%</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">提交:</span>
+                <span class="stat-value">2.9k</span>
+              </div>
+            </div>
+            <div class="problem-tags">
+              <span class="tag">数学</span>
+            </div>
+          </div>
+          
+          <div class="problem-card">
+            <div class="problem-difficulty medium">中等</div>
+            <a href="#" class="problem-title">盛最多水的容器</a>
+            <p class="problem-description">给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
+            <div class="problem-stats">
+              <div class="stat">
+                <span class="stat-label">通过率:</span>
+                <span class="stat-value">42.1%</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">提交:</span>
+                <span class="stat-value">2.1k</span>
+              </div>
+            </div>
+            <div class="problem-tags">
+              <span class="tag">贪心</span>
+              <span class="tag">双指针</span>
+              <span class="tag">数组</span>
+            </div>
+          </div>
+        </div>
+        <!-- 添加分页 -->
+        <div class="pagination">
+          <a href="#" class="pagination-item active">1</a>
+          <a href="#" class="pagination-item">2</a>
+          <a href="#" class="pagination-item">3</a>
+          <a href="#" class="pagination-item">4</a>
+          <a href="#" class="pagination-item">5</a>
+          <a href="#" class="pagination-item">下一页</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 特点区域 -->
+  <section class="features">
+    <div class="features-container">
+      <div class="section-header">
+        <h2 class="section-title">平台特点</h2>
+        <p class="section-subtitle">SwustOJ提供全面的编程学习解决方案，从入门到精通</p>
+      </div>
+      <div class="features-grid">
+      <div class="feature-card">
+          <div class="feature-icon">📝</div>
+        <h3 class="feature-title">丰富的题库资源</h3>
+        <p class="feature-description">数千道精心挑选的编程题目，涵盖基础算法、数据结构、竞赛真题等多个领域，难度由易到难，帮助你循序渐进地提升能力。</p>
+      </div>
+      <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+        <h3 class="feature-title">实时在线评测</h3>
+        <p class="feature-description">代码提交后即时评测，获得详细的执行结果、运行时间和内存消耗，帮助你优化代码效率，提升算法性能。</p>
+      </div>
+      <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">竞赛与排行榜</h3>
+        <p class="feature-description">定期举办校内编程竞赛，培养竞争意识和团队协作能力。实时更新的排行榜让你了解自己在校内的水平和进步。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-content">
+        <ul class="footer-links">
+        <li><a href="#" class="footer-link">关于我们</a></li>
+        <li><a href="#" class="footer-link">帮助中心</a></li>
+        <li><a href="#" class="footer-link">学习资料</a></li>
+        <li><a href="#" class="footer-link">联系我们</a></li>
+        </ul>
+      <div class="copyright">
+        © 2023 SwustOJ - 西南科技大学在线编程评测平台
+      </div>
+      </div>
+  </footer>
+
+  <!-- 登录弹窗 -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+      <div class="modal-header">
+        <img src="images/logo.png" alt="SwustOJ Logo" class="modal-logo">
+        <h2>登录 SwustOJ</h2>
+      </div>
+
+      <div class="login-tabs">
+        <div class="login-tab active" onclick="switchTab('account')">账号密码登录</div>
+        <div class="login-tab" onclick="switchTab('qrcode')">扫码登录</div>
+    </div>
+
+      <div class="login-content">
+        <div class="account-login active">
+          <form>
+            <div class="form-group">
+              <label for="username">学号/邮箱</label>
+              <input type="text" id="username" class="form-control" placeholder="请输入学号或邮箱" required>
+    </div>
+            <div class="form-group">
+              <label for="password">密码</label>
+              <input type="password" id="password" class="form-control" placeholder="请输入密码" required>
+            </div>
+            <button type="submit" class="submit-btn">登录</button>
+            <div class="auth-footer">
+              <a href="javascript:void(0)" onclick="showModal('forgotPasswordModal')">忘记密码？</a>
+              <a href="javascript:void(0)" onclick="showModal('registerModal')">注册账号</a>
+            </div>
+          </form>
+        </div>
+        
+        <div class="qrcode-login">
+          <div class="qrcode-container">
+            <div class="qrcode">
+              <div class="scan-icon wechat"></div>
+            </div>
+            <p class="qrcode-info">请使用微信扫描二维码登录</p>
+          </div>
+          
+          <div class="oauth-divider">其他登录方式</div>
+          <div class="oauth-buttons">
+            <div class="oauth-button" onclick="switchQRCode('wechat')">
+              <span class="icon icon-wechat"></span>
+            </div>
+            <div class="oauth-button" onclick="switchQRCode('dingtalk')">
+              <span class="icon icon-dingtalk"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 注册弹窗 -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal modal-small">
+      <button class="modal-close" onclick="closeModal('registerModal')">&times;</button>
+      <div class="modal-header">
+        <img src="images/logo.png" alt="SwustOJ Logo" class="modal-logo">
+        <h2>注册账号</h2>
+      </div>
+      <form>
+        <div class="form-group">
+          <label for="studentId">学号</label>
+          <input type="text" id="studentId" class="form-control" placeholder="请输入学号" required>
+        </div>
+        <div class="form-group">
+          <label for="email">邮箱</label>
+          <input type="email" id="email" class="form-control" placeholder="请输入邮箱" required>
+        </div>
+        <div class="form-group">
+          <label for="verificationCode">验证码</label>
+          <div class="verification-row">
+            <input type="text" id="verificationCode" class="form-control" placeholder="请输入验证码" required>
+            <button type="button">获取</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">密码</label>
+          <input type="password" id="reg-password" class="form-control" placeholder="请输入密码" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">确认密码</label>
+          <input type="password" id="confirmPassword" class="form-control" placeholder="请再次输入密码" required>
+        </div>
+        <button type="submit" class="submit-btn">注册</button>
+        <div class="login-link">
+          已有账号？<a href="javascript:void(0)" onclick="showModal('loginModal')">立即登录</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 忘记密码弹窗 -->
+  <div class="modal-overlay" id="forgotPasswordModal">
+    <div class="modal modal-small">
+      <button class="modal-close" onclick="closeModal('forgotPasswordModal')">&times;</button>
+      <div class="modal-header">
+        <img src="images/logo.png" alt="SwustOJ Logo" class="modal-logo">
+        <h2>找回密码</h2>
+      </div>
+      <p class="instruction-text">输入邮箱获取验证码重置密码</p>
+      <form>
+        <div class="form-group">
+          <label for="forgot-email">邮箱</label>
+          <input type="email" id="forgot-email" class="form-control" placeholder="请输入邮箱地址" required>
+        </div>
+        <div class="form-group">
+          <label for="forgot-verificationCode">验证码</label>
+          <div class="verification-row">
+            <input type="text" id="forgot-verificationCode" class="form-control" placeholder="请输入验证码" required>
+            <button type="button">获取</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">新密码</label>
+          <input type="password" id="newPassword" class="form-control" placeholder="请设置新密码" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmNewPassword">确认密码</label>
+          <input type="password" id="confirmNewPassword" class="form-control" placeholder="请再次输入新密码" required>
+        </div>
+        <button type="submit" class="submit-btn">重置</button>
+        <div class="login-link">
+          记起密码了？<a href="javascript:void(0)" onclick="showModal('loginModal')">返回登录</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // 弹窗控制
+    function showModal(modalId) {
+      // 先关闭所有模态框
+      document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.classList.remove('active');
+      });
+      
+      // 打开指定的模态框
+      document.getElementById(modalId).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // 登录标签切换
+    function switchTab(tab) {
+      if (tab === 'account') {
+        document.querySelector('.login-tab:nth-child(1)').classList.add('active');
+        document.querySelector('.login-tab:nth-child(2)').classList.remove('active');
+        document.querySelector('.account-login').classList.add('active');
+        document.querySelector('.qrcode-login').classList.remove('active');
+      } else {
+        document.querySelector('.login-tab:nth-child(1)').classList.remove('active');
+        document.querySelector('.login-tab:nth-child(2)').classList.add('active');
+        document.querySelector('.account-login').classList.remove('active');
+        document.querySelector('.qrcode-login').classList.add('active');
+      }
+    }
+
+    // 二维码登录方式切换
+    function switchQRCode(type) {
+      const qrcodeElement = document.querySelector('.scan-icon');
+      const qrcodeInfo = document.querySelector('.qrcode-info');
+      
+      qrcodeElement.className = 'scan-icon';
+      qrcodeElement.classList.add(type);
+      
+      if (type === 'wechat') {
+        qrcodeInfo.textContent = '请使用微信扫描二维码登录';
+      } else if (type === 'dingtalk') {
+        qrcodeInfo.textContent = '请使用钉钉扫描二维码登录';
+      }
+    }
+
+    // 根据URL hash参数显示不同的弹窗
+    function handleHashChange() {
+      const hash = window.location.hash.substring(1);
+      if (hash === 'login') {
+        showModal('loginModal');
+      } else if (hash === 'register') {
+        showModal('registerModal');
+      } else if (hash === 'forgotPassword') {
+        showModal('forgotPasswordModal');
+      }
+    }
+
+    // 页面加载时检查hash
+    window.addEventListener('load', function() {
+      handleHashChange();
+      
+      // 修改导航栏按钮事件
+      const loginBtn = document.querySelector('.auth-buttons .btn-outline');
+      if (loginBtn) {
+        loginBtn.href = 'javascript:void(0)';
+        loginBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          showModal('loginModal');
+        });
+      }
+      
+      // 替换注册按钮链接
+      const registerBtn = document.querySelector('.auth-buttons .btn-primary');
+      if (registerBtn) {
+        registerBtn.href = 'javascript:void(0)';
+        registerBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          showModal('registerModal');
+        });
+      }
+      
+      // 英雄区域按钮
+      const heroStartBtn = document.querySelector('.hero-buttons .btn-primary');
+      if (heroStartBtn) {
+        heroStartBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = 'problems.html';
+        });
+      }
+      
+      const heroLearnBtn = document.querySelector('.hero-buttons .btn-outline');
+      if (heroLearnBtn) {
+        heroLearnBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = 'learning.html';
+        });
+      }
+
+      // 初始化英雄区轮播图
+      initHeroSlideshow();
+      
+      // 初始化日历
+      initCalendar();
+    });
+ 
+    // 轮播图相关函数
+    let slideIndex = 1;
+    let slideshowInterval;
+
+    function initSlideshow() {
+      showSlides(slideIndex);
+      // 设置自动轮播
+      slideshowInterval = setInterval(() => {
+        plusSlides(1);
+      }, 5000); // 每5秒切换一次图片
+      
+      // 初始化轮播点
+      const dots = document.getElementsByClassName("slide-dot");
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].addEventListener('click', function() {
+          currentSlide(i + 1);
+        });
+      }
+      
+      // 初始轮播点状态
+      if (dots.length > 0) {
+        dots[0].classList.add('active');
+      }
+    }
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      const slides = document.getElementsByClassName("slide");
+      const dots = document.getElementsByClassName("slide-dot");
+      
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      
+      // 隐藏所有幻灯片
+      for (i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active');
+      }
+      
+      // 移除所有点的活动状态
+      for (i = 0; i < dots.length; i++) {
+        dots[i].classList.remove('active');
+      }
+      
+      // 显示当前幻灯片和激活当前点
+      slides[slideIndex-1].classList.add('active');
+      dots[slideIndex-1].classList.add('active');
+    }
+
+    // 初始化日历
+    function initCalendar() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const day = now.getDate();
+      
+      // 设置当前月份标题
+      document.querySelector('.current-month').textContent = `${year}年${month + 1}月`;
+      
+      // 获取当月第一天
+      const firstDay = new Date(year, month, 1);
+      // 获取当月最后一天
+      const lastDay = new Date(year, month + 1, 0);
+      
+      // 获取当月第一天是星期几（0-6，0是星期日）
+      const firstDayIndex = firstDay.getDay();
+      // 获取当月天数
+      const daysInMonth = lastDay.getDate();
+      
+      // 获取上个月最后一天
+      const prevLastDay = new Date(year, month, 0);
+      const prevDaysInMonth = prevLastDay.getDate();
+      
+      // 计算下个月开始的天数
+      const nextDays = 42 - (firstDayIndex + daysInMonth);
+      
+      // 清空日历天数
+      const daysContainer = document.getElementById('calendar-days');
+      daysContainer.innerHTML = '';
+      
+      // 添加上个月的最后几天
+      for (let i = firstDayIndex; i > 0; i--) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day other-month';
+        dayElement.textContent = prevDaysInMonth - i + 1;
+        daysContainer.appendChild(dayElement);
+      }
+      
+      // 添加当月的天数
+      for (let i = 1; i <= daysInMonth; i++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day';
+        if (i === day) {
+          dayElement.classList.add('today');
+        }
+        dayElement.textContent = i;
+        daysContainer.appendChild(dayElement);
+      }
+      
+      // 添加下个月的开始几天
+      for (let i = 1; i <= nextDays; i++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day other-month';
+        dayElement.textContent = i;
+        daysContainer.appendChild(dayElement);
+      }
+      
+      // 更新日历底部信息
+      const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+      const todayInfo = document.getElementById('today-info');
+      const monthInfo = document.getElementById('month-days');
+      todayInfo.innerHTML = `今天是 <span>${year}年${month + 1}月${day}日</span>`;
+      monthInfo.innerHTML = `本月共 <span>${daysInMonth}</span> 天`;
+      
+      // 初始化时钟
+      initClock();
+    }
+    
+    // 初始化时钟函数
+    function initClock() {
+      // 更新时钟显示
+      updateClock();
+      
+      // 每秒更新时钟
+      setInterval(updateClock, 1000);
+    }
+    
+    // 更新时钟显示
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+      const weekDay = weekDays[now.getDay()];
+      
+      // 更新时间和日期显示
+      document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
+      document.getElementById('current-date').textContent = `${year}年${month}月${day}日 ${weekDay}`;
+    }
+    
+    // 英雄区轮播图相关变量和函数
+    let heroSlideIndex = 1;
+    let heroSlideshowInterval;
+    
+    function initHeroSlideshow() {
+      heroShowSlides(heroSlideIndex);
+      // 设置自动轮播
+      heroSlideshowInterval = setInterval(() => {
+        heroPlusSlides(1);
+      }, 5000); // 每5秒切换一次图片
+    }
+    
+    function heroPlusSlides(n) {
+      heroShowSlides(heroSlideIndex += n);
+    }
+    
+    function heroCurrentSlide(n) {
+      heroShowSlides(heroSlideIndex = n);
+    }
+    
+    function heroShowSlides(n) {
+      let i;
+      const slides = document.querySelectorAll('.hero-slideshow .slide');
+      const dots = document.querySelectorAll('.hero-slideshow .slide-dot');
+      
+      if (n > slides.length) {heroSlideIndex = 1}
+      if (n < 1) {heroSlideIndex = slides.length}
+      
+      // 隐藏所有幻灯片
+      for (i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active');
+      }
+      
+      // 移除所有点的活动状态
+      for (i = 0; i < dots.length; i++) {
+        dots[i].classList.remove('active');
+      }
+      
+      // 显示当前幻灯片和激活当前点
+      slides[heroSlideIndex-1].classList.add('active');
+      dots[heroSlideIndex-1].classList.add('active');
+    }
+  </script>
+</body>
+
+</html>

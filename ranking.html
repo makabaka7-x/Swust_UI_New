@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>排行榜 - SwustOJ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #2d3748;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 导航栏 */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      object-fit: contain;
+    }
+
+    .welcome-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #4a5568;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 12px;
+      padding: 8px 2px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #3498db;
+    }
+
+    .user-avatar {
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .avatar-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #3498db;
+      padding: 0;
+    }
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline {
+      border: 1px solid #3498db;
+      color: #3498db;
+      background-color: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    /* 主要内容区域 */
+    .main {
+      flex-grow: 1;
+    }
+
+    /* 排行榜区域 */
+    .ranking-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .ranking-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .ranking-tab {
+      padding: 8px 16px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+
+    .ranking-tab.active {
+      color: #3498db;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .ranking-filters {
+      display: flex;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .filter-dropdown {
+      position: relative;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      background-color: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover {
+      border-color: #cbd5e0;
+    }
+
+    .search-bar {
+      flex-grow: 1;
+      display: flex;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+    }
+
+    /* 排行榜表格 */
+    .ranking-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+
+    .ranking-table th,
+    .ranking-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .ranking-table th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+      color: #4a5568;
+      font-size: 14px;
+    }
+
+    .ranking-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ranking-table tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .rank-cell {
+      font-weight: 600;
+      color: #4a5568;
+      width: 80px;
+    }
+
+    .top-rank {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: white;
+      font-weight: 600;
+    }
+
+    .rank-1 {
+      background-color: #ecc94b;
+    }
+
+    .rank-2 {
+      background-color: #a0aec0;
+    }
+
+    .rank-3 {
+      background-color: #ed8936;
+    }
+
+    .user-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #4a5568;
+    }
+
+    .user-name {
+      font-weight: 600;
+      color: #2c3e50;
+      text-decoration: none;
+    }
+
+    .user-name:hover {
+      color: #3498db;
+    }
+
+    .user-title {
+      font-size: 12px;
+      color: #718096;
+    }
+
+    .score-cell {
+      font-weight: 600;
+      color: #3498db;
+    }
+
+    .solved-cell {
+      color: #4a5568;
+    }
+
+    .submission-cell {
+      color: #4a5568;
+    }
+
+    .ratio-cell {
+      color: #4a5568;
+    }
+
+    /* 分页 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .pagination-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 38px;
+      margin: 0 4px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #4a5568;
+      font-size: 14px;
+      border: 1px solid #e2e8f0;
+      background-color: white;
+      padding: 0 12px;
+    }
+
+    .pagination-item:hover {
+      border-color: #3498db;
+      color: #3498db;
+    }
+
+    .pagination-item.active {
+      background-color: #3498db;
+      color: white;
+      border-color: #3498db;
+    }
+
+    /* 页脚 */
+    .footer {
+      background-color: white;
+      border-top: 1px solid #e2e8f0;
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .footer-link {
+      color: #4a5568;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-link:hover {
+      color: #3498db;
+    }
+
+    .copyright {
+      color: #4a5568;
+      font-size: 14px;
+    }
+
+    /* 媒体查询 */
+    @media (max-width: 768px) {
+      .navbar {
+        height: auto;
+        padding: 15px 0;
+      }
+
+      .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .auth-buttons {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .ranking-filters {
+        flex-direction: column;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .ranking-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="SwustOJ Logo" class="logo-img">
+        <span class="welcome-text">欢迎来到SwustOJ</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="problems.html" class="nav-link">题库</a>
+        <a href="contest.html" class="nav-link">竞赛</a>
+        <a href="homework.html" class="nav-link">作业</a>
+        <a href="discussion.html" class="nav-link">讨论</a>
+        <a href="ranking.html" class="nav-link active">排行榜</a>
+        <a href="learning.html" class="nav-link">学习</a>
+      </div>
+      <div class="auth-buttons">
+        <a href="index.html#login" class="btn btn-outline">登录</a>
+        <a href="index.html#register" class="btn btn-primary">注册</a>
+        <div class="user-avatar">
+          <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main">
+    <div class="ranking-container">
+      <div class="section-header">
+        <h1 class="section-title">排行榜</h1>
+      </div>
+      
+      <div class="ranking-tabs">
+        <div class="ranking-tab active">总榜</div>
+        <div class="ranking-tab">周榜</div>
+        <div class="ranking-tab">月榜</div>
+        <div class="ranking-tab">竞赛榜</div>
+      </div>
+      
+      <div class="ranking-filters">
+        <div class="filter-dropdown">
+          <button class="filter-btn">学院</button>
+        </div>
+        <div class="filter-dropdown">
+          <button class="filter-btn">年级</button>
+        </div>
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="搜索用户...">
+        </div>
+      </div>
+      
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>排名</th>
+            <th>用户</th>
+            <th>积分</th>
+            <th>已解题目</th>
+            <th>提交次数</th>
+            <th>通过率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rank-cell">
+              <div class="top-rank rank-1">1</div>
+            </td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">WL</div>
+                <div>
+                  <a href="#" class="user-name">WangLei2023</a>
+                  <div class="user-title">计算机学院 • 算法大师</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">8,942</td>
+            <td class="solved-cell">286</td>
+            <td class="submission-cell">392</td>
+            <td class="ratio-cell">73.0%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">
+              <div class="top-rank rank-2">2</div>
+            </td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">CX</div>
+                <div>
+                  <a href="#" class="user-name">CodeXpert</a>
+                  <div class="user-title">软件工程学院 • 编程能手</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">8,567</td>
+            <td class="solved-cell">263</td>
+            <td class="submission-cell">371</td>
+            <td class="ratio-cell">70.9%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">
+              <div class="top-rank rank-3">3</div>
+            </td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">ZY</div>
+                <div>
+                  <a href="#" class="user-name">ZhangYang</a>
+                  <div class="user-title">计算机学院 • 问题解决者</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">7,935</td>
+            <td class="solved-cell">241</td>
+            <td class="submission-cell">356</td>
+            <td class="ratio-cell">67.7%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">4</td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">LH</div>
+                <div>
+                  <a href="#" class="user-name">LiHong1999</a>
+                  <div class="user-title">人工智能学院 • 算法爱好者</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">7,612</td>
+            <td class="solved-cell">232</td>
+            <td class="submission-cell">342</td>
+            <td class="ratio-cell">67.8%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">5</td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">JC</div>
+                <div>
+                  <a href="#" class="user-name">JiangCheng</a>
+                  <div class="user-title">软件工程学院 • 编程达人</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">7,209</td>
+            <td class="solved-cell">219</td>
+            <td class="submission-cell">331</td>
+            <td class="ratio-cell">66.2%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">6</td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">SQ</div>
+                <div>
+                  <a href="#" class="user-name">SunQian</a>
+                  <div class="user-title">数学学院 • 算法探索者</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">6,874</td>
+            <td class="solved-cell">208</td>
+            <td class="submission-cell">312</td>
+            <td class="ratio-cell">66.7%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">7</td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">YM</div>
+                <div>
+                  <a href="#" class="user-name">YangMing2022</a>
+                  <div class="user-title">计算机学院 • 代码艺术家</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">6,531</td>
+            <td class="solved-cell">198</td>
+            <td class="submission-cell">301</td>
+            <td class="ratio-cell">65.8%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">8</td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">FT</div>
+                <div>
+                  <a href="#" class="user-name">FengTao</a>
+                  <div class="user-title">人工智能学院 • 数据驱动者</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">6,328</td>
+            <td class="solved-cell">192</td>
+            <td class="submission-cell">298</td>
+            <td class="ratio-cell">64.4%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">9</td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">HL</div>
+                <div>
+                  <a href="#" class="user-name">HuangLei</a>
+                  <div class="user-title">软件工程学院 • 编程新星</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">6,012</td>
+            <td class="solved-cell">183</td>
+            <td class="submission-cell">289</td>
+            <td class="ratio-cell">63.3%</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">10</td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">GW</div>
+                <div>
+                  <a href="#" class="user-name">GuoWei</a>
+                  <div class="user-title">计算机学院 • 算法实践者</div>
+                </div>
+              </div>
+            </td>
+            <td class="score-cell">5,847</td>
+            <td class="solved-cell">177</td>
+            <td class="submission-cell">283</td>
+            <td class="ratio-cell">62.5%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 分页 -->
+      <div class="pagination">
+        <a href="#" class="pagination-item active">1</a>
+        <a href="#" class="pagination-item">2</a>
+        <a href="#" class="pagination-item">3</a>
+        <a href="#" class="pagination-item">4</a>
+        <a href="#" class="pagination-item">5</a>
+        <a href="#" class="pagination-item">下一页</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <ul class="footer-links">
+        <li><a href="#" class="footer-link">关于我们</a></li>
+        <li><a href="#" class="footer-link">帮助中心</a></li>
+        <li><a href="#" class="footer-link">学习资料</a></li>
+        <li><a href="#" class="footer-link">联系我们</a></li>
+      </ul>
+      <div class="copyright">
+        © 2023 SwustOJ - 西南科技大学在线编程评测平台
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 页面加载时
+    window.addEventListener('load', function() {
+      // 修改导航栏按钮事件
+      const loginBtn = document.querySelector('.auth-buttons .btn-outline');
+      if (loginBtn) {
+        loginBtn.href = 'index.html#login';
+      }
+      
+      // 替换注册按钮链接
+      const registerBtn = document.querySelector('.auth-buttons .btn-primary');
+      if (registerBtn) {
+        registerBtn.href = 'index.html#register';
+      }
+      
+      // 点击排行榜标签切换激活状态
+      const rankingTabs = document.querySelectorAll('.ranking-tab');
+      rankingTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          rankingTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+
+</html> 

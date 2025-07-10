@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>竞赛 - SwustOJ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #2d3748;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 导航栏 */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      object-fit: contain;
+    }
+
+    .welcome-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #4a5568;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 12px;
+      padding: 8px 2px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #3498db;
+    }
+
+    .user-avatar {
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .avatar-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #3498db;
+      padding: 0;
+    }
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline {
+      border: 1px solid #3498db;
+      color: #3498db;
+      background-color: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    /* 主要内容区域 */
+    .main {
+      flex-grow: 1;
+    }
+
+    /* 竞赛列表区域 */
+    .contests-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .section-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .contest-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .contest-tab {
+      padding: 8px 16px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+
+    .contest-tab.active {
+      color: #3498db;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .contest-filters {
+      display: flex;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .filter-dropdown {
+      position: relative;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      background-color: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover {
+      border-color: #cbd5e0;
+    }
+
+    .search-bar {
+      flex-grow: 1;
+      display: flex;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+    }
+
+    /* 竞赛卡片 */
+    .contest-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .contest-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .contest-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contest-header {
+      padding: 16px;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .contest-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 8px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .contest-title:hover {
+      color: #3498db;
+    }
+
+    .contest-status {
+      display: inline-block;
+      padding: 3px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .status-upcoming {
+      background-color: rgba(236, 201, 75, 0.15);
+      color: #ecc94b;
+    }
+
+    .status-ongoing {
+      background-color: rgba(72, 187, 120, 0.15);
+      color: #48bb78;
+    }
+
+    .status-finished {
+      background-color: rgba(160, 174, 192, 0.15);
+      color: #a0aec0;
+    }
+
+    .contest-info {
+      padding: 16px;
+    }
+
+    .contest-time {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .contest-duration {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .contest-participants {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .contest-icon {
+      color: #3498db;
+      width: 16px;
+      height: 16px;
+      text-align: center;
+    }
+
+    /* 分页 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .pagination-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 38px;
+      margin: 0 4px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #4a5568;
+      font-size: 14px;
+      border: 1px solid #e2e8f0;
+      background-color: white;
+      padding: 0 12px;
+    }
+
+    .pagination-item:hover {
+      border-color: #3498db;
+      color: #3498db;
+    }
+
+    .pagination-item.active {
+      background-color: #3498db;
+      color: white;
+      border-color: #3498db;
+    }
+
+    /* 页脚 */
+    .footer {
+      background-color: white;
+      border-top: 1px solid #e2e8f0;
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .footer-link {
+      color: #4a5568;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-link:hover {
+      color: #3498db;
+    }
+
+    .copyright {
+      color: #4a5568;
+      font-size: 14px;
+    }
+
+    /* 媒体查询 */
+    @media (max-width: 768px) {
+      .navbar {
+        height: auto;
+        padding: 15px 0;
+      }
+
+      .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .auth-buttons {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .contest-filters {
+        flex-direction: column;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .contest-list {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="SwustOJ Logo" class="logo-img">
+        <span class="welcome-text">欢迎来到SwustOJ</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="problems.html" class="nav-link">题库</a>
+        <a href="contest.html" class="nav-link active">竞赛</a>
+        <a href="homework.html" class="nav-link">作业</a>
+        <a href="discussion.html" class="nav-link">讨论</a>
+        <a href="ranking.html" class="nav-link">排行榜</a>
+        <a href="learning.html" class="nav-link">学习</a>
+      </div>
+      <div class="auth-buttons">
+        <a href="index.html#login" class="btn btn-outline">登录</a>
+        <a href="index.html#register" class="btn btn-primary">注册</a>
+        <div class="user-avatar">
+          <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main">
+    <div class="contests-container">
+      <div class="section-header">
+        <h1 class="section-title">竞赛列表</h1>
+        <div class="section-actions">
+          <a href="#" class="btn btn-primary">创建竞赛</a>
+        </div>
+      </div>
+      
+      <div class="contest-tabs">
+        <div class="contest-tab active">全部竞赛</div>
+        <div class="contest-tab">公开竞赛</div>
+        <div class="contest-tab">私有竞赛</div>
+        <div class="contest-tab">已参加</div>
+      </div>
+      
+      <div class="contest-filters">
+        <div class="filter-dropdown">
+          <button class="filter-btn">状态</button>
+        </div>
+        <div class="filter-dropdown">
+          <button class="filter-btn">类型</button>
+        </div>
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="搜索竞赛...">
+        </div>
+      </div>
+      
+      <div class="contest-list">
+        <div class="contest-card">
+          <div class="contest-header">
+            <a href="#" class="contest-title">2023年西南科技大学程序设计新生赛</a>
+            <span class="contest-status status-upcoming">即将开始</span>
+          </div>
+          <div class="contest-info">
+            <div class="contest-time">
+              <span class="contest-icon">📅</span>
+              <span>2023-11-05 14:00:00</span>
+            </div>
+            <div class="contest-duration">
+              <span class="contest-icon">⏱️</span>
+              <span>持续时间: 3小时</span>
+            </div>
+            <div class="contest-participants">
+              <span class="contest-icon">👥</span>
+              <span>参与人数: 132</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contest-card">
+          <div class="contest-header">
+            <a href="#" class="contest-title">ACM算法训练赛 #12</a>
+            <span class="contest-status status-ongoing">进行中</span>
+          </div>
+          <div class="contest-info">
+            <div class="contest-time">
+              <span class="contest-icon">📅</span>
+              <span>2023-11-01 19:30:00</span>
+            </div>
+            <div class="contest-duration">
+              <span class="contest-icon">⏱️</span>
+              <span>持续时间: 2.5小时</span>
+            </div>
+            <div class="contest-participants">
+              <span class="contest-icon">👥</span>
+              <span>参与人数: 87</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contest-card">
+          <div class="contest-header">
+            <a href="#" class="contest-title">西南科技大学第14届ACM程序设计竞赛</a>
+            <span class="contest-status status-finished">已结束</span>
+          </div>
+          <div class="contest-info">
+            <div class="contest-time">
+              <span class="contest-icon">📅</span>
+              <span>2023-10-15 09:00:00</span>
+            </div>
+            <div class="contest-duration">
+              <span class="contest-icon">⏱️</span>
+              <span>持续时间: 5小时</span>
+            </div>
+            <div class="contest-participants">
+              <span class="contest-icon">👥</span>
+              <span>参与人数: 256</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contest-card">
+          <div class="contest-header">
+            <a href="#" class="contest-title">每周算法练习赛 #23</a>
+            <span class="contest-status status-finished">已结束</span>
+          </div>
+          <div class="contest-info">
+            <div class="contest-time">
+              <span class="contest-icon">📅</span>
+              <span>2023-10-25 20:00:00</span>
+            </div>
+            <div class="contest-duration">
+              <span class="contest-icon">⏱️</span>
+              <span>持续时间: 2小时</span>
+            </div>
+            <div class="contest-participants">
+              <span class="contest-icon">👥</span>
+              <span>参与人数: 112</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contest-card">
+          <div class="contest-header">
+            <a href="#" class="contest-title">数据结构专题训练赛</a>
+            <span class="contest-status status-finished">已结束</span>
+          </div>
+          <div class="contest-info">
+            <div class="contest-time">
+              <span class="contest-icon">📅</span>
+              <span>2023-10-18 14:30:00</span>
+            </div>
+            <div class="contest-duration">
+              <span class="contest-icon">⏱️</span>
+              <span>持续时间: 3小时</span>
+            </div>
+            <div class="contest-participants">
+              <span class="contest-icon">👥</span>
+              <span>参与人数: 95</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contest-card">
+          <div class="contest-header">
+            <a href="#" class="contest-title">动态规划进阶训练</a>
+            <span class="contest-status status-upcoming">即将开始</span>
+          </div>
+          <div class="contest-info">
+            <div class="contest-time">
+              <span class="contest-icon">📅</span>
+              <span>2023-11-10 19:00:00</span>
+            </div>
+            <div class="contest-duration">
+              <span class="contest-icon">⏱️</span>
+              <span>持续时间: 3小时</span>
+            </div>
+            <div class="contest-participants">
+              <span class="contest-icon">👥</span>
+              <span>参与人数: 63</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分页 -->
+      <div class="pagination">
+        <a href="#" class="pagination-item active">1</a>
+        <a href="#" class="pagination-item">2</a>
+        <a href="#" class="pagination-item">3</a>
+        <a href="#" class="pagination-item">4</a>
+        <a href="#" class="pagination-item">5</a>
+        <a href="#" class="pagination-item">下一页</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <ul class="footer-links">
+        <li><a href="#" class="footer-link">关于我们</a></li>
+        <li><a href="#" class="footer-link">帮助中心</a></li>
+        <li><a href="#" class="footer-link">学习资料</a></li>
+        <li><a href="#" class="footer-link">联系我们</a></li>
+      </ul>
+      <div class="copyright">
+        © 2023 SwustOJ - 西南科技大学在线编程评测平台
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 页面加载时
+    window.addEventListener('load', function() {
+      // 修改导航栏按钮事件
+      const loginBtn = document.querySelector('.auth-buttons .btn-outline');
+      if (loginBtn) {
+        loginBtn.href = 'index.html#login';
+      }
+      
+      // 替换注册按钮链接
+      const registerBtn = document.querySelector('.auth-buttons .btn-primary');
+      if (registerBtn) {
+        registerBtn.href = 'index.html#register';
+      }
+      
+      // 点击竞赛标签切换激活状态
+      const contestTabs = document.querySelectorAll('.contest-tab');
+      contestTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          contestTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // 创建竞赛按钮事件
+      const createContestBtn = document.querySelector('.section-actions .btn-primary');
+      if (createContestBtn) {
+        createContestBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (!isLoggedIn()) {
+            window.location.href = 'index.html#login';
+            return;
+          }
+          // 这里添加创建竞赛的逻辑
+          alert('创建竞赛功能即将上线');
+        });
+      }
+      
+      // 模拟检查用户是否登录
+      function isLoggedIn() {
+        return false; // 为了演示效果，默认返回未登录状态
+      }
+    });
+  </script>
+</body>
+
+</html> 
