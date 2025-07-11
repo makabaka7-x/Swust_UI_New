@@ -14,16 +14,171 @@
     }
 
     body {
-      background-color: #f8f9fa;
+      background-color: #c4ddff;
+      background-image: 
+        linear-gradient(120deg, 
+          rgba(196, 221, 255, 0.8) 0%, 
+          rgba(208, 228, 255, 0.8) 15%, 
+          rgba(220, 233, 255, 0.8) 30%, 
+          rgba(232, 238, 255, 0.8) 50%, 
+          rgba(255, 225, 249, 0.8) 70%, 
+          rgba(255, 232, 252, 0.8) 85%, 
+          rgba(255, 239, 253, 0.8) 100%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"),
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 35%),
+        radial-gradient(circle at 70% 80%, rgba(255, 232, 252, 0.5) 0%, rgba(255, 232, 252, 0) 40%);
+      background-attachment: fixed;
       color: #2d3748;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* 添加一个悬浮的背景动画效果 */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      animation: float 25s infinite linear;
+      opacity: 0.3;
+    }
+    
+    body::before {
+      background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, rgba(52, 152, 219, 0) 70%);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+    
+    body::after {
+      background: radial-gradient(circle, rgba(255, 204, 240, 0.3) 0%, rgba(255, 204, 240, 0) 70%);
+      bottom: 10%;
+      right: 10%;
+      animation-delay: -12.5s;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(10%, 15%) scale(1.1);
+      }
+      50% {
+        transform: translate(5%, -5%) scale(0.9);
+      }
+      75% {
+        transform: translate(-10%, 5%) scale(1.05);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+    
+    /* 更新英雄区域以匹配新背景 */
+    .hero {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+      padding: 60px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    /* 更新推荐区域背景 */
+    .recommendations {
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 60px 0;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .recommendations::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(208, 228, 255, 0.2) 0%, rgba(255, 232, 252, 0.2) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    /* 更新竞赛日历区域背景 */
+    .contest-calendar {
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 60px 0;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contest-calendar::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 232, 252, 0.2) 0%, rgba(208, 228, 255, 0.2) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    /* 确保所有内容层都在背景效果之上 */
+    .hero-container, .recommendations-container, .features-container, .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* 学习计划和每日一题区域的背景更新 */
+    .study-daily-section {
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 50px 0;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .study-daily-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(225deg, rgba(208, 228, 255, 0.2) 0%, rgba(255, 232, 252, 0.2) 100%);
+      z-index: 0;
+      pointer-events: none;
     }
 
     /* 导航栏 */
     .navbar {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       height: 60px;
       display: flex;
@@ -139,8 +294,9 @@
 
     /* 英雄区域 */
     .hero {
-      background-color: white;
-      border-bottom: 1px solid #e2e8f0;
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
       padding: 60px 40px;
     }
 
@@ -185,153 +341,29 @@
 
     .hero-image {
       flex-shrink: 0;
-      width: 400px;
-      height: 280px;
-      background-color: #f8f9fa;
-      border-radius: 8px;
+      width: 350px; /* 增加宽度，但保持高度不变 */
+      height: 300px; /* 保持高度与轮播图一致 */
+      background-color: transparent;
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0; /* 移除内边距以便轮播图填充整个区域 */
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      padding: 0;
+      box-shadow: none;
       align-self: center;
     }
     
-    /* 时钟和日历样式 */
-    .clock-container {
-      width: 100%;
-      background-color: rgba(52, 152, 219, 0.9);
-      color: white;
-      padding: 10px 0;
-      text-align: center;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-    }
-    
-    .clock-time {
-      font-size: 2rem;
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
-    
-    .clock-date {
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-    
-    .calendar {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      background-color: white;
-    }
-
-    .calendar-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 0;
-      background-color: rgba(52, 152, 219, 0.1);
-    }
-
-    .current-month {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #2c3e50;
-      text-align: center;
-    }
-
-    .calendar-body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 0 10px;
-    }
-
-    .weekdays {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      text-align: center;
-      font-weight: 500;
-      color: #3498db;
-      padding: 5px 0;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .weekday {
-      padding: 2px;
-      font-size: 0.7rem;
-    }
-
-    .days {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: repeat(6, 1fr);
-      gap: 1px;
-      padding: 5px 0;
-    }
-
-    .day {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 0.8rem;
-      color: #4a5568;
-      height: 26px;
-      width: 26px;
-      margin: 0 auto;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    
-    .day:hover {
-      background-color: rgba(52, 152, 219, 0.1);
-    }
-
-    .day.today {
-      background-color: #3498db;
-      color: white;
-      font-weight: 600;
-    }
-
-    .day.other-month {
-      color: #cbd5e0;
-    }
-
-    .calendar-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px;
-      background-color: rgba(52, 152, 219, 0.05);
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-    }
-
-    .calendar-info {
-      font-size: 0.65rem;
-      color: #4a5568;
-      text-align: center;
-    }
-
-    .calendar-info span {
-      color: #3498db;
-      font-weight: 600;
-    }
-
     /* 英雄区轮播图样式 */
     .hero-slideshow {
       flex-shrink: 0;
-      width: 900px;
+      width: 1000px; /* 增加宽度 */
       height: 300px;
       position: relative;
-      background-color: #f8f9fa;
+      background-color: rgba(248, 249, 250, 0.7);
+      backdrop-filter: blur(5px);
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -412,6 +444,169 @@
     .prev-btn:hover, .next-btn:hover {
       background-color: rgba(255, 255, 255, 0.6);
     }
+    
+    /* 时钟和日历样式 */
+    .clock-container {
+      width: 100%;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      padding: 5px 0; /* 减小内边距 */
+      text-align: center;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      box-shadow: 0 2px 10px rgba(79, 172, 254, 0.3);
+    }
+    
+    .clock-time {
+      font-size: 1.6rem; /* 减小字体大小 */
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 2px; /* 减小间距 */
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .clock-date {
+      font-size: 0.8rem; /* 减小字体大小 */
+      font-weight: 500;
+      opacity: 0.9;
+    }
+    
+    .calendar {
+      width: 100%;
+      height: 100%;
+      min-height: 0; /* 移除最小高度限制 */
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-top: none;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 10px; /* 减小内边距 */
+      background-color: rgba(249, 250, 251, 0.8);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .current-month {
+      font-size: 0.9rem; /* 减小字体大小 */
+      font-weight: 600;
+      color: #2c3e50;
+      text-align: center;
+      padding: 3px 10px; /* 减小内边距 */
+      border-radius: 20px;
+      background: rgba(52, 152, 219, 0.08);
+    }
+
+    .calendar-nav-btn {
+      width: 22px; /* 减小按钮大小 */
+      height: 22px; /* 减小按钮大小 */
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #3498db;
+      font-size: 11px; /* 减小字体大小 */
+      transition: all 0.3s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    
+    .calendar-nav-btn:hover {
+      background: rgba(52, 152, 219, 0.1);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .calendar-nav-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .calendar-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 3px 8px 8px; /* 减小内边距 */
+      min-height: 0; /* 移除最小高度限制 */
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-weight: 600;
+      color: #3498db;
+      padding: 2px 0; /* 减小内边距 */
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .weekday {
+      padding: 1px; /* 减小内边距 */
+      font-size: 0.7rem; /* 减小字体大小 */
+    }
+
+    .days {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(6, 18px); /* 保持行高不变 */
+      gap: 2px; /* 略微增加间距 */
+      padding: 2px 0; /* 保持内边距不变 */
+      min-height: 0; /* 保持没有最小高度限制 */
+    }
+
+    .day {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.7rem; /* 保持字体大小不变 */
+      color: #4a5568;
+      height: 18px; /* 保持高度不变 */
+      width: 22px; /* 增加宽度 */
+      margin: 0 auto;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .day:hover {
+      background-color: rgba(52, 152, 219, 0.15);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .day.today {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(79, 172, 254, 0.4);
+    }
+
+    .day.other-month {
+      color: #cbd5e0;
+      opacity: 0.6;
+    }
+
+    /* 删除了日历底部相关样式 */
+
+    .calendar-info span {
+      color: #3498db;
+      font-weight: 600;
+      padding: 1px 4px;
+      background: rgba(52, 152, 219, 0.08);
+      border-radius: 8px;
+    }
 
     /* 特点区域 */
     .features {
@@ -450,7 +645,8 @@
     }
 
     .feature-card {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
       border-radius: 8px;
       padding: 24px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -489,9 +685,10 @@
 
     /* 推荐区域 */
     .recommendations {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
       padding: 60px 0;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
     }
 
     .recommendations-container {
@@ -535,8 +732,9 @@
     }
 
     .problem-card {
-      background-color: white;
-      border: 1px solid #e2e8f0;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
       border-radius: 8px;
       padding: 16px;
       transition: box-shadow 0.2s ease;
@@ -589,8 +787,9 @@
 
     /* 页脚 */
     .footer {
-      background-color: white;
-      border-top: 1px solid #e2e8f0;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
       padding: 20px;
       margin-top: auto;
     }
@@ -648,7 +847,7 @@
       
       .hero-slideshow {
         width: 100%;
-        max-width: 900px;
+        max-width: 1000px; /* 更新最大宽度 */
         margin-bottom: 30px;
       }
     }
@@ -693,10 +892,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
       display: flex;
-        justify-content: center;
+      justify-content: center;
       align-items: center;
       opacity: 0;
       visibility: hidden;
@@ -709,10 +908,10 @@
     }
 
     .modal {
-      background-color: white;
+      background-color: #ffffff; /* 改为纯白色背景 */
       width: 400px;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       padding: 40px;
       position: relative;
       transform: translateY(-20px);
@@ -723,6 +922,7 @@
     .modal-small {
       width: 360px;
       padding: 30px;
+      background-color: #ffffff; /* 确保小弹窗也是白色背景 */
     }
     
     .modal-small .modal-logo {
@@ -824,19 +1024,19 @@
     .form-control {
       width: 100%;
       height: 40px;
-      padding: 8px 12px;
-      border: 1px solid #e2e8f0;
+      padding: 8px 16px;
+      border: 1px solid rgba(226, 232, 240, 0.5);
       border-radius: 4px;
       font-size: 14px;
       color: #2d3748;
-      transition: all 0.2s ease;
-      background-color: white;
+      transition: border-color 0.2s ease;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
     }
 
     .form-control:focus {
       outline: none;
       border-color: #3498db;
-      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
     }
 
     .verification-row {
@@ -867,7 +1067,7 @@
 
     .submit-btn {
       width: 100%;
-      height: 40px;
+      height: 44px;
       background-color: #3498db;
       border: none;
       border-radius: 4px;
@@ -933,12 +1133,13 @@
     .login-tab {
       flex: 1;
       text-align: center;
-      padding: 10px 0;
+      padding: 12px 0;
       color: #4a5568;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
       position: relative;
+      transition: all 0.3s ease;
     }
 
     .login-tab.active {
@@ -951,8 +1152,15 @@
       bottom: -1px;
       left: 25%;
       width: 50%;
-      height: 2px;
+      height: 3px;
       background-color: #3498db;
+      border-radius: 3px 3px 0 0;
+      transition: all 0.3s ease;
+    }
+
+    .login-tab:hover:not(.active) {
+      color: #2980b9;
+      background-color: rgba(52, 152, 219, 0.05);
     }
 
     .login-content > div {
@@ -963,30 +1171,31 @@
       display: block;
     }
 
+    /* 扫码登录样式 */
     .qrcode-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 0;
+      padding: 20px 0;
     }
 
     .qrcode {
       width: 180px;
       height: 180px;
-      background-color: #f8f9fa;
-      border: 1px solid #e2e8f0;
       margin-bottom: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
     }
 
     .qrcode img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
     }
 
     .qrcode-info {
@@ -996,25 +1205,67 @@
       line-height: 1.5;
     }
 
-    .scan-icon {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0.5;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    .divider {
+      display: flex;
+      align-items: center;
+      color: #8c98a4;
+      font-size: 14px;
+      margin: 20px 0;
     }
 
-    .scan-icon.wechat {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M8.691 2c-1.612.073-5.604.614-7.02 3.636c-.958 1.995-.589 4.043.089 5.508c.803 1.73 2.253 3.047 3.76 3.93c-.268.712-.804 1.804-.536 2.679c.135.44.456.783.971.93c.9.223.82.223 1.031.223c.356 0 .713-.134 1.249-.491c1.159-.759 2.253-1.875 2.253-1.875s.134.179.356.357c.178.134.356.268.535.357c1.784 1.34 3.794 1.696 5.47 1.607c1.965-.089 3.705-.8 4.931-1.518c2.309-1.34 3.883-3.437 4.04-5.686c.18-2.59-1.518-5.091-3.883-6.342c-1.16-.58-2.675-.936-3.705-1.072c-.223-.044-.713-.089-1.16-.134C15.942 3.383 12.28 1.82 8.691 2'/%3E%3C/svg%3E");
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #e2e8f0;
     }
 
-    .scan-icon.dingtalk {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M12.09 1.28a10.21 10.21 0 0 0-10.24 10.18c0 5.64 4.59 10.24 10.23 10.24c5.65 0 10.24-4.6 10.24-10.24c0-5.64-4.59-10.18-10.23-10.18z'/%3E%3C/svg%3E");
+    .divider::before {
+      margin-right: 15px;
+    }
+
+    .divider::after {
+      margin-left: 15px;
+    }
+
+         .auth-options {
+       display: flex;
+       justify-content: center;
+       gap: 20px;
+     }
+
+     /* 认证选项样式 */
+      .auth-option {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .auth-option:hover {
+      border-color: #3498db;
+      background-color: #f8f9fa;
+    }
+
+    .auth-option img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    /* 确保图标大小一致 */
+    .auth-icon {
+      width: 28px;
+      height: 28px;
+      display: block;
     }
 
     .oauth-section {
@@ -1059,8 +1310,9 @@
       align-items: center;
       justify-content: center;
       border-radius: 4px;
-      border: 1px solid #e2e8f0;
-      background-color: white;
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
       color: #4a5568;
       font-size: 20px;
       cursor: pointer;
@@ -1075,8 +1327,8 @@
 
     .icon {
       display: inline-block;
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
@@ -1107,8 +1359,9 @@
       text-decoration: none;
       color: #4a5568;
       font-size: 14px;
-      border: 1px solid #e2e8f0;
-      background-color: white;
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
       padding: 0 12px;
     }
 
@@ -1118,11 +1371,12 @@
     }
 
     .pagination-item.active {
-      background-color: #3498db;
+      background-color: rgba(52, 152, 219, 0.8);
       color: white;
-      border-color: #3498db;
+      border-color: rgba(52, 152, 219, 0.8);
     }
 
+    /* 以下是热门问题相关样式，不再使用 */
     /* 问题相关样式 */
     .popular-problems {
       margin-top: 60px;
@@ -1136,9 +1390,10 @@
     }
 
     .problem-card {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       padding: 20px;
       position: relative;
       transition: transform 0.2s, box-shadow 0.2s;
@@ -1162,16 +1417,31 @@
     .easy {
       background-color: rgba(72, 187, 120, 0.1);
       color: #48bb78;
+      transition: all 0.2s ease;
+    }
+    
+    .easy:hover {
+      background-color: rgba(72, 187, 120, 0.2);
     }
 
     .medium {
       background-color: rgba(236, 201, 75, 0.1);
       color: #ecc94b;
+      transition: all 0.2s ease;
+    }
+    
+    .medium:hover {
+      background-color: rgba(236, 201, 75, 0.2);
     }
 
     .hard {
       background-color: rgba(245, 101, 101, 0.1);
       color: #f56565;
+      transition: all 0.2s ease;
+    }
+    
+    .hard:hover {
+      background-color: rgba(245, 101, 101, 0.2);
     }
 
     .problem-title {
@@ -1228,6 +1498,955 @@
       border-radius: 4px;
       font-size: 12px;
       font-weight: 500;
+    }
+    /* 热门问题相关样式结束 */
+
+
+    .qrcode-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      color: #8c98a4;
+      font-size: 14px;
+      margin: 20px 0;
+    }
+
+    /* 每日一题卡片容器 */
+
+    .daily-challenge-card {
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .daily-challenge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .daily-challenge-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+    }
+
+    .daily-challenge-title i {
+      font-size: 1.8rem;
+      margin-right: 10px;
+      color: #3498db;
+    }
+
+    .daily-challenge-timer {
+      display: flex;
+      align-items: center;
+      color: #4a5568;
+      font-size: 0.9rem;
+    }
+
+    .daily-challenge-timer span {
+      background-color: rgba(52, 152, 219, 0.1);
+      padding: 5px 10px;
+      border-radius: 4px;
+      margin-left: 8px;
+      font-weight: 600;
+      color: #3498db;
+    }
+
+    .daily-challenge-content {
+      margin-bottom: 25px;
+    }
+
+    .daily-challenge-problem {
+      margin-bottom: 20px;
+    }
+
+    .daily-challenge-problem h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .problem-difficulty-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-left: 10px;
+    }
+
+    .problem-difficulty-tag.easy {
+      background-color: rgba(72, 187, 120, 0.1);
+      color: #48bb78;
+    }
+
+    .problem-difficulty-tag.medium {
+      background-color: rgba(236, 201, 75, 0.1);
+      color: #ecc94b;
+    }
+
+    .problem-difficulty-tag.hard {
+      background-color: rgba(245, 101, 101, 0.1);
+      color: #f56565;
+    }
+
+    .daily-challenge-description {
+      color: #4a5568;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .daily-challenge-example {
+      background-color: rgba(226, 232, 240, 0.5);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-family: "Courier New", monospace;
+      font-size: 0.9rem;
+      color: #2d3748;
+    }
+
+    .daily-challenge-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .daily-challenge-stats {
+      display: flex;
+      gap: 20px;
+      color: #4a5568;
+      font-size: 0.9rem;
+      justify-content: flex-end;
+      width: 100%;
+    }
+
+    .daily-challenge-stat {
+      display: flex;
+      align-items: center;
+    }
+
+    .daily-challenge-stat i {
+      margin-right: 5px;
+      color: #3498db;
+    }
+
+    .daily-challenge-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .daily-challenge-btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .btn-solve {
+      background-color: #3498db;
+      color: white;
+      border: none;
+    }
+
+    .btn-solve:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-details {
+      border: 1px solid #3498db;
+      color: #3498db;
+      background-color: transparent;
+    }
+
+    .btn-details:hover {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    /* 学习计划卡片样式 */
+
+    .study-plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .study-plan-card {
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .study-plan-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    .study-plan-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .study-plan-icon {
+      width: 48px;
+      height: 48px;
+      margin-right: 16px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(79, 172, 254, 0.15), rgba(0, 242, 254, 0.15));
+      color: #3498db;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .study-plan-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0;
+    }
+
+    .study-plan-stats {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+
+    .study-plan-stat {
+      font-weight: 600;
+      background-color: rgba(226, 232, 240, 0.7);
+      padding: 4px 12px;
+      border-radius: 20px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+    
+    .study-plan-stat:hover {
+      background-color: rgba(226, 232, 240, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .study-plan-difficulty {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+    
+    .study-plan-difficulty:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .study-plan-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      margin-top: auto;
+    }
+
+    .plan-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
+      color: #3498db;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(79, 172, 254, 0.2);
+    }
+    
+    .plan-tag:hover {
+      background: linear-gradient(135deg, rgba(79, 172, 254, 0.2), rgba(0, 242, 254, 0.2));
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .study-plan-progress {
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .progress-bar {
+      flex-grow: 1;
+      height: 10px;
+      background-color: rgba(226, 232, 240, 0.7);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .progress {
+      height: 100%;
+      background-image: linear-gradient(to right, #4facfe, #00f2fe);
+      border-radius: 20px;
+      transition: width 0.5s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-text {
+      min-width: 70px;
+      font-size: 0.9rem;
+      color: #3498db;
+      margin-left: 15px;
+      font-weight: 600;
+      text-align: right;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 4px 10px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .study-plan-description {
+      font-size: 0.95rem;
+      color: #4a5568;
+      line-height: 1.6;
+      margin-bottom: 22px;
+      flex-grow: 1;
+      padding: 0 2px;
+      border-left: 3px solid rgba(79, 172, 254, 0.3);
+      padding-left: 12px;
+      font-style: italic;
+    }
+
+    .study-plan-btn {
+      width: 100%;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(79, 172, 254, 0.3);
+      margin-top: auto;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .study-plan-btn:hover {
+      box-shadow: 0 5px 12px rgba(79, 172, 254, 0.5);
+      transform: translateY(-2px);
+    }
+    
+    .study-plan-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(79, 172, 254, 0.3);
+    }
+    
+    .study-plan-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.7s ease;
+      z-index: -1;
+    }
+    
+    .study-plan-btn:hover::before {
+      left: 100%;
+    }
+
+    .view-more-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .view-more-btn {
+      color: #3498db;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s ease;
+    }
+
+    .view-more-btn:hover {
+      color: #2980b9;
+    }
+
+    .arrow {
+      margin-left: 5px;
+      transition: transform 0.2s ease;
+    }
+
+    .view-more-btn:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    /* 竞赛日历区域 */
+    .contest-calendar {
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      padding: 60px 0;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .calendar-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .calendar-month {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .calendar-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .calendar-nav-btn:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+      border-color: #3498db;
+    }
+
+    .arrow-left, .arrow-right {
+      font-style: normal;
+      color: #3498db;
+    }
+
+    .contest-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contest-card {
+      display: flex;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .contest-card.upcoming {
+      border-left-color: #3498db;
+    }
+
+    .contest-card.past {
+      border-left-color: #a0aec0;
+      opacity: 0.8;
+    }
+
+    .contest-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contest-date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      margin-right: 20px;
+    }
+
+    .contest-day {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .contest-month {
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+
+    .contest-info {
+      flex: 1;
+    }
+
+    .contest-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .contest-time {
+      font-size: 0.9rem;
+      color: #3498db;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .contest-details {
+      display: flex;
+      gap: 15px;
+      font-size: 0.85rem;
+      color: #4a5568;
+    }
+
+    .contest-details span {
+      display: flex;
+      align-items: center;
+    }
+
+    .icon {
+      margin-right: 5px;
+      font-style: normal;
+    }
+
+    .contest-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      min-width: 140px;
+    }
+
+    .contest-btn {
+      padding: 8px 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .contest-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .contest-btn.secondary {
+      background-color: transparent;
+      color: #3498db;
+      border: 1px solid #3498db;
+    }
+
+    .contest-btn.secondary:hover {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    .contest-countdown {
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    .countdown-label {
+      font-size: 0.8rem;
+      color: #4a5568;
+    }
+
+    .countdown-time {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #3498db;
+    }
+
+    .contest-result {
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    .result-label {
+      font-size: 0.8rem;
+      color: #4a5568;
+    }
+
+    .result-rank {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .calendar-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background-color: rgba(249, 250, 251, 0.8);
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
+    .calendar-info {
+      font-size: 0.7rem;
+      color: #4a5568;
+      text-align: center;
+    }
+
+    .calendar-info span {
+      color: #3498db;
+      font-weight: 600;
+      padding: 1px 4px;
+      background: rgba(52, 152, 219, 0.08);
+      border-radius: 8px;
+    }
+
+    .view-all-contests {
+      color: #3498db;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s ease;
+    }
+
+    .view-all-contests:hover {
+      color: #2980b9;
+    }
+
+    .view-all-contests .arrow {
+      margin-left: 5px;
+      transition: transform 0.2s ease;
+    }
+
+    .view-all-contests:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    /* 题目难度分布 */
+    .difficulty-distribution {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+    }
+
+    .distribution-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .distribution-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .distribution-stats {
+      display: flex;
+      gap: 20px;
+    }
+
+    .total-problems, .solved-problems {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #4a5568;
+    }
+
+    .chart-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .difficulty-label {
+      width: 100px;
+      font-weight: 600;
+      color: #718096;
+    }
+
+    .chart-bar-container {
+      flex: 1;
+      height: 20px;
+      background-color: rgba(226, 232, 240, 0.5);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .chart-bar {
+      height: 100%;
+      background-color: #e2e8f0;
+    }
+
+    .chart-progress {
+      height: 100%;
+    }
+
+    .chart-progress.easy {
+      background-color: #48bb78;
+    }
+
+    .chart-progress.medium {
+      background-color: #ecc94b;
+    }
+
+    .chart-progress.hard {
+      background-color: #f56565;
+    }
+
+    .chart-stats {
+      display: flex;
+      width: 150px;
+      margin-left: 15px;
+    }
+
+    .solved {
+      font-size: 0.9rem;
+      color: #4a5568;
+      font-weight: 600;
+    }
+
+    .solved span {
+      color: #3498db;
+    }
+
+    .total {
+      font-size: 0.9rem;
+      color: #718096;
+      margin-left: 5px;
+    }
+
+    .distribution-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .progress-summary {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .progress-summary span {
+      color: #3498db;
+    }
+
+    .solve-more-btn {
+      display: inline-flex;
+      align-items: center;
+      color: #3498db;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .solve-more-btn:hover {
+      color: #2980b9;
+    }
+
+    /* 学习计划和每日一题并排布局 */
+    .study-daily-section {
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      padding: 50px 0;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .study-daily-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .study-plans-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .daily-challenge-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 更新学习计划卡片网格布局 */
+    .study-plans-column .study-plans-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 25px;
+      margin-top: 30px;
+      max-height: 600px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    /* 学习计划卡片在并排布局中的样式 */
+    .study-plans-column .study-plan-card {
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .study-plans-column .study-plan-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .daily-challenge-column .daily-challenge-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 更新每日一题卡片样式 */
+    .daily-challenge-column .daily-challenge-card {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      height: auto;
+      min-height: 600px;
+      transition: box-shadow 0.2s;
+    }
+    
+    .daily-challenge-content {
+      flex-grow: 1;
+      overflow: auto;
+      padding: 15px 0;
+    }
+    
+    .daily-challenge-description {
+      margin-bottom: 20px;
+    }
+    
+    .daily-challenge-example {
+      margin-bottom: 30px;
+    }
+    
+    .daily-challenge-actions {
+      margin-top: auto;
+      padding-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .daily-challenge-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    @media (max-width: 992px) {
+      .study-daily-container {
+        flex-direction: column;
+      }
+      
+      .daily-challenge-column .daily-challenge-card {
+        min-height: 500px;
+      }
+      
+      .study-plans-column .study-plans-grid {
+        max-height: none;
+      }
+    }
+
+    /* 新增样式：统一学习计划和每日一题的布局 */
+    .study-plan-stats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, rgba(249, 250, 251, 0.7), rgba(240, 245, 250, 0.7));
+      padding: 12px 15px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .daily-challenge-stats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(226, 232, 240, 0.3);
+    }
+
+    .study-plan-progress {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -1287,7 +2506,9 @@
             </div>
           </div>
           <div class="calendar-header">
+            <button class="calendar-nav-btn" onclick="prevMonth()"><i class="arrow-left">←</i></button>
             <span class="current-month" id="current-month">2023年10月</span>
+            <button class="calendar-nav-btn" onclick="nextMonth()"><i class="arrow-right">→</i></button>
           </div>
           <div class="calendar-body">
             <div class="weekdays">
@@ -1303,12 +2524,186 @@
               <!-- 日期将通过JavaScript动态生成 -->
             </div>
           </div>
-          <div class="calendar-footer">
-            <div class="calendar-info" id="today-info">
-              今天是 <span>2023年10月27日</span>
+          <!-- 删除整个日历底部信息 -->
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 学习计划和每日一题区域 -->
+  <section class="study-daily-section">
+    <div class="study-daily-container">
+      <!-- 学习计划部分 -->
+      <div class="study-plans-column">
+        <div class="section-header">
+          <h2 class="section-title">学习计划</h2>
+          <p class="section-subtitle">系统化学习，循序渐进提升编程能力</p>
+        </div>
+
+        <div class="study-plans-grid">
+          <div class="study-plan-card">
+            <div class="study-plan-header">
+              <div class="study-plan-icon">🔥</div>
+              <div class="study-plan-info">
+                <h3 class="study-plan-title">算法入门</h3>
+              </div>
             </div>
-            <div class="calendar-info" id="month-days">
-              本月共 <span>31</span> 天
+            
+            <div class="study-plan-stats-row">
+              <div class="study-plan-stats">
+                <span class="study-plan-stat">14天</span>
+                <span class="study-plan-stat">31题</span>
+              </div>
+              <span class="study-plan-difficulty easy">简单</span>
+            </div>
+            
+            <div class="study-plan-progress">
+              <div class="progress-bar">
+                <div class="progress" style="width: 25%"></div>
+              </div>
+              <span class="progress-text">25% 完成</span>
+            </div>
+            
+            <p class="study-plan-description">适合算法初学者的入门计划，从基本数据结构到简单算法，循序渐进。</p>
+            
+            <div class="study-plan-tags">
+              <span class="plan-tag">数组</span>
+              <span class="plan-tag">链表</span>
+              <span class="plan-tag">排序</span>
+              <span class="plan-tag">哈希表</span>
+            </div>
+            
+            <button class="study-plan-btn">继续学习</button>
+          </div>
+
+          <div class="study-plan-card">
+            <div class="study-plan-header">
+              <div class="study-plan-icon">🏆</div>
+              <div class="study-plan-info">
+                <h3 class="study-plan-title">动态规划专题</h3>
+              </div>
+            </div>
+            
+            <div class="study-plan-stats-row">
+              <div class="study-plan-stats">
+                <span class="study-plan-stat">21天</span>
+                <span class="study-plan-stat">45题</span>
+              </div>
+              <span class="study-plan-difficulty medium">中等</span>
+            </div>
+            
+            <div class="study-plan-progress">
+              <div class="progress-bar">
+                <div class="progress" style="width: 0%"></div>
+              </div>
+              <span class="progress-text">未开始</span>
+            </div>
+            
+            <p class="study-plan-description">从基础到进阶的动态规划专题训练，掌握这一强大的算法设计技术。</p>
+            
+            <div class="study-plan-tags">
+              <span class="plan-tag">DP</span>
+              <span class="plan-tag">记忆化搜索</span>
+              <span class="plan-tag">状态压缩</span>
+            </div>
+            
+            <button class="study-plan-btn">开始学习</button>
+          </div>
+
+          <div class="study-plan-card">
+            <div class="study-plan-header">
+              <div class="study-plan-icon">🚀</div>
+              <div class="study-plan-info">
+                <h3 class="study-plan-title">面试高频题</h3>
+              </div>
+            </div>
+            
+            <div class="study-plan-stats-row">
+              <div class="study-plan-stats">
+                <span class="study-plan-stat">30天</span>
+                <span class="study-plan-stat">100题</span>
+              </div>
+              <span class="study-plan-difficulty hard">困难</span>
+            </div>
+            
+            <div class="study-plan-progress">
+              <div class="progress-bar">
+                <div class="progress" style="width: 60%"></div>
+              </div>
+              <span class="progress-text">60% 完成</span>
+            </div>
+            
+            <p class="study-plan-description">精选大厂面试高频算法题，助你高效准备技术面试。</p>
+            
+            <div class="study-plan-tags">
+              <span class="plan-tag">面试</span>
+              <span class="plan-tag">高频</span>
+              <span class="plan-tag">大厂</span>
+            </div>
+            
+            <button class="study-plan-btn">继续学习</button>
+          </div>
+        </div>
+
+        <div class="view-more-container">
+          <a href="#" class="view-more-btn">查看全部学习计划 <span class="arrow">→</span></a>
+        </div>
+      </div>
+      
+      <!-- 每日一题部分 -->
+      <div class="daily-challenge-column">
+        <div class="section-header">
+          <h2 class="section-title">每日一题</h2>
+          <p class="section-subtitle">每天一道精选题目，提升你的编程技能</p>
+        </div>
+        
+        <div class="daily-challenge-card">
+          <div class="daily-challenge-header">
+            <div class="daily-challenge-title">
+              <i>📝</i>今日挑战
+            </div>
+            <div class="daily-challenge-timer">
+              剩余时间: <span id="challenge-timer">23:45:12</span>
+            </div>
+          </div>
+          
+          <div class="daily-challenge-content">
+            <div class="daily-challenge-problem">
+              <h3>
+                两数之和
+                <span class="problem-difficulty-tag easy">简单</span>
+              </h3>
+              
+              <div class="daily-challenge-description">
+                <p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。</p>
+                <p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+              </div>
+              
+              <div class="daily-challenge-example">
+                <strong>示例:</strong><br>
+                输入: nums = [2,7,11,15], target = 9<br>
+                输出: [0,1]<br>
+                解释: 因为 nums[0] + nums[1] == 9，所以返回 [0, 1]
+              </div>
+            </div>
+          </div>
+          
+          <div class="daily-challenge-stats-row">
+            <div class="daily-challenge-stats">
+              <div class="daily-challenge-stat">
+                <i>👥</i> 已提交: 1,245
+              </div>
+              <div class="daily-challenge-stat">
+                <i>✅</i> 通过率: 76.3%
+              </div>
+            </div>
+          </div>
+            
+          <div class="daily-challenge-actions">
+            <div class="daily-challenge-buttons">
+              <button class="daily-challenge-btn btn-details">查看详情</button>
+              <button class="daily-challenge-btn btn-solve">立即解题</button>
             </div>
           </div>
         </div>
@@ -1316,7 +2711,7 @@
     </div>
   </section>
 
-  <!-- 推荐题目区域 -->
+  <!-- 推荐区域 -->
   <section class="recommendations">
     <div class="recommendations-container">
       <div class="section-header">
@@ -1380,149 +2775,159 @@
           </div>
         </div>
       </div>
-      <!-- 热门问题 -->
-      <div class="popular-problems">
-        <div class="section-header">
-          <h2 class="section-title">热门问题</h2>
-          <a href="problems.html" class="btn btn-outline">查看全部</a>
+
+      <!-- 题目难度分布 -->
+      <div class="difficulty-distribution">
+        <div class="distribution-header">
+          <h3 class="distribution-title">题目难度分布</h3>
+          <div class="distribution-stats">
+            <div class="total-problems">总题数: <span>2,345</span></div>
+            <div class="solved-problems">已解决: <span>347</span></div>
+          </div>
         </div>
-        <div class="problem-grid">
-          <!-- 问题卡片 -->
-          <div class="problem-card">
-            <div class="problem-difficulty easy">简单</div>
-            <a href="#" class="problem-title">两数之和</a>
-            <p class="problem-description">给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。</p>
-            <div class="problem-stats">
-              <div class="stat">
-                <span class="stat-label">通过率:</span>
-                <span class="stat-value">46.2%</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">提交:</span>
-                <span class="stat-value">3.8k</span>
+        
+        <div class="distribution-chart">
+          <div class="chart-row">
+            <div class="difficulty-label easy">简单</div>
+            <div class="chart-bar-container">
+              <div class="chart-bar">
+                <div class="chart-progress easy" style="width: 75%"></div>
               </div>
             </div>
-            <div class="problem-tags">
-              <span class="tag">数组</span>
-              <span class="tag">哈希表</span>
+            <div class="chart-stats">
+              <div class="solved">已解决 <span>187</span></div>
+              <div class="total">/ 652</div>
             </div>
           </div>
           
-          <div class="problem-card">
-            <div class="problem-difficulty medium">中等</div>
-            <a href="#" class="problem-title">无重复字符的最长子串</a>
-            <p class="problem-description">给定一个字符串 s，请你找出其中不含有重复字符的最长子串的长度。</p>
-            <div class="problem-stats">
-              <div class="stat">
-                <span class="stat-label">通过率:</span>
-                <span class="stat-value">38.7%</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">提交:</span>
-                <span class="stat-value">2.5k</span>
+          <div class="chart-row">
+            <div class="difficulty-label medium">中等</div>
+            <div class="chart-bar-container">
+              <div class="chart-bar">
+                <div class="chart-progress medium" style="width: 45%"></div>
               </div>
             </div>
-            <div class="problem-tags">
-              <span class="tag">哈希表</span>
-              <span class="tag">字符串</span>
-              <span class="tag">滑动窗口</span>
+            <div class="chart-stats">
+              <div class="solved">已解决 <span>135</span></div>
+              <div class="total">/ 1,247</div>
             </div>
           </div>
           
-          <div class="problem-card">
-            <div class="problem-difficulty hard">困难</div>
-            <a href="#" class="problem-title">寻找两个正序数组的中位数</a>
-            <p class="problem-description">给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的中位数。</p>
-            <div class="problem-stats">
-              <div class="stat">
-                <span class="stat-label">通过率:</span>
-                <span class="stat-value">28.3%</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">提交:</span>
-                <span class="stat-value">1.9k</span>
+          <div class="chart-row">
+            <div class="difficulty-label hard">困难</div>
+            <div class="chart-bar-container">
+              <div class="chart-bar">
+                <div class="chart-progress hard" style="width: 15%"></div>
               </div>
             </div>
-            <div class="problem-tags">
-              <span class="tag">数组</span>
-              <span class="tag">二分查找</span>
-              <span class="tag">分治</span>
-            </div>
-          </div>
-          
-          <div class="problem-card">
-            <div class="problem-difficulty medium">中等</div>
-            <a href="#" class="problem-title">最长回文子串</a>
-            <p class="problem-description">给你一个字符串 s，找到 s 中最长的回文子串。如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。</p>
-            <div class="problem-stats">
-              <div class="stat">
-                <span class="stat-label">通过率:</span>
-                <span class="stat-value">35.9%</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">提交:</span>
-                <span class="stat-value">2.3k</span>
-              </div>
-            </div>
-            <div class="problem-tags">
-              <span class="tag">字符串</span>
-              <span class="tag">动态规划</span>
-            </div>
-          </div>
-          
-          <div class="problem-card">
-            <div class="problem-difficulty easy">简单</div>
-            <a href="#" class="problem-title">回文数</a>
-            <p class="problem-description">给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
-            <div class="problem-stats">
-              <div class="stat">
-                <span class="stat-label">通过率:</span>
-                <span class="stat-value">58.6%</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">提交:</span>
-                <span class="stat-value">2.9k</span>
-              </div>
-            </div>
-            <div class="problem-tags">
-              <span class="tag">数学</span>
-            </div>
-          </div>
-          
-          <div class="problem-card">
-            <div class="problem-difficulty medium">中等</div>
-            <a href="#" class="problem-title">盛最多水的容器</a>
-            <p class="problem-description">给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
-            <div class="problem-stats">
-              <div class="stat">
-                <span class="stat-label">通过率:</span>
-                <span class="stat-value">42.1%</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">提交:</span>
-                <span class="stat-value">2.1k</span>
-              </div>
-            </div>
-            <div class="problem-tags">
-              <span class="tag">贪心</span>
-              <span class="tag">双指针</span>
-              <span class="tag">数组</span>
+            <div class="chart-stats">
+              <div class="solved">已解决 <span>25</span></div>
+              <div class="total">/ 446</div>
             </div>
           </div>
         </div>
-        <!-- 添加分页 -->
-        <div class="pagination">
-          <a href="#" class="pagination-item active">1</a>
-          <a href="#" class="pagination-item">2</a>
-          <a href="#" class="pagination-item">3</a>
-          <a href="#" class="pagination-item">4</a>
-          <a href="#" class="pagination-item">5</a>
-          <a href="#" class="pagination-item">下一页</a>
+        
+        <div class="distribution-footer">
+          <div class="progress-summary">总进度: <span>14.8%</span></div>
+          <a href="problems.html" class="solve-more-btn">继续挑战 <span class="arrow">→</span></a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 竞赛日历区域 -->
+  <section class="contest-calendar">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">竞赛日历</h2>
+        <p class="section-subtitle">参加编程竞赛，挑战自我，提升能力</p>
+      </div>
+      
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <button class="calendar-nav-btn"><i class="arrow-left">←</i></button>
+          <h3 class="calendar-month">2025年7月</h3>
+          <button class="calendar-nav-btn"><i class="arrow-right">→</i></button>
+        </div>
+        
+        <div class="contest-list">
+          <div class="contest-card upcoming">
+            <div class="contest-date">
+              <div class="contest-day">12</div>
+              <div class="contest-month">7月</div>
+            </div>
+            <div class="contest-info">
+              <h4 class="contest-title">周赛 #455</h4>
+              <div class="contest-time">09:30 - 11:30</div>
+              <div class="contest-details">
+                <span class="contest-duration"><i class="icon">⏱️</i> 2小时</span>
+                <span class="contest-problems"><i class="icon">📝</i> 4题</span>
+                <span class="contest-participants"><i class="icon">👥</i> 已报名: 3,245</span>
+              </div>
+            </div>
+            <div class="contest-actions">
+              <button class="contest-btn">立即报名</button>
+              <div class="contest-countdown">
+                <div class="countdown-label">距离开始</div>
+                <div class="countdown-time" id="contest-countdown-1">2天 18:45:30</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contest-card upcoming">
+            <div class="contest-date">
+              <div class="contest-day">19</div>
+              <div class="contest-month">7月</div>
+            </div>
+            <div class="contest-info">
+              <h4 class="contest-title">双周赛 #148</h4>
+              <div class="contest-time">21:30 - 23:30</div>
+              <div class="contest-details">
+                <span class="contest-duration"><i class="icon">⏱️</i> 2小时</span>
+                <span class="contest-problems"><i class="icon">📝</i> 4题</span>
+                <span class="contest-participants"><i class="icon">👥</i> 已报名: 2,187</span>
+              </div>
+            </div>
+            <div class="contest-actions">
+              <button class="contest-btn">立即报名</button>
+              <div class="contest-countdown">
+                <div class="countdown-label">距离开始</div>
+                <div class="countdown-time" id="contest-countdown-2">9天 06:45:30</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contest-card past">
+            <div class="contest-date">
+              <div class="contest-day">5</div>
+              <div class="contest-month">7月</div>
+            </div>
+            <div class="contest-info">
+              <h4 class="contest-title">周赛 #454</h4>
+              <div class="contest-time">09:30 - 11:30</div>
+              <div class="contest-details">
+                <span class="contest-duration"><i class="icon">⏱️</i> 2小时</span>
+                <span class="contest-problems"><i class="icon">📝</i> 4题</span>
+                <span class="contest-participants"><i class="icon">👥</i> 参与: 4,127</span>
+              </div>
+            </div>
+            <div class="contest-actions">
+              <button class="contest-btn secondary">查看题目</button>
+              <div class="contest-result">
+                <div class="result-label">你的排名</div>
+                <div class="result-rank">1,245 / 4,127</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="calendar-footer">
+          <a href="#" class="view-all-contests">查看全部竞赛 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- 特点区域 -->
   <section class="features">
     <div class="features-container">
@@ -1560,7 +2965,7 @@
         <li><a href="#" class="footer-link">联系我们</a></li>
         </ul>
       <div class="copyright">
-        © 2023 SwustOJ - 西南科技大学在线编程评测平台
+        © 2025 SwustOJ - 西南科技大学在线编程评测平台
       </div>
       </div>
   </footer>
@@ -1583,12 +2988,10 @@
         <div class="account-login active">
           <form>
             <div class="form-group">
-              <label for="username">学号/邮箱</label>
-              <input type="text" id="username" class="form-control" placeholder="请输入学号或邮箱" required>
-    </div>
+              <input type="text" class="form-control" placeholder="学号/邮箱" required>
+            </div>
             <div class="form-group">
-              <label for="password">密码</label>
-              <input type="password" id="password" class="form-control" placeholder="请输入密码" required>
+              <input type="password" class="form-control" placeholder="密码" required>
             </div>
             <button type="submit" class="submit-btn">登录</button>
             <div class="auth-footer">
@@ -1601,18 +3004,18 @@
         <div class="qrcode-login">
           <div class="qrcode-container">
             <div class="qrcode">
-              <div class="scan-icon wechat"></div>
+              <img src="images/二维码.png" alt="微信登录二维码" id="qrcode-image">
             </div>
             <p class="qrcode-info">请使用微信扫描二维码登录</p>
           </div>
           
-          <div class="oauth-divider">其他登录方式</div>
-          <div class="oauth-buttons">
-            <div class="oauth-button" onclick="switchQRCode('wechat')">
-              <span class="icon icon-wechat"></span>
+          <div class="divider">其他登录方式</div>
+          <div class="auth-options">
+            <div class="auth-option" onclick="switchQRCode('wechat')">
+              <img src="images/微信.png" alt="微信" class="auth-icon">
             </div>
-            <div class="oauth-button" onclick="switchQRCode('dingtalk')">
-              <span class="icon icon-dingtalk"></span>
+            <div class="auth-option" onclick="switchQRCode('dingtalk')">
+              <img src="images/钉钉01.png" alt="钉钉" class="auth-icon">
             </div>
           </div>
         </div>
@@ -1732,15 +3135,14 @@
 
     // 二维码登录方式切换
     function switchQRCode(type) {
-      const qrcodeElement = document.querySelector('.scan-icon');
+      const qrcodeImage = document.getElementById('qrcode-image');
       const qrcodeInfo = document.querySelector('.qrcode-info');
       
-      qrcodeElement.className = 'scan-icon';
-      qrcodeElement.classList.add(type);
-      
       if (type === 'wechat') {
+        qrcodeImage.src = 'images/二维码.png';
         qrcodeInfo.textContent = '请使用微信扫描二维码登录';
-      } else if (type === 'dingtalk') {
+      } else {
+        qrcodeImage.src = 'images/二维码.png';
         qrcodeInfo.textContent = '请使用钉钉扫描二维码登录';
       }
     }
@@ -1803,6 +3205,14 @@
       
       // 初始化日历
       initCalendar();
+      
+      // 每日一题倒计时
+      updateChallengeTimer();
+      setInterval(updateChallengeTimer, 1000);
+      
+      // 竞赛倒计时
+      updateContestCountdowns();
+      setInterval(updateContestCountdowns, 1000);
     });
  
     // 轮播图相关函数
@@ -1861,74 +3271,7 @@
       dots[slideIndex-1].classList.add('active');
     }
 
-    // 初始化日历
-    function initCalendar() {
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = now.getMonth();
-      const day = now.getDate();
-      
-      // 设置当前月份标题
-      document.querySelector('.current-month').textContent = `${year}年${month + 1}月`;
-      
-      // 获取当月第一天
-      const firstDay = new Date(year, month, 1);
-      // 获取当月最后一天
-      const lastDay = new Date(year, month + 1, 0);
-      
-      // 获取当月第一天是星期几（0-6，0是星期日）
-      const firstDayIndex = firstDay.getDay();
-      // 获取当月天数
-      const daysInMonth = lastDay.getDate();
-      
-      // 获取上个月最后一天
-      const prevLastDay = new Date(year, month, 0);
-      const prevDaysInMonth = prevLastDay.getDate();
-      
-      // 计算下个月开始的天数
-      const nextDays = 42 - (firstDayIndex + daysInMonth);
-      
-      // 清空日历天数
-      const daysContainer = document.getElementById('calendar-days');
-      daysContainer.innerHTML = '';
-      
-      // 添加上个月的最后几天
-      for (let i = firstDayIndex; i > 0; i--) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'day other-month';
-        dayElement.textContent = prevDaysInMonth - i + 1;
-        daysContainer.appendChild(dayElement);
-      }
-      
-      // 添加当月的天数
-      for (let i = 1; i <= daysInMonth; i++) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'day';
-        if (i === day) {
-          dayElement.classList.add('today');
-        }
-        dayElement.textContent = i;
-        daysContainer.appendChild(dayElement);
-      }
-      
-      // 添加下个月的开始几天
-      for (let i = 1; i <= nextDays; i++) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'day other-month';
-        dayElement.textContent = i;
-        daysContainer.appendChild(dayElement);
-      }
-      
-      // 更新日历底部信息
-      const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-      const todayInfo = document.getElementById('today-info');
-      const monthInfo = document.getElementById('month-days');
-      todayInfo.innerHTML = `今天是 <span>${year}年${month + 1}月${day}日</span>`;
-      monthInfo.innerHTML = `本月共 <span>${daysInMonth}</span> 天`;
-      
-      // 初始化时钟
-      initClock();
-    }
+    // 初始化日历函数已在下方重新定义
     
     // 初始化时钟函数
     function initClock() {
@@ -1997,6 +3340,181 @@
       // 显示当前幻灯片和激活当前点
       slides[heroSlideIndex-1].classList.add('active');
       dots[heroSlideIndex-1].classList.add('active');
+    }
+    
+    // 每日一题倒计时
+    function updateChallengeTimer() {
+      // 设置每日挑战结束时间为今天的23:59:59
+      const now = new Date();
+      const endTime = new Date(now);
+      endTime.setHours(23, 59, 59, 999);
+      
+      // 计算剩余时间
+      const timeDiff = endTime - now;
+      
+      // 如果已经结束，重置为明天
+      if (timeDiff < 0) {
+        endTime.setDate(endTime.getDate() + 1);
+        timeDiff = endTime - now;
+      }
+      
+      // 计算小时、分钟和秒数
+      const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+      
+      // 格式化显示
+      const formattedTime = 
+        String(hours).padStart(2, '0') + ':' +
+        String(minutes).padStart(2, '0') + ':' +
+        String(seconds).padStart(2, '0');
+      
+      // 更新显示
+      document.getElementById('challenge-timer').textContent = formattedTime;
+    }
+    
+    // 竞赛倒计时
+    function updateContestCountdowns() {
+      // 竞赛1倒计时 - 假设是2天后
+      const contest1Date = new Date();
+      contest1Date.setDate(contest1Date.getDate() + 2);
+      contest1Date.setHours(9, 30, 0, 0);
+      updateCountdown('contest-countdown-1', contest1Date);
+      
+      // 竞赛2倒计时 - 假设是9天后
+      const contest2Date = new Date();
+      contest2Date.setDate(contest2Date.getDate() + 9);
+      contest2Date.setHours(21, 30, 0, 0);
+      updateCountdown('contest-countdown-2', contest2Date);
+    }
+    
+    function updateCountdown(elementId, targetDate) {
+      const now = new Date();
+      const timeDiff = targetDate - now;
+      
+      if (timeDiff <= 0) {
+        document.getElementById(elementId).textContent = "已开始";
+        return;
+      }
+      
+      // 计算天、小时、分钟和秒
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+      
+      // 格式化显示
+      let formattedTime = '';
+      if (days > 0) {
+        formattedTime += days + '天 ';
+      }
+      formattedTime += String(hours).padStart(2, '0') + ':';
+      formattedTime += String(minutes).padStart(2, '0') + ':';
+      formattedTime += String(seconds).padStart(2, '0');
+      
+      document.getElementById(elementId).textContent = formattedTime;
+    }
+
+    // 全局变量，用于跟踪当前显示的年份和月份
+    let currentYear;
+    let currentMonth;
+    let currentDay;
+
+    // 初始化日历
+    function initCalendar() {
+      const now = new Date();
+      currentYear = now.getFullYear();
+      currentMonth = now.getMonth();
+      currentDay = now.getDate();
+      
+      updateCalendar();
+      
+      // 初始化时钟
+      initClock();
+    }
+    
+    // 更新日历显示
+    function updateCalendar() {
+      // 设置当前月份标题
+      document.querySelector('.current-month').textContent = `${currentYear}年${currentMonth + 1}月`;
+      
+      // 获取当月第一天
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      // 获取当月最后一天
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      
+      // 获取当月第一天是星期几（0-6，0是星期日）
+      const firstDayIndex = firstDay.getDay();
+      // 获取当月天数
+      const daysInMonth = lastDay.getDate();
+      
+      // 获取上个月最后一天
+      const prevLastDay = new Date(currentYear, currentMonth, 0);
+      const prevDaysInMonth = prevLastDay.getDate();
+      
+      // 计算下个月开始的天数
+      const nextDays = 42 - (firstDayIndex + daysInMonth);
+      
+      // 清空日历天数
+      const daysContainer = document.getElementById('calendar-days');
+      daysContainer.innerHTML = '';
+      
+      // 添加上个月的最后几天
+      for (let i = firstDayIndex; i > 0; i--) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day other-month';
+        dayElement.textContent = prevDaysInMonth - i + 1;
+        daysContainer.appendChild(dayElement);
+      }
+      
+      // 获取当前日期，用于标记今天
+      const now = new Date();
+      const today = now.getDate();
+      const thisMonth = now.getMonth();
+      const thisYear = now.getFullYear();
+      
+      // 添加当月的天数
+      for (let i = 1; i <= daysInMonth; i++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day';
+        // 只有当前月份和年份与日历显示一致时，才标记今天
+        if (i === today && currentMonth === thisMonth && currentYear === thisYear) {
+          dayElement.classList.add('today');
+        }
+        dayElement.textContent = i;
+        daysContainer.appendChild(dayElement);
+      }
+      
+      // 添加下个月的开始几天
+      for (let i = 1; i <= nextDays; i++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day other-month';
+        dayElement.textContent = i;
+        daysContainer.appendChild(dayElement);
+      }
+      
+      // 不再需要更新日历底部信息
+      const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    }
+    
+    // 上个月
+    function prevMonth() {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      updateCalendar();
+    }
+    
+    // 下个月
+    function nextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      updateCalendar();
     }
   </script>
 </body>

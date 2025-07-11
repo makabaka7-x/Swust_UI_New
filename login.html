@@ -14,7 +14,7 @@
     }
 
     body {
-      background-color: #f8f9fa;
+      background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -27,15 +27,22 @@
       width: 400px;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      padding: 40px;
+      padding: 30px;
+      position: relative;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #a0aec0;
     }
 
     .modal-header {
       text-align: center;
-      margin-bottom: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      margin-bottom: 25px;
     }
 
     .logo {
@@ -46,7 +53,7 @@
 
     .modal-header h2 {
       color: #2c3e50;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 600;
     }
 
@@ -116,80 +123,7 @@
       text-decoration: underline;
     }
 
-    .oauth-section {
-      margin-top: 30px;
-      text-align: center;
-    }
-
-    .oauth-divider {
-      display: flex;
-      align-items: center;
-      color: #8c98a4;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .oauth-divider::before,
-    .oauth-divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background-color: #e2e8f0;
-    }
-
-    .oauth-divider::before {
-      margin-right: 15px;
-    }
-
-    .oauth-divider::after {
-      margin-left: 15px;
-    }
-
-    .oauth-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .oauth-button {
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 4px;
-      border: 1px solid #e2e8f0;
-      background-color: white;
-      color: #4a5568;
-      font-size: 20px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .oauth-button:hover {
-      border-color: #3498db;
-      color: #3498db;
-      background-color: rgba(52, 152, 219, 0.05);
-    }
-
-    .icon {
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .icon-dingtalk {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M12.09 1.28a10.21 10.21 0 0 0-10.24 10.18c0 5.64 4.59 10.24 10.23 10.24c5.65 0 10.24-4.6 10.24-10.24c0-5.64-4.59-10.18-10.23-10.18zm1.95 13.34H9.33c-.5 0-.9-.39-.9-.88c0-.49.4-.89.9-.89h1.86v-4h-1.19c-.5 0-.9-.4-.9-.89s.4-.89.9-.89h4.1c.5 0 .9.4.9.9c0 .48-.4.88-.9.88h-1.2v4.89h1.15c.5 0 .9.4.9.89c0 .49-.4.88-.9.88zm1.2-9.01l-3.25.93l-3.32-.93c-.42-.14-.85.22-.74.68l.13.48c.06.18.22.32.41.37l3.25.93c.17.05.35.05.53 0l3.25-.93c.18-.05.35-.19.41-.37l.13-.48c.1-.46-.33-.82-.74-.68z'/%3E%3C/svg%3E");
-    }
-
-    .icon-wechat {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M8.691 2c-1.612.073-5.604.614-7.02 3.636c-.958 1.995-.589 4.043.089 5.508c.803 1.73 2.253 3.047 3.76 3.93c-.268.712-.804 1.804-.536 2.679c.135.44.456.783.971.93c.9.223.82.223 1.031.223c.356 0 .713-.134 1.249-.491c1.159-.759 2.253-1.875 2.253-1.875s.134.179.356.357c.178.134.356.268.535.357c1.784 1.34 3.794 1.696 5.47 1.607c1.965-.089 3.705-.8 4.931-1.518c2.309-1.34 3.883-3.437 4.04-5.686c.18-2.59-1.518-5.091-3.883-6.342c-1.16-.58-2.675-.936-3.705-1.072c-.223-.044-.713-.089-1.16-.134C15.942 3.383 12.28 1.82 8.691 2m.178 5c.803 0 1.428.67 1.428 1.474c0 .803-.625 1.428-1.428 1.428c-.848 0-1.517-.625-1.517-1.428c0-.803.67-1.474 1.517-1.474zm6.877 0c.802 0 1.428.67 1.428 1.474c0 .803-.626 1.428-1.428 1.428c-.848 0-1.517-.625-1.517-1.428c0-.803.669-1.474 1.517-1.474zm-6.877 7.59c.4 0 .758.223 1.026.58c.223.313.402.759.402 1.25c0 .178-.45.312-.09.49c-.089-.044-.133-.089-.223-.178c-.357-.267-.714-.535-1.115-.535c-.445 0-.848.268-1.16.535c-.089.09-.134.134-.223.178c-.044-.178-.089-.312-.089-.49c0-.491.178-.937.401-1.25c.268-.357.625-.58 1.071-.58zm6.877 0c.401 0 .759.223 1.026.58c.223.313.401.759.401 1.25c0 .178-.044.312-.089.49c-.089-.044-.133-.089-.223-.178c-.356-.267-.714-.535-1.115-.535c-.445 0-.848.268-1.159.535c-.09.09-.134.134-.223.178c-.045-.178-.09-.312-.09-.49c0-.491.179-.937.402-1.25c.267-.357.625-.58 1.07-.58z'/%3E%3C/svg%3E");
-    }
-
-    /* 扫码登录相关样式 */
+    /* 登录标签页样式 */
     .login-tabs {
       display: flex;
       margin-bottom: 25px;
@@ -229,19 +163,18 @@
       display: block;
     }
 
+    /* 扫码登录样式 */
     .qrcode-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 0;
+      padding: 20px 0;
     }
 
     .qrcode {
       width: 180px;
       height: 180px;
-      background-color: #f8f9fa;
-      border: 1px solid #e2e8f0;
       margin-bottom: 15px;
       display: flex;
       align-items: center;
@@ -250,9 +183,8 @@
     }
 
     .qrcode img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
     }
 
     .qrcode-info {
@@ -262,36 +194,74 @@
       line-height: 1.5;
     }
 
-    .scan-icon {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0.5;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    .divider {
+      display: flex;
+      align-items: center;
+      color: #8c98a4;
+      font-size: 14px;
+      margin: 20px 0;
     }
 
-    .scan-icon.wechat {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M8.691 2c-1.612.073-5.604.614-7.02 3.636c-.958 1.995-.589 4.043.089 5.508c.803 1.73 2.253 3.047 3.76 3.93c-.268.712-.804 1.804-.536 2.679c.135.44.456.783.971.93c.9.223.82.223 1.031.223c.356 0 .713-.134 1.249-.491c1.159-.759 2.253-1.875 2.253-1.875s.134.179.356.357c.178.134.356.268.535.357c1.784 1.34 3.794 1.696 5.47 1.607c1.965-.089 3.705-.8 4.931-1.518c2.309-1.34 3.883-3.437 4.04-5.686c.18-2.59-1.518-5.091-3.883-6.342c-1.16-.58-2.675-.936-3.705-1.072c-.223-.044-.713-.089-1.16-.134C15.942 3.383 12.28 1.82 8.691 2'/%3E%3C/svg%3E");
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #e2e8f0;
     }
 
-    .scan-icon.dingtalk {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M12.09 1.28a10.21 10.21 0 0 0-10.24 10.18c0 5.64 4.59 10.24 10.23 10.24c5.65 0 10.24-4.6 10.24-10.24c0-5.64-4.59-10.18-10.23-10.18z'/%3E%3C/svg%3E");
+    .divider::before {
+      margin-right: 15px;
+    }
+
+    .divider::after {
+      margin-left: 15px;
+    }
+
+    .auth-options {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .auth-option {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: white;
+      border: 1px solid #e2e8f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .auth-option:hover {
+      border-color: #3498db;
+      background-color: #f8f9fa;
+    }
+
+    .auth-option img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+    
+    /* 确保图标大小一致 */
+    .auth-icon {
+      width: 28px;
+      height: 28px;
+      display: block;
     }
   </style>
 </head>
 
 <body>
   <div class="modal">
+    <span class="close-btn">&times;</span>
     <div class="modal-header">
-      <svg class="logo" viewBox="0 0 100 100">
-        <path fill="#3498db" d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z"/>
-        <text x="50" y="65" text-anchor="middle" fill="white" font-size="40" font-weight="bold">OJ</text>
-      </svg>
+      <img src="images/logo.png" alt="SwustOJ Logo" class="logo">
       <h2>登录 SwustOJ</h2>
     </div>
 
@@ -304,12 +274,10 @@
       <div class="account-login active">
         <form>
           <div class="form-group">
-            <label for="username">学号/邮箱</label>
-            <input type="text" id="username" class="form-control" placeholder="请输入学号或邮箱" required>
+            <input type="text" class="form-control" placeholder="学号/邮箱" required>
           </div>
           <div class="form-group">
-            <label for="password">密码</label>
-            <input type="password" id="password" class="form-control" placeholder="请输入密码" required>
+            <input type="password" class="form-control" placeholder="密码" required>
           </div>
           <button type="submit" class="submit-btn">登录</button>
           <div class="auth-footer">
@@ -322,18 +290,18 @@
       <div class="qrcode-login">
         <div class="qrcode-container">
           <div class="qrcode">
-            <div class="scan-icon wechat"></div>
+            <img src="images/acm-qrcode.png" alt="微信登录二维码" id="qrcode-image">
           </div>
           <p class="qrcode-info">请使用微信扫描二维码登录</p>
         </div>
         
-        <div class="oauth-divider">其他登录方式</div>
-        <div class="oauth-buttons">
-          <div class="oauth-button" onclick="switchQRCode('wechat')">
-            <span class="icon icon-wechat"></span>
+        <div class="divider">其他登录方式</div>
+        <div class="auth-options">
+          <div class="auth-option" onclick="switchQRCode('wechat')">
+            <img src="images/微信.png" alt="微信" class="auth-icon">
           </div>
-          <div class="oauth-button" onclick="switchQRCode('dingtalk')">
-            <span class="icon icon-dingtalk"></span>
+          <div class="auth-option" onclick="switchQRCode('dingtalk')">
+            <img src="images/钉钉.png" alt="钉钉" class="auth-icon">
           </div>
         </div>
       </div>
@@ -342,24 +310,22 @@
 
   <script>
     function switchTab(tabName) {
-      // 移除所有标签的active类
+      // 切换标签样式
       document.querySelectorAll('.login-tab').forEach(tab => {
         tab.classList.remove('active');
       });
       
-      // 给点击的标签添加active类
       if (tabName === 'account') {
         document.querySelectorAll('.login-tab')[0].classList.add('active');
       } else {
         document.querySelectorAll('.login-tab')[1].classList.add('active');
       }
       
-      // 隐藏所有内容区域
+      // 切换内容区域
       document.querySelectorAll('.login-content > div').forEach(content => {
         content.classList.remove('active');
       });
       
-      // 显示对应的内容区域
       if (tabName === 'account') {
         document.querySelector('.account-login').classList.add('active');
       } else {
@@ -368,23 +334,23 @@
     }
     
     function switchQRCode(type) {
-      const qrcode = document.querySelector('.qrcode');
+      const qrcodeImage = document.getElementById('qrcode-image');
       const qrcodeInfo = document.querySelector('.qrcode-info');
-      const scanIcon = document.querySelector('.scan-icon');
       
-      // 移除现有图标类
-      scanIcon.classList.remove('wechat', 'dingtalk');
-      
-      // 添加新图标类
-      scanIcon.classList.add(type);
-      
-      // 更新提示文字
       if (type === 'wechat') {
+        qrcodeImage.src = 'images/二维码.png';
         qrcodeInfo.textContent = '请使用微信扫描二维码登录';
       } else {
+        qrcodeImage.src = 'images/二维码.png';
         qrcodeInfo.textContent = '请使用钉钉扫描二维码登录';
       }
     }
+    
+    // 关闭按钮功能
+    document.querySelector('.close-btn').addEventListener('click', function() {
+      // 在实际应用中，这里应该关闭弹窗
+      console.log('关闭登录窗口');
+    });
   </script>
 </body>
 
