@@ -155,12 +155,10 @@
     
     /* 学习计划和每日一题区域的背景更新 */
     .study-daily-section {
-      background-color: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
       padding: 50px 0;
       border-top: 1px solid rgba(226, 232, 240, 0.5);
-      position: relative;
-      overflow: hidden;
     }
     
     .study-daily-section::before {
@@ -240,11 +238,103 @@
     .nav-link.active {
       color: #3498db;
     }
+    
+    /* 搜索图标和搜索框样式 */
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      margin-right: 15px;
+      position: relative;
+    }
+    
+    .search-icon {
+      font-size: 18px;
+      color: #4a5568;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .search-icon:hover {
+      color: #3498db;
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+    
+    .search-container {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 300px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      padding: 12px;
+      display: none;
+      z-index: 1000;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      transform-origin: top right;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    
+    .search-container.show {
+      display: flex;
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    .search-input {
+      flex: 1;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    
+    .search-input:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+    }
+    
+    .search-btn {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      margin-left: 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .search-btn:hover {
+      box-shadow: 0 2px 8px rgba(79, 172, 254, 0.4);
+      transform: translateY(-1px);
+    }
 
     .user-avatar {
       margin-left: 8px;
       display: flex;
       align-items: center;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .username {
+      font-size: 14px;
+      font-weight: 500;
+      color: #2c3e50;
+      margin-right: 8px;
     }
     
     .avatar-img {
@@ -254,6 +344,210 @@
       object-fit: cover;
       border: 2px solid #3498db;
       padding: 0;
+    }
+    
+    .user-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 150px;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      z-index: 1000;
+      display: none;
+      margin-top: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      transform-origin: top right;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    
+    /* Dropdown will now be controlled by JavaScript instead of hover */
+    .user-dropdown.show {
+      display: block;
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    /* 日历标记弹窗样式 */
+    .calendar-mark-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .calendar-mark-form {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .calendar-mark-form h3 {
+      margin: 0 0 15px;
+      color: #2c3e50;
+      font-size: 16px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 10px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+    
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .form-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .form-buttons button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-save {
+      background-color: #3498db;
+      color: white;
+    }
+    
+    .btn-save:hover {
+      background-color: #2980b9;
+    }
+    
+    .btn-cancel,
+    .btn-close {
+      background-color: #e2e8f0;
+      color: #4a5568;
+    }
+    
+    .btn-cancel:hover,
+    .btn-close:hover {
+      background-color: #cbd5e0;
+    }
+    
+    .btn-delete {
+      background-color: #f56565;
+      color: white;
+    }
+    
+    .btn-delete:hover {
+      background-color: #e53e3e;
+    }
+    
+    .btn-edit {
+      background-color: #3498db;
+      color: white;
+    }
+    
+    .btn-edit:hover {
+      background-color: #2980b9;
+    }
+    
+    .mark-info {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #2d3748;
+      font-weight: 500;
+    }
+    
+    .mark-type {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+    
+    .mark-type.contest {
+      background-color: rgba(245, 101, 101, 0.1);
+      color: #f56565;
+    }
+    
+    .mark-type.deadline {
+      background-color: rgba(246, 173, 85, 0.1);
+      color: #f6ad55;
+    }
+    
+    .mark-type.homework {
+      background-color: rgba(72, 187, 120, 0.1);
+      color: #48bb78;
+    }
+    
+    .mark-type.note {
+      background-color: rgba(66, 153, 225, 0.1);
+      color: #4299e1;
+    }
+    
+    /* 添加小箭头指向头像 */
+    .user-dropdown::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: 16px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid white;
+    }
+    
+    .dropdown-item {
+      padding: 12px 15px;
+      color: #4a5568;
+      font-size: 14px;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+    
+    .dropdown-item:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+      color: #3498db;
+    }
+    
+    .dropdown-divider {
+      height: 1px;
+      background-color: rgba(226, 232, 240, 0.8);
+      margin: 0;
     }
     
     .auth-buttons {
@@ -297,17 +591,17 @@
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
       border-bottom: 1px solid rgba(226, 232, 240, 0.5);
-      padding: 60px 40px;
+      padding: 60px 0;
     }
 
     .hero-container {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0;
+      padding: 0 20px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      gap: 20px;
+      gap: 0;
     }
 
     .hero-content {
@@ -341,7 +635,7 @@
 
     .hero-image {
       flex-shrink: 0;
-      width: 350px; /* 增加宽度，但保持高度不变 */
+      width: 400px; /* 进一步增加日历宽度 */
       height: 300px; /* 保持高度与轮播图一致 */
       background-color: transparent;
       backdrop-filter: blur(5px);
@@ -353,13 +647,15 @@
       justify-content: center;
       padding: 0;
       box-shadow: none;
-      align-self: center;
+      align-self: flex-start;
+      margin-left: auto; /* 将日历推到右侧 */
+      margin-right: -60px; /* 增加负边距，让日历向右移动更多 */
     }
     
     /* 英雄区轮播图样式 */
     .hero-slideshow {
       flex-shrink: 0;
-      width: 1000px; /* 增加宽度 */
+      width: 760px; /* 调整宽度与学习计划保持一致 */
       height: 300px;
       position: relative;
       background-color: rgba(248, 249, 250, 0.7);
@@ -369,6 +665,7 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       margin-right: 0;
       align-self: flex-start;
+      left: 0;
     }
 
     .slideshow-container {
@@ -572,12 +869,14 @@
       align-items: center;
       font-size: 0.7rem; /* 保持字体大小不变 */
       color: #4a5568;
-      height: 18px; /* 保持高度不变 */
-      width: 22px; /* 增加宽度 */
+      height: 20px; /* 略微增加高度 */
+      width: 20px; /* 调整为正方形 */
       margin: 0 auto;
       border-radius: 50%;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-sizing: border-box; /* 确保边框不会改变元素大小 */
+      padding: 0; /* 移除内边距 */
     }
     
     .day:hover {
@@ -585,17 +884,59 @@
       transform: translateY(-1px);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
+    
+    /* 标记日期悬停状态 */
+    .day.marked:hover {
+      transform: translateY(-1px) scale(1.05);
+      border-width: 2px;
+      z-index: 2;
+    }
 
     .day.today {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       color: white;
       font-weight: 600;
       box-shadow: 0 2px 6px rgba(79, 172, 254, 0.4);
+      z-index: 1; /* 确保今天的日期始终在上层 */
     }
 
     .day.other-month {
       color: #cbd5e0;
       opacity: 0.6;
+    }
+    
+    /* 标记日期样式 - 使用圆圈而不是圆点 */
+    .day.marked {
+      position: relative;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+    
+    .day.marked.contest {
+      border-color: #f56565;  /* 红色 - 竞赛 */
+      background-color: rgba(245, 101, 101, 0.08);
+    }
+    
+    .day.marked.deadline {
+      border-color: #f6ad55;  /* 橙色 - 截止日期 */
+      background-color: rgba(246, 173, 85, 0.08);
+    }
+    
+    .day.marked.homework {
+      border-color: #48bb78;  /* 绿色 - 作业 */
+      background-color: rgba(72, 187, 120, 0.08);
+    }
+    
+    .day.marked.note {
+      border-color: #4299e1;  /* 蓝色 - 笔记 */
+      background-color: rgba(66, 153, 225, 0.08);
+    }
+    
+    /* 确保今天的样式优先级更高 */
+    .day.today.marked {
+      border-color: white;
+      box-shadow: 0 0 0 2px #3498db;
     }
 
     /* 删除了日历底部相关样式 */
@@ -636,6 +977,15 @@
       color: #4a5568;
       max-width: 600px;
       margin: 0 auto;
+    }
+    
+    /* 确保学习计划和每日一题标题对齐 */
+    .study-plans-column .section-header,
+    .daily-challenge-column .section-header {
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .features-grid {
@@ -841,14 +1191,15 @@
 
       .hero-image {
         width: 100%;
-        max-width: 450px;
-        margin-bottom: 30px;
+        max-width: 400px; /* 与每日一题宽度一致 */
+        margin: 0 auto 30px;
       }
       
       .hero-slideshow {
         width: 100%;
-        max-width: 1000px; /* 更新最大宽度 */
-        margin-bottom: 30px;
+        max-width: 800px; /* 与学习计划栏宽度保持一致 */
+        margin: 0 auto 30px;
+        margin-right: 0;
       }
     }
 
@@ -2315,19 +2666,22 @@
       padding: 0 20px;
       display: flex;
       gap: 40px;
-      align-items: stretch;
+      align-items: flex-start;
+      justify-content: space-between;
+      min-height: 720px; /* 确保有足够空间容纳绝对定位的元素 */
     }
 
     .study-plans-column {
-      flex: 1;
+      width: 800px; /* 增加宽度，让学习计划拉长 */
       display: flex;
       flex-direction: column;
     }
 
     .daily-challenge-column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+      position: absolute;
+      right: -100px; /* 进一步向右移动每日一题栏 */
+      width: 400px;
+      top: 0;
     }
 
     /* 更新学习计划卡片网格布局 */
@@ -2378,6 +2732,9 @@
       height: auto;
       min-height: 600px;
       transition: box-shadow 0.2s;
+      width: 100%;
+      position: relative;
+      right: -40px; /* 增加负值，使卡片向左移动 */
     }
     
     .daily-challenge-content {
@@ -2411,12 +2768,33 @@
         flex-direction: column;
       }
       
+      .study-plans-column,
+      .daily-challenge-column {
+        width: 100%;
+        position: static;
+        margin-right: 0;
+        top: auto;
+        left: auto;
+      }
+      
       .daily-challenge-column .daily-challenge-card {
         min-height: 500px;
       }
       
       .study-plans-column .study-plans-grid {
         max-height: none;
+      }
+      
+      .hero-image {
+        width: 100%;
+        max-width: 400px; /* 与每日一题卡片宽度保持一致 */
+        margin-left: 0; /* 在小屏幕上取消自动右对齐 */
+        margin-right: 0; /* 在小屏幕上取消偏移 */
+      }
+      
+      .hero-slideshow {
+        width: 100%;
+        left: auto;
       }
     }
 
@@ -2448,6 +2826,73 @@
       align-items: center;
       margin-bottom: 10px;
     }
+
+    /* 新增样式：确保卡片容器与标题对齐 */
+    .study-plans-column .study-plans-grid,
+    .daily-challenge-column .daily-challenge-card {
+      margin-top: 30px;
+    }
+    
+    /* 调整两列的对齐方式 */
+    .study-daily-container {
+      align-items: flex-start;
+    }
+    
+    /* 使两列底部对齐 */
+    .study-plans-column,
+    .daily-challenge-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    
+    /* 确保轮播图和学习计划左右边界对齐 */
+    .hero-container,
+    .study-daily-container,
+    .recommendations-container,
+    .container,
+    .calendar-container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      position: relative;
+    }
+    
+    /* 确保日历和每日一题右侧边缘对齐 */
+    .hero-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    /* 调整轮播图与日历之间的间距 */
+    .hero-slideshow {
+      width: 800px; /* 恢复原来宽度 */
+      margin-right: 0; /* 减少右侧间距，让轮播图向右延伸 */
+      margin-left: 0; /* 确保左侧没有额外边距 */
+    }
+    
+    /* 确保每日一题卡片右侧与日历右侧对齐 */
+    .study-daily-container {
+      position: relative;
+      min-height: 800px; /* 增加空间容纳绝对定位的元素 */
+    }
+    
+    .daily-challenge-column {
+      position: absolute;
+      right: 0; /* 使每日一题靠右对齐 */
+      width: 400px;
+      top: 0;
+    }
+    
+    .study-plans-column {
+      width: 800px; /* 恢复原来宽度 */
+      flex: 0 0 auto;
+      position: absolute;
+      left: 0;
+      margin-left: 0; /* 确保没有额外的左侧边距 */
+    }
   </style>
 </head>
 
@@ -2468,12 +2913,25 @@
         <a href="ranking.html" class="nav-link">排行榜</a>
         <a href="learning.html" class="nav-link">学习</a>
     </div>
+    <div class="nav-tools">
+      <div class="search-icon" id="search-icon">🔍</div>
+      <div class="search-container" id="search-container">
+        <input type="text" class="search-input" placeholder="搜索题目、竞赛、文章..." />
+        <button class="search-btn">搜索</button>
+      </div>
+    </div>
     <div class="auth-buttons">
       <a href="login.html" class="btn btn-outline">登录</a>
       <a href="register.html" class="btn btn-primary">注册</a>
     </div>
     <div class="user-avatar">
+      <span class="username">用户001</span>
       <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
+      <div class="user-dropdown">
+        <a href="#" class="dropdown-item">个人主页</a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item">退出登录</a>
+      </div>
     </div>
     </div>
   </nav>
@@ -3419,6 +3877,16 @@
     let currentYear;
     let currentMonth;
     let currentDay;
+    
+    // 日历标记数据 - 格式: { year: 2025, month: 7, day: 12, type: 'contest', title: '周赛 #455' }
+    let calendarMarks = [
+      { year: 2025, month: 7, day: 12, type: 'contest', title: '周赛 #455' },
+      { year: 2025, month: 7, day: 19, type: 'contest', title: '双周赛 #148' },
+      { year: 2025, month: 7, day: 5, type: 'contest', title: '周赛 #454' },
+      { year: 2025, month: 7, day: 15, type: 'deadline', title: '算法作业截止' },
+      { year: 2025, month: 7, day: 20, type: 'homework', title: '数据结构作业' },
+      { year: 2025, month: 7, day: 25, type: 'note', title: '复习笔记' }
+    ];
 
     // 初始化日历
     function initCalendar() {
@@ -3481,6 +3949,32 @@
         if (i === today && currentMonth === thisMonth && currentYear === thisYear) {
           dayElement.classList.add('today');
         }
+        
+        // 检查是否有标记
+        const dayMarks = calendarMarks.filter(mark => 
+          mark.year === currentYear && 
+          mark.month === currentMonth + 1 && // 注意：JavaScript月份从0开始，我们的数据从1开始
+          mark.day === i
+        );
+        
+        // 如果有标记，添加标记类
+        if (dayMarks.length > 0) {
+          dayElement.classList.add('marked');
+          // 如果有多个标记，只显示第一个的类型
+          if (dayMarks[0].type) {
+            dayElement.classList.add(dayMarks[0].type);
+          }
+          
+          // 添加标记提示
+          const markTitles = dayMarks.map(mark => mark.title).join('\n');
+          dayElement.title = markTitles;
+          dayElement.setAttribute('data-marked', 'true');
+        }
+        
+        // 设置日期点击事件
+        dayElement.setAttribute('data-date', `${currentYear}-${currentMonth + 1}-${i}`);
+        dayElement.addEventListener('click', toggleDateMark);
+        
         dayElement.textContent = i;
         daysContainer.appendChild(dayElement);
       }
@@ -3516,6 +4010,317 @@
       }
       updateCalendar();
     }
+    
+    // 切换日期标记状态
+    function toggleDateMark(event) {
+      const dateStr = this.getAttribute('data-date');
+      const [year, month, day] = dateStr.split('-').map(Number);
+      
+      // 检查是否已经有标记
+      const markIndex = calendarMarks.findIndex(mark => 
+        mark.year === year && mark.month === month && mark.day === day
+      );
+      
+      if (markIndex >= 0) {
+        // 如果已有标记，显示编辑/删除选项
+        showMarkOptions(event, dateStr, calendarMarks[markIndex]);
+      } else {
+        // 如果没有标记，显示添加标记选项
+        showAddMarkForm(event, dateStr);
+      }
+    }
+    
+    // 显示添加标记表单
+    function showAddMarkForm(event, dateStr) {
+      // 防止事件冒泡
+      event.stopPropagation();
+      
+      // 解析日期
+      const [year, month, day] = dateStr.split('-').map(Number);
+      
+      // 创建简单弹窗
+      const modal = document.createElement('div');
+      modal.className = 'calendar-mark-modal';
+      modal.innerHTML = `
+        <div class="calendar-mark-form">
+          <h3>添加标记 (${year}年${month}月${day}日)</h3>
+          <div class="form-group">
+            <label for="mark-title">标题:</label>
+            <input type="text" id="mark-title" placeholder="请输入标记标题">
+          </div>
+          <div class="form-group">
+            <label for="mark-type">类型:</label>
+            <select id="mark-type">
+              <option value="contest">竞赛</option>
+              <option value="deadline">截止日期</option>
+              <option value="homework">作业</option>
+              <option value="note">笔记</option>
+            </select>
+          </div>
+          <div class="form-buttons">
+            <button class="btn-cancel">取消</button>
+            <button class="btn-save">保存</button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // 点击背景关闭
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          document.body.removeChild(modal);
+        }
+      });
+      
+      // 取消按钮
+      modal.querySelector('.btn-cancel').addEventListener('click', function() {
+        document.body.removeChild(modal);
+      });
+      
+      // 保存按钮
+      modal.querySelector('.btn-save').addEventListener('click', function() {
+        const title = modal.querySelector('#mark-title').value.trim();
+        const type = modal.querySelector('#mark-type').value;
+        
+        if (title) {
+          // 添加新标记
+          calendarMarks.push({
+            year, month, day, type, title
+          });
+          
+          // 更新日历
+          updateCalendar();
+          
+          // 关闭弹窗
+          document.body.removeChild(modal);
+        }
+      });
+    }
+    
+    // 显示标记选项（编辑或删除）
+    function showMarkOptions(event, dateStr, mark) {
+      // 防止事件冒泡
+      event.stopPropagation();
+      
+      // 解析日期
+      const [year, month, day] = dateStr.split('-').map(Number);
+      
+      // 创建简单弹窗
+      const modal = document.createElement('div');
+      modal.className = 'calendar-mark-modal';
+      modal.innerHTML = `
+        <div class="calendar-mark-form">
+          <h3>标记详情 (${year}年${month}月${day}日)</h3>
+          <p class="mark-info">${mark.title}</p>
+          <p class="mark-type ${mark.type}">${getMarkTypeName(mark.type)}</p>
+          <div class="form-buttons">
+            <button class="btn-delete">删除</button>
+            <button class="btn-edit">编辑</button>
+            <button class="btn-close">关闭</button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // 点击背景关闭
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          document.body.removeChild(modal);
+        }
+      });
+      
+      // 删除按钮
+      modal.querySelector('.btn-delete').addEventListener('click', function() {
+        // 查找并删除标记
+        const markIndex = calendarMarks.findIndex(m => 
+          m.year === year && m.month === month && m.day === day
+        );
+        
+        if (markIndex >= 0) {
+          calendarMarks.splice(markIndex, 1);
+          updateCalendar();
+        }
+        
+        document.body.removeChild(modal);
+      });
+      
+      // 编辑按钮
+      modal.querySelector('.btn-edit').addEventListener('click', function() {
+        document.body.removeChild(modal);
+        showEditMarkForm(event, dateStr, mark);
+      });
+      
+      // 关闭按钮
+      modal.querySelector('.btn-close').addEventListener('click', function() {
+        document.body.removeChild(modal);
+      });
+    }
+    
+    // 显示编辑标记表单
+    function showEditMarkForm(event, dateStr, mark) {
+      // 防止事件冒泡
+      event.stopPropagation();
+      
+      // 解析日期
+      const [year, month, day] = dateStr.split('-').map(Number);
+      
+      // 创建简单弹窗
+      const modal = document.createElement('div');
+      modal.className = 'calendar-mark-modal';
+      modal.innerHTML = `
+        <div class="calendar-mark-form">
+          <h3>编辑标记 (${year}年${month}月${day}日)</h3>
+          <div class="form-group">
+            <label for="edit-mark-title">标题:</label>
+            <input type="text" id="edit-mark-title" value="${mark.title}" placeholder="请输入标记标题">
+          </div>
+          <div class="form-group">
+            <label for="edit-mark-type">类型:</label>
+            <select id="edit-mark-type">
+              <option value="contest" ${mark.type === 'contest' ? 'selected' : ''}>竞赛</option>
+              <option value="deadline" ${mark.type === 'deadline' ? 'selected' : ''}>截止日期</option>
+              <option value="homework" ${mark.type === 'homework' ? 'selected' : ''}>作业</option>
+              <option value="note" ${mark.type === 'note' ? 'selected' : ''}>笔记</option>
+            </select>
+          </div>
+          <div class="form-buttons">
+            <button class="btn-cancel">取消</button>
+            <button class="btn-save">保存</button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // 点击背景关闭
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          document.body.removeChild(modal);
+        }
+      });
+      
+      // 取消按钮
+      modal.querySelector('.btn-cancel').addEventListener('click', function() {
+        document.body.removeChild(modal);
+      });
+      
+      // 保存按钮
+      modal.querySelector('.btn-save').addEventListener('click', function() {
+        const title = modal.querySelector('#edit-mark-title').value.trim();
+        const type = modal.querySelector('#edit-mark-type').value;
+        
+        if (title) {
+          // 查找并更新标记
+          const markIndex = calendarMarks.findIndex(m => 
+            m.year === year && m.month === month && m.day === day
+          );
+          
+          if (markIndex >= 0) {
+            calendarMarks[markIndex].title = title;
+            calendarMarks[markIndex].type = type;
+            updateCalendar();
+          }
+          
+          // 关闭弹窗
+          document.body.removeChild(modal);
+        }
+      });
+    }
+    
+    // 获取标记类型名称
+    function getMarkTypeName(type) {
+      const typeMap = {
+        'contest': '竞赛',
+        'deadline': '截止日期',
+        'homework': '作业',
+        'note': '笔记'
+      };
+      return typeMap[type] || '标记';
+    }
+    
+    // 点击头像显示下拉菜单和搜索功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取用户头像元素和下拉菜单元素
+      const userAvatar = document.querySelector('.avatar-img');
+      const userDropdown = document.querySelector('.user-dropdown');
+      
+      // 点击头像时显示/隐藏下拉菜单
+      userAvatar.addEventListener('click', function(event) {
+        event.stopPropagation(); // 阻止事件冒泡
+        userDropdown.classList.toggle('show');
+        
+        // 隐藏搜索框（如果显示的话）
+        const searchContainer = document.getElementById('search-container');
+        if (searchContainer.classList.contains('show')) {
+          searchContainer.classList.remove('show');
+        }
+      });
+      
+      // 搜索图标点击功能
+      const searchIcon = document.getElementById('search-icon');
+      const searchContainer = document.getElementById('search-container');
+      
+      searchIcon.addEventListener('click', function(event) {
+        event.stopPropagation();
+        searchContainer.classList.toggle('show');
+        
+        // 如果搜索框显示，就隐藏用户下拉菜单
+        if (searchContainer.classList.contains('show')) {
+          userDropdown.classList.remove('show');
+          
+          // 自动聚焦到搜索输入框
+          setTimeout(() => {
+            const searchInput = document.querySelector('.search-input');
+            searchInput.focus();
+          }, 100);
+        }
+      });
+      
+      // 防止点击搜索框本身时关闭它
+      searchContainer.addEventListener('click', function(event) {
+        event.stopPropagation();
+      });
+      
+      // 搜索按钮功能
+      const searchBtn = document.querySelector('.search-btn');
+      searchBtn.addEventListener('click', function() {
+        const searchInput = document.querySelector('.search-input');
+        const searchQuery = searchInput.value.trim();
+        
+        if (searchQuery) {
+          // 可以根据需要修改搜索逻辑
+          alert('正在搜索: ' + searchQuery);
+          // 实际项目中应该重定向到搜索结果页面或执行搜索API调用
+          // window.location.href = `search-results.html?q=${encodeURIComponent(searchQuery)}`;
+        }
+      });
+      
+      // 点击页面其他地方时隐藏下拉菜单和搜索框
+      document.addEventListener('click', function() {
+        if (userDropdown.classList.contains('show')) {
+          userDropdown.classList.remove('show');
+        }
+        
+        if (searchContainer.classList.contains('show')) {
+          searchContainer.classList.remove('show');
+        }
+      });
+      
+      // 防止点击下拉菜单本身时关闭它
+      userDropdown.addEventListener('click', function(event) {
+        event.stopPropagation();
+      });
+      
+      // 搜索框回车键提交
+      const searchInput = document.querySelector('.search-input');
+      searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          searchBtn.click();
+        }
+      });
+    });
   </script>
 </body>
 
