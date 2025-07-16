@@ -13,20 +13,24 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     }
 
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
     body {
-      background-color: #c4ddff;
+      background-color: #e8f0ff;
       background-image: 
-        linear-gradient(120deg, 
-          rgba(196, 221, 255, 0.8) 0%, 
-          rgba(208, 228, 255, 0.8) 15%, 
-          rgba(220, 233, 255, 0.8) 30%, 
-          rgba(232, 238, 255, 0.8) 50%, 
-          rgba(255, 225, 249, 0.8) 70%, 
-          rgba(255, 232, 252, 0.8) 85%, 
-          rgba(255, 239, 253, 0.8) 100%),
-        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"),
-        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 35%),
-        radial-gradient(circle at 70% 80%, rgba(255, 232, 252, 0.5) 0%, rgba(255, 232, 252, 0) 40%);
+        linear-gradient(135deg, 
+          rgba(210, 235, 255, 0.95) 0%, 
+          rgba(195, 225, 255, 0.93) 20%,
+          rgba(180, 215, 252, 0.91) 35%,
+          rgba(165, 205, 250, 0.9) 50%, 
+          rgba(185, 215, 250, 0.85) 65%,
+          rgba(205, 225, 250, 0.8) 80%,
+          rgba(215, 235, 250, 0.7) 100%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
       background-attachment: fixed;
       color: #2d3748;
       min-height: 100vh;
@@ -34,6 +38,14 @@
       flex-direction: column;
       position: relative;
       overflow-x: hidden;
+    }
+    
+    .page-content {
+      flex: 1 0 auto;
+    }
+    
+    footer {
+      flex-shrink: 0;
     }
     
     /* 添加一个悬浮的背景动画效果 */
@@ -81,9 +93,11 @@
       }
     }
     
+
+    
     /* 更新英雄区域以匹配新背景 */
     .hero {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(226, 232, 240, 0.5);
       padding: 60px 40px;
@@ -126,7 +140,90 @@
     }
     
     /* 更新竞赛日历区域背景 */
+    /* 两栏布局样式 */
+    .two-column-layout {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .two-column-section {
+      width: 50%;
+      flex: 1;
+    }
+    
+    .two-column-section .container {
+      padding: 0;
+      width: 100%;
+      max-width: none;
+    }
+    
+    .problems-grid-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .problems-grid-vertical .problem-card {
+      width: 100%;
+    }
+    
+    .problems-footer {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .view-all-problems {
+      color: #3498db;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.2s;
+    }
+    
+    .view-all-problems:hover {
+      color: #2980b9;
+    }
+    
+    .view-all-problems .arrow {
+      margin-left: 5px;
+      transition: transform 0.2s;
+    }
+    
+    .view-all-problems:hover .arrow {
+      transform: translateX(5px);
+    }
+    
+    /* 响应式布局 */
+    @media (max-width: 900px) {
+      .two-column-layout {
+        flex-direction: column;
+      }
+      
+      .two-column-section {
+        width: 100%;
+      }
+      
+      .contest-calendar, .hot-problems {
+        padding: 40px 0;
+      }
+    }
+    
     .contest-calendar {
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 60px 0;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hot-problems {
       background-color: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(8px);
       padding: 60px 0;
@@ -148,7 +245,7 @@
     }
     
     /* 确保所有内容层都在背景效果之上 */
-    .hero-container, .recommendations-container, .features-container, .container {
+    .hero-container, .recommendations-container, .container {
       position: relative;
       z-index: 1;
     }
@@ -157,8 +254,9 @@
     .study-daily-section {
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
-      padding: 50px 0;
+      padding: 12px 0 100px 0; /* 大幅增加下边距，确保完全包含社区讨论 */
       border-top: 1px solid rgba(226, 232, 240, 0.5);
+      margin-bottom: 80px; /* 进一步增加底部外边距 */
     }
     
     .study-daily-section::before {
@@ -591,7 +689,7 @@
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
       border-bottom: 1px solid rgba(226, 232, 240, 0.5);
-      padding: 60px 0;
+      padding: 30px 0;
     }
 
     .hero-container {
@@ -635,8 +733,8 @@
 
     .hero-image {
       flex-shrink: 0;
-      width: 400px; /* 进一步增加日历宽度 */
-      height: 300px; /* 保持高度与轮播图一致 */
+      width: 350px; /* 减小日历宽度 */
+      height: 255px; /* 减小高度以适应减少的一行 */
       background-color: transparent;
       backdrop-filter: blur(5px);
       border-radius: 12px;
@@ -649,14 +747,19 @@
       box-shadow: none;
       align-self: flex-start;
       margin-left: auto; /* 将日历推到右侧 */
-      margin-right: -60px; /* 增加负边距，让日历向右移动更多 */
+      margin-right: -20px; /* 减小负边距，让日历向轮播图方向移动 */
+    }
+    
+    /* 调整推荐卡片和每日一题卡片之间的间距 */
+    .daily-challenge-card + .daily-challenge-card {
+      margin-top: 25px;
     }
     
     /* 英雄区轮播图样式 */
     .hero-slideshow {
       flex-shrink: 0;
-      width: 760px; /* 调整宽度与学习计划保持一致 */
-      height: 300px;
+      width: 768px; /* 增加约1毫米(~4px)宽度 */
+      height: 250px;
       position: relative;
       background-color: rgba(248, 249, 250, 0.7);
       backdrop-filter: blur(5px);
@@ -786,35 +889,35 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 5px 10px; /* 减小内边距 */
+      padding: 4px 10px; /* 适当增加上下内边距 */
+      height: 34px; /* 调整为更合适的高度 */
       background-color: rgba(249, 250, 251, 0.8);
       border-bottom: 1px solid rgba(226, 232, 240, 0.5);
     }
 
     .current-month {
-      font-size: 0.9rem; /* 减小字体大小 */
+      font-size: 0.88rem; /* 适当调整字体大小 */
       font-weight: 600;
       color: #2c3e50;
       text-align: center;
-      padding: 3px 10px; /* 减小内边距 */
-      border-radius: 20px;
+      padding: 2px 10px; /* 适当增加内边距 */
+      border-radius: 18px;
       background: rgba(52, 152, 219, 0.08);
     }
 
     .calendar-nav-btn {
-      width: 22px; /* 减小按钮大小 */
-      height: 22px; /* 减小按钮大小 */
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      width: 16px; /* 减小按钮大小 */
+      height: 16px; /* 减小按钮大小 */
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       color: #3498db;
-      font-size: 11px; /* 减小字体大小 */
+      font-size: 12px; /* 增加字体大小使箭头更明显 */
       transition: all 0.3s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      background: none;
+      border: none;
+      box-shadow: none;
     }
     
     .calendar-nav-btn:hover {
@@ -832,8 +935,8 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      padding: 3px 8px 8px; /* 减小内边距 */
-      min-height: 0; /* 移除最小高度限制 */
+      padding: 3px 8px 6px; /* 减小内边距 */
+      min-height: 180px; /* 减小最小高度 */
       border-bottom-left-radius: 12px;
       border-bottom-right-radius: 12px;
     }
@@ -844,33 +947,33 @@
       text-align: center;
       font-weight: 600;
       color: #3498db;
-      padding: 2px 0; /* 减小内边距 */
+      padding: 1px 0; /* 进一步减小内边距 */
       border-bottom: 1px solid rgba(226, 232, 240, 0.5);
     }
 
     .weekday {
-      padding: 1px; /* 减小内边距 */
-      font-size: 0.7rem; /* 减小字体大小 */
+      padding: 0px; /* 移除内边距 */
+      font-size: 0.65rem; /* 进一步减小字体大小 */
     }
 
     .days {
       flex: 1;
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: repeat(6, 18px); /* 保持行高不变 */
-      gap: 2px; /* 略微增加间距 */
-      padding: 2px 0; /* 保持内边距不变 */
-      min-height: 0; /* 保持没有最小高度限制 */
+      grid-template-rows: repeat(5, 22px); /* 减少为5行，去掉一行 */
+      gap: 1px; /* 减小间距 */
+      padding: 3px 0; /* 减小上下内边距 */
+      min-height: 110px; /* 相应调整最小高度 */
     }
 
     .day {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 0.7rem; /* 保持字体大小不变 */
+      font-size: 0.7rem; /* 减小字体大小 */
       color: #4a5568;
-      height: 20px; /* 略微增加高度 */
-      width: 20px; /* 调整为正方形 */
+      height: 20px; /* 减小高度 */
+      width: 20px; /* 减小宽度，保持正方形 */
       margin: 0 auto;
       border-radius: 50%;
       cursor: pointer;
@@ -949,17 +1052,7 @@
       border-radius: 8px;
     }
 
-    /* 特点区域 */
-    .features {
-      padding: 60px 0;
-    }
-
-    .features-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
+    /* 标题样式 */
     .section-header {
       text-align: center;
       margin-bottom: 40px;
@@ -986,51 +1079,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .feature-card {
-      background-color: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(5px);
-      border-radius: 8px;
-      padding: 24px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 16px;
-      color: #3498db;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(52, 152, 219, 0.1);
-      border-radius: 8px;
-    }
-
-    .feature-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 12px;
-    }
-
-    .feature-description {
-      font-size: 0.9rem;
-      color: #4a5568;
-      line-height: 1.6;
     }
 
     /* 推荐区域 */
@@ -1135,43 +1183,7 @@
       color: #4a5568;
     }
 
-    /* 页脚 */
-    .footer {
-      background-color: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(226, 232, 240, 0.5);
-      padding: 20px;
-      margin-top: auto;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-links {
-      display: flex;
-      list-style: none;
-      gap: 20px;
-    }
-
-    .footer-link {
-      color: #4a5568;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .footer-link:hover {
-      color: #3498db;
-    }
-
-    .copyright {
-      color: #4a5568;
-      font-size: 14px;
-    }
+    /* 页脚已移除 */
 
     /* 媒体查询 */
     @media (max-width: 992px) {
@@ -1230,10 +1242,7 @@
         justify-content: flex-end;
       }
 
-      .footer-content {
-        flex-direction: column;
-        gap: 15px;
-      }
+      /* 页脚相关样式已移除 */
     }
 
     /* 弹窗样式 */
@@ -1872,10 +1881,10 @@
     /* 每日一题卡片容器 */
 
     .daily-challenge-card {
-      background-color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
       border-radius: 12px;
-      padding: 30px;
+      padding: 20px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(226, 232, 240, 0.5);
     }
@@ -1884,13 +1893,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 25px;
-      padding-bottom: 15px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
       border-bottom: 1px solid rgba(226, 232, 240, 0.5);
     }
 
     .daily-challenge-title {
-      font-size: 1.5rem;
+      font-size: 1rem;
       font-weight: 600;
       color: #2c3e50;
       display: flex;
@@ -1898,8 +1907,8 @@
     }
 
     .daily-challenge-title i {
-      font-size: 1.8rem;
-      margin-right: 10px;
+      font-size: 1.4rem;
+      margin-right: 8px;
       color: #3498db;
     }
 
@@ -2019,20 +2028,15 @@
       background-color: #3498db;
       color: white;
       border: none;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
     }
 
     .btn-solve:hover {
       background-color: #2980b9;
-    }
-
-    .btn-details {
-      border: 1px solid #3498db;
-      color: #3498db;
-      background-color: transparent;
-    }
-
-    .btn-details:hover {
-      background-color: rgba(52, 152, 219, 0.05);
     }
 
     /* 学习计划卡片样式 */
@@ -2045,14 +2049,15 @@
     }
 
     .study-plan-card {
-      background-color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
       border-radius: 12px;
-      padding: 24px;
+      padding: 16px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
 
     .study-plan-card:hover {
@@ -2069,8 +2074,8 @@
     }
 
     .study-plan-icon {
-      width: 48px;
-      height: 48px;
+      width: 60px;
+      height: 60px;
       margin-right: 16px;
       font-size: 24px;
       display: flex;
@@ -2078,8 +2083,9 @@
       justify-content: center;
       background: linear-gradient(135deg, rgba(79, 172, 254, 0.15), rgba(0, 242, 254, 0.15));
       color: #3498db;
-      border-radius: 12px;
+      border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
     }
 
     .study-plan-title {
@@ -2087,6 +2093,12 @@
       font-weight: 600;
       color: #2c3e50;
       margin: 0;
+    }
+    
+    .study-plan-short-desc {
+      font-size: 0.85rem;
+      color: #718096;
+      margin: 5px 0 0 0;
     }
 
     .study-plan-stats {
@@ -2281,16 +2293,19 @@
     }
 
     .calendar-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 20px;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
     }
 
     .calendar-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 10px 15px;
+      border-radius: 8px;
     }
 
     .calendar-month {
@@ -2314,8 +2329,8 @@
     }
 
     .calendar-nav-btn:hover {
-      background-color: rgba(52, 152, 219, 0.1);
-      border-color: #3498db;
+      color: #2980b9;
+      transform: scale(1.1);
     }
 
     .arrow-left, .arrow-right {
@@ -2327,6 +2342,7 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      margin-bottom: 0;
     }
 
     .contest-card {
@@ -2334,10 +2350,11 @@
       background-color: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(5px);
       border-radius: 8px;
-      padding: 20px;
+      padding: 15px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       border-left: 4px solid transparent;
+      margin-bottom: 12px;
     }
 
     .contest-card.upcoming {
@@ -2477,13 +2494,10 @@
 
     .calendar-footer {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 8px 12px;
-      background-color: rgba(249, 250, 251, 0.8);
-      border-top: 1px solid rgba(226, 232, 240, 0.5);
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
+      padding: 15px 0 0;
+      margin-top: 10px;
     }
 
     .calendar-info {
@@ -2656,8 +2670,9 @@
     .study-daily-section {
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
-      padding: 50px 0;
+      padding: 12px 0 100px 0; /* 大幅增加下边距，确保完全包含社区讨论 */
       border-top: 1px solid rgba(226, 232, 240, 0.5);
+      margin-bottom: 0; /* 移除底部外边距 */
     }
 
     .study-daily-container {
@@ -2668,28 +2683,48 @@
       gap: 40px;
       align-items: flex-start;
       justify-content: space-between;
-      min-height: 720px; /* 确保有足够空间容纳绝对定位的元素 */
+      min-height: 1000px; /* 进一步增加高度确保完全包含社区讨论区域 */
     }
 
     .study-plans-column {
-      width: 800px; /* 增加宽度，让学习计划拉长 */
+      width: 768px; /* 与轮播图宽度保持一致 */
       display: flex;
       flex-direction: column;
+      position: relative;
+      left: 0; /* 确保与轮播图左侧对齐 */
+    }
+    
+    .study-plans-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 2px;
+      padding-left: 16px; /* 与卡片内边距一致 */
+    }
+    
+    .study-plans-title::after {
+      content: "›";
+      margin-left: 8px;
+      color: #718096;
+      font-size: 1.4rem;
+      line-height: 1;
     }
 
     .daily-challenge-column {
       position: absolute;
-      right: -100px; /* 进一步向右移动每日一题栏 */
-      width: 400px;
-      top: 0;
+      right: -240px; /* 增加距离，使每日一题远离暑期训练营 */
+      width: 350px; /* 减小每日一题区域的宽度 */
+      top: 26px; /* 向上移动约1毫米(4px) */
     }
 
     /* 更新学习计划卡片网格布局 */
     .study-plans-column .study-plans-grid {
       display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 25px;
-      margin-top: 30px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 10px;
       max-height: 600px;
       overflow-y: auto;
       padding-right: 5px;
@@ -2700,13 +2735,14 @@
       background-color: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(5px);
       border-radius: 12px;
-      padding: 25px;
+      padding: 16px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(226, 232, 240, 0.5);
       transition: transform 0.2s, box-shadow 0.2s;
       height: auto;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
 
     .study-plans-column .study-plan-card:hover {
@@ -2726,25 +2762,30 @@
       background-color: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(5px);
       border-radius: 12px;
-      padding: 25px;
+      padding: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(226, 232, 240, 0.5);
       height: auto;
-      min-height: 600px;
+      min-height: 100px; /* 再次减少高度 */
       transition: box-shadow 0.2s;
-      width: 100%;
-      position: relative;
-      right: -40px; /* 增加负值，使卡片向左移动 */
+      width: 90%; /* 减小每日一题卡片的宽度 */
+      margin-left: auto; /* 使卡片右对齐 */
+    }
+    
+    /* 复习提醒卡片独特样式 */
+    .daily-challenge-column .daily-challenge-card:nth-child(2) {
+      border-left: 3px solid #e74c3c; /* 添加红色左边框提醒标记 */
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 245, 245, 0.7)); /* 略微偏暖色背景 */
     }
     
     .daily-challenge-content {
       flex-grow: 1;
       overflow: auto;
-      padding: 15px 0;
+      padding: 3px 0;
     }
     
     .daily-challenge-description {
-      margin-bottom: 20px;
+      margin-bottom: 5px;
     }
     
     .daily-challenge-example {
@@ -2753,14 +2794,9 @@
     
     .daily-challenge-actions {
       margin-top: auto;
-      padding-top: 20px;
+      padding-top: 3px;
       display: flex;
-      justify-content: center;
-    }
-    
-    .daily-challenge-buttons {
-      display: flex;
-      gap: 15px;
+      justify-content: flex-end;
     }
 
     @media (max-width: 992px) {
@@ -2777,8 +2813,15 @@
         left: auto;
       }
       
+      /* 响应式布局下调整竞赛日历 */
+      .contest-calendar .container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
       .daily-challenge-column .daily-challenge-card {
-        min-height: 500px;
+        min-height: 350px; /* 再次减少高度 */
       }
       
       .study-plans-column .study-plans-grid {
@@ -2828,7 +2871,6 @@
     }
 
     /* 新增样式：确保卡片容器与标题对齐 */
-    .study-plans-column .study-plans-grid,
     .daily-challenge-column .daily-challenge-card {
       margin-top: 30px;
     }
@@ -2876,7 +2918,7 @@
     /* 确保每日一题卡片右侧与日历右侧对齐 */
     .study-daily-container {
       position: relative;
-      min-height: 800px; /* 增加空间容纳绝对定位的元素 */
+      min-height: 600px; /* 减少空间以移除底部空白区域 */
     }
     
     .daily-challenge-column {
@@ -2886,6 +2928,8 @@
       top: 0;
     }
     
+
+    
     .study-plans-column {
       width: 800px; /* 恢复原来宽度 */
       flex: 0 0 auto;
@@ -2893,10 +2937,626 @@
       left: 0;
       margin-left: 0; /* 确保没有额外的左侧边距 */
     }
+    
+    /* 竞赛日历布局恢复 */
+    .contest-calendar .container {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+    }
+    
+    /* 竞赛日历样式恢复 */
+    .contest-calendar .contest-list {
+      margin-top: 20px;
+      overflow: auto;
+    }
+    
+    .contest-calendar .section-header {
+      display: block;
+    }
+    
+    .contest-calendar .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+
+    .daily-challenge-content {
+      margin-bottom: 25px;
+    }
+
+    .daily-challenge-problem-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .daily-challenge-description {
+      color: #4a5568;
+      line-height: 1.3;
+      font-size: 0.85rem;
+    }
+
+    .daily-challenge-problem {
+      margin-bottom: 20px;
+    }
+    
+    /* 最新公告区域样式 */
+    .announcements-section {
+      background-color: transparent;
+      padding: 0;
+      margin-top: 0;
+    }
+    
+    .announcements-container {
+      max-width: 800px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .announcements-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 5px;
+      padding-left: 16px; /* 与卡片内边距一致 */
+    }
+    
+    .announcements-title::after {
+      content: "›";
+      margin-left: 8px;
+      color: #718096;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    
+    .announcements-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 10px;
+    }
+    
+    .announcement-card {
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+    }
+    
+    .announcement-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .announcement-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+    
+    .announcement-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 12px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(79, 172, 254, 0.15), rgba(0, 242, 254, 0.15));
+      color: #3498db;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .announcement-info {
+      flex: 1;
+    }
+    
+    .announcement-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0 0 3px 0;
+    }
+    
+    .announcement-date {
+      font-size: 0.8rem;
+      color: #718096;
+    }
+    
+    .announcement-content {
+      color: #4a5568;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .announcement-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    
+    .announcement-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .tag-important {
+      background-color: rgba(245, 101, 101, 0.1);
+      color: #f56565;
+    }
+    
+    .tag-notice {
+      background-color: rgba(66, 153, 225, 0.1);
+      color: #4299e1;
+    }
+    
+    .tag-update {
+      background-color: rgba(72, 187, 120, 0.1);
+      color: #48bb78;
+    }
+    
+    .announcement-btn {
+      width: 100%;
+      padding: 8px 0;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(79, 172, 254, 0.3);
+      margin-top: auto;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .announcement-btn:hover {
+      box-shadow: 0 5px 12px rgba(79, 172, 254, 0.5);
+      transform: translateY(-2px);
+    }
+    
+    /* 社区讨论和实时排行榜区域样式 */
+    .community-ranking-section {
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      padding: 50px 0;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+
+    
+    /* 讨论卡片样式 - 与学习计划卡片统一 */
+    .discussion-plan-card {
+      position: relative;
+    }
+    
+    .discussion-stat {
+      display: flex;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #8c8c8c;
+    }
+    
+    .discussion-stat i {
+      margin-right: 4px;
+      font-size: 0.9rem;
+    }
+    
+    /* 垂直排列的讨论卡片 */
+    .discussion-vertical-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .discussion-card {
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      padding: 8px 12px; /* 减少上下内边距 */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    .discussion-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .discussion-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px; /* 进一步减少底部间距 */
+      padding-bottom: 3px; /* 减少内边距 */
+    }
+    
+    /* 隐藏讨论图标 */
+    .discussion-icon {
+      display: none;
+    }
+    
+    .discussion-info {
+      flex: 1;
+    }
+    
+    .discussion-title {
+      font-size: 1rem; /* 减小标题字体大小 */
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0;
+    }
+    
+    .discussion-meta {
+      margin-top: 2px; /* 减少顶部间距 */
+    }
+    
+    .discussion-desc {
+      margin: 3px 0 6px 0; /* 减少上下间距 */
+      color: #4a5568;
+      line-height: 1.3; /* 减小行高 */
+      font-size: 0.85rem; /* 减小字体大小 */
+      max-height: 2.6em; /* 限制描述高度为两行 */
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* 限制为两行文字 */
+      -webkit-box-orient: vertical;
+    }
+    
+        .discussion-footer {
+      margin-top: auto;
+      padding-top: 5px; /* 减少顶部内边距 */
+      display: flex;
+    }
+    
+    .discussion-stat {
+      display: flex;
+      align-items: center;
+      font-size: 0.75rem; /* 减小字体大小 */
+      color: #8c8c8c;
+    }
+    
+    .like-stat, .reply-stat, .collect-stat {
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .like-stat:hover .icon {
+      color: #ff4d4f !important;
+      text-shadow: 0 0 1px #ff4d4f;
+    }
+    
+    .reply-stat:hover .icon {
+      color: #1890ff !important;
+      text-shadow: 0 0 1px #1890ff;
+    }
+    
+    .collect-stat:hover .icon {
+      color: #faad14 !important;
+      text-shadow: 0 0 1px #faad14;
+    }
+    
+    .like-stat.liked {
+      color: #ff4d4f;
+    }
+    
+    .like-stat.liked .like-icon {
+      animation: likeAnimation 0.5s ease;
+    }
+    
+    @keyframes likeAnimation {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    
+    /* 帖子标签样式 */
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    
+    .post-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    
+    .post-tag:hover {
+      opacity: 0.8;
+      transform: translateY(-1px);
+    }
+    
+    /* 帖子操作样式 */
+    .discussion-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .post-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .report-btn {
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #a0aec0;
+      opacity: 0.6;
+      transition: all 0.2s ease;
+    }
+    
+          .report-btn:hover {
+        color: #e53e3e;
+        opacity: 1;
+        background-color: rgba(229, 62, 62, 0.1);
+      }
+    
+    /* 举报模态框样式 */
+    .report-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1100;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .report-modal.show {
+      display: flex;
+    }
+    
+    .report-modal-content {
+      width: 400px;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .report-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .report-modal-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    .report-close-btn {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #a0aec0;
+      background: none;
+      border: none;
+      line-height: 1;
+      padding: 0;
+    }
+    
+    .report-types {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .report-type {
+      display: flex;
+      align-items: center;
+    }
+    
+    .report-type input {
+      margin-right: 10px;
+    }
+    
+    .report-type label {
+      font-size: 0.95rem;
+      color: #4a5568;
+    }
+    
+    .report-details {
+      margin-top: 15px;
+    }
+    
+    .report-details textarea {
+      width: 100%;
+      height: 100px;
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      resize: none;
+    }
+    
+    .report-details textarea:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+    
+    .report-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .report-btn-cancel, .report-btn-submit {
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .report-btn-cancel {
+      background-color: #e2e8f0;
+      color: #4a5568;
+      border: none;
+    }
+    
+    .report-btn-cancel:hover {
+      background-color: #cbd5e0;
+    }
+    
+    .report-btn-submit {
+      background-color: #3498db;
+      color: white;
+      border: none;
+    }
+    
+    .report-btn-submit:hover {
+      background-color: #2980b9;
+    }
+    
+    /* 评论区样式 */
+    .comments-section {
+      margin-top: 10px;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+      padding-top: 10px;
+    }
+    
+    .comments-list {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    
+    .comment-item {
+      margin-bottom: 8px;
+      padding: 8px;
+      background-color: rgba(248, 250, 252, 0.7);
+      border-radius: 8px;
+      position: relative;
+    }
+    
+    .comment-content {
+      font-size: 0.85rem;
+      color: #4a5568;
+      line-height: 1.5;
+      padding-right: 20px;
+    }
+    
+    .comment-author {
+      font-weight: 600;
+      color: #3498db;
+      margin-right: 5px;
+    }
+    
+    .comment-delete {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      color: #cbd5e0;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      opacity: 0.5;
+      transition: all 0.2s ease;
+    }
+    
+    .comment-delete:hover {
+      color: #e53e3e;
+      opacity: 1;
+    }
+    
+    .comment-form {
+      display: flex;
+      margin-top: 10px;
+    }
+    
+    .comment-input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid rgba(226, 232, 240, 0.7);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      resize: none;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .comment-input:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+    
+    .comment-submit {
+      margin-left: 10px;
+      padding: 0 15px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    
+    .comment-submit:hover {
+      background-color: #2980b9;
+    }
+
   </style>
 </head>
 
 <body>
+  <div class="page-content">
   <!-- 导航栏 -->
   <nav class="navbar">
     <div class="container navbar-container">
@@ -2928,7 +3588,7 @@
       <span class="username">用户001</span>
       <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
       <div class="user-dropdown">
-        <a href="#" class="dropdown-item">个人主页</a>
+        <a href="profile.html" class="dropdown-item">个人主页</a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">退出登录</a>
       </div>
@@ -2994,439 +3654,619 @@
     <div class="study-daily-container">
       <!-- 学习计划部分 -->
       <div class="study-plans-column">
-        <div class="section-header">
-          <h2 class="section-title">学习计划</h2>
-          <p class="section-subtitle">系统化学习，循序渐进提升编程能力</p>
+        <!-- 最新公告部分 -->
+        <div class="announcements-section">
+          <h2 class="announcements-title">最新公告</h2>
+          
+          <div class="announcements-grid">
+            <div class="announcement-card">
+              <div class="announcement-header">
+                <div class="announcement-icon" style="background: linear-gradient(135deg, #FF9A9E, #FAD0C4);">
+                  <div style="font-size: 20px;">📢</div>
+                </div>
+                <div class="announcement-info">
+                  <h3 class="announcement-title">系统维护通知</h3>
+                  <p class="announcement-date">2025-06-10</p>
+                </div>
+              </div>
+              <div class="announcement-content">
+                <p>为提升系统性能和用户体验，我们将于6月15日凌晨2:00-4:00进行系统维护。维护期间，平台将暂停访问。请您提前做好相关准备，由此带来的不便敬请谅解。</p>
+              </div>
+              <a href="#" class="announcement-btn">查看详情</a>
+            </div>
+            
+            <div class="announcement-card">
+              <div class="announcement-header">
+                <div class="announcement-icon" style="background: linear-gradient(135deg, #A1C4FD, #C2E9FB);">
+                  <div style="font-size: 20px;">🆕</div>
+                </div>
+                <div class="announcement-info">
+                  <h3 class="announcement-title">新增题库</h3>
+                  <p class="announcement-date">2025-06-08</p>
+                </div>
+              </div>
+              <div class="announcement-content">
+                <p>我们新增了LeetCode热门100题合集，涵盖了各种难度和类型的经典算法题目。这些题目在面试中经常出现，是提升算法能力的绝佳资源。现已上线，欢迎挑战！</p>
+              </div>
+              <a href="#" class="announcement-btn">立即查看</a>
+            </div>
+            
+            <div class="announcement-card">
+              <div class="announcement-header">
+                <div class="announcement-icon" style="background: linear-gradient(135deg, #FFECD2, #FCB69F);">
+                  <div style="font-size: 20px;">🏕️</div>
+                </div>
+                <div class="announcement-info">
+                  <h3 class="announcement-title">暑期训练营</h3>
+                  <p class="announcement-date">2025-06-05</p>
+                </div>
+              </div>
+              <div class="announcement-content">
+                <p>为帮助同学们在暑假期间提升算法能力，我们将于7月1日-8月15日举办为期6周的算法训练营。课程涵盖基础算法、高级数据结构和竞赛技巧，名额有限，请尽快报名！</p>
+              </div>
+              <a href="#" class="announcement-btn">报名参加</a>
+            </div>
+          </div>
+          
+                  <div class="view-more-container" style="margin-top: 0; padding-left: 16px;">
+          <a href="#" class="view-more-btn">查看全部公告 <span class="arrow">→</span></a>
         </div>
+        </div>
+
+        <h2 class="study-plans-title">学习计划</h2>
 
         <div class="study-plans-grid">
           <div class="study-plan-card">
             <div class="study-plan-header">
-              <div class="study-plan-icon">🔥</div>
+              <div class="study-plan-icon" style="background: linear-gradient(135deg, #FF9A9E, #FAD0C4);">
+                <div style="font-size: 28px;">🚀</div>
+              </div>
               <div class="study-plan-info">
-                <h3 class="study-plan-title">算法入门</h3>
+                <h3 class="study-plan-title">零基础入门编程</h3>
+                <p class="study-plan-short-desc">适合初学者的编程基础与算法思维培养</p>
               </div>
             </div>
-            
-            <div class="study-plan-stats-row">
-              <div class="study-plan-stats">
-                <span class="study-plan-stat">14天</span>
-                <span class="study-plan-stat">31题</span>
-              </div>
-              <span class="study-plan-difficulty easy">简单</span>
-            </div>
-            
-            <div class="study-plan-progress">
-              <div class="progress-bar">
-                <div class="progress" style="width: 25%"></div>
-              </div>
-              <span class="progress-text">25% 完成</span>
-            </div>
-            
-            <p class="study-plan-description">适合算法初学者的入门计划，从基本数据结构到简单算法，循序渐进。</p>
-            
-            <div class="study-plan-tags">
-              <span class="plan-tag">数组</span>
-              <span class="plan-tag">链表</span>
-              <span class="plan-tag">排序</span>
-              <span class="plan-tag">哈希表</span>
-            </div>
-            
-            <button class="study-plan-btn">继续学习</button>
           </div>
 
           <div class="study-plan-card">
             <div class="study-plan-header">
-              <div class="study-plan-icon">🏆</div>
+              <div class="study-plan-icon" style="background: linear-gradient(135deg, #A1C4FD, #C2E9FB);">
+                <div style="font-size: 28px;">🏆</div>
+              </div>
               <div class="study-plan-info">
-                <h3 class="study-plan-title">动态规划专题</h3>
+                <h3 class="study-plan-title">数据结构精讲</h3>
+                <p class="study-plan-short-desc">掌握核心数据结构，构建扎实的编程基础</p>
               </div>
             </div>
-            
-            <div class="study-plan-stats-row">
-              <div class="study-plan-stats">
-                <span class="study-plan-stat">21天</span>
-                <span class="study-plan-stat">45题</span>
-              </div>
-              <span class="study-plan-difficulty medium">中等</span>
-            </div>
-            
-            <div class="study-plan-progress">
-              <div class="progress-bar">
-                <div class="progress" style="width: 0%"></div>
-              </div>
-              <span class="progress-text">未开始</span>
-            </div>
-            
-            <p class="study-plan-description">从基础到进阶的动态规划专题训练，掌握这一强大的算法设计技术。</p>
-            
-            <div class="study-plan-tags">
-              <span class="plan-tag">DP</span>
-              <span class="plan-tag">记忆化搜索</span>
-              <span class="plan-tag">状态压缩</span>
-            </div>
-            
-            <button class="study-plan-btn">开始学习</button>
           </div>
 
           <div class="study-plan-card">
             <div class="study-plan-header">
-              <div class="study-plan-icon">🚀</div>
+              <div class="study-plan-icon" style="background: linear-gradient(135deg, #FFECD2, #FCB69F);">
+                <div style="font-size: 28px;">💼</div>
+              </div>
               <div class="study-plan-info">
-                <h3 class="study-plan-title">面试高频题</h3>
+                <h3 class="study-plan-title">校招面试特训</h3>
+                <p class="study-plan-short-desc">针对校招面试的算法题目与解题技巧</p>
               </div>
             </div>
-            
-            <div class="study-plan-stats-row">
-              <div class="study-plan-stats">
-                <span class="study-plan-stat">30天</span>
-                <span class="study-plan-stat">100题</span>
-              </div>
-              <span class="study-plan-difficulty hard">困难</span>
-            </div>
-            
-            <div class="study-plan-progress">
-              <div class="progress-bar">
-                <div class="progress" style="width: 60%"></div>
-              </div>
-              <span class="progress-text">60% 完成</span>
-            </div>
-            
-            <p class="study-plan-description">精选大厂面试高频算法题，助你高效准备技术面试。</p>
-            
-            <div class="study-plan-tags">
-              <span class="plan-tag">面试</span>
-              <span class="plan-tag">高频</span>
-              <span class="plan-tag">大厂</span>
-            </div>
-            
-            <button class="study-plan-btn">继续学习</button>
           </div>
         </div>
 
-        <div class="view-more-container">
+        <div class="view-more-container" style="margin-top: 0; padding-left: 16px;">
           <a href="#" class="view-more-btn">查看全部学习计划 <span class="arrow">→</span></a>
+        </div>
+
+        <!-- 社区讨论部分 - 垂直排列更宽的卡片 -->
+        <div style="display: flex; margin-top: 5px; position: relative; min-height: 400px;">
+          <div style="width: 800px; position: absolute; left: 0;">
+            <h2 class="study-plans-title">社区讨论</h2>
+            <div class="discussion-vertical-grid">
+              <!-- 讨论卡片1 -->
+              <div class="discussion-card" data-card-id="1">
+                <div class="discussion-header">
+                  <div class="discussion-info">
+                    <h3 class="discussion-title">如何优化快速排序算法？</h3>
+                    <div class="discussion-meta">
+                      <span class="discussion-author" style="font-size: 0.8rem; color: #595959;">程序员小王</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="discussion-desc">我在实现快速排序时，发现在数据量较大的情况下性能不佳，有没有优化技巧？</p>
+                <div class="post-tags">
+                  <span class="post-tag" style="background-color: #f0f7ff; color: #1890ff;">算法</span>
+                  <span class="post-tag" style="background-color: #f6ffed; color: #52c41a;">快速排序</span>
+                  <span class="post-tag" style="background-color: #fff7e6; color: #fa8c16;">性能优化</span>
+                </div>
+                <div class="discussion-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                  <div class="discussion-actions-left" style="display: flex; align-items: center;">
+                    <span class="discussion-stat like-stat" style="cursor: pointer; margin-right: 15px;" data-liked="false" data-count="16">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">♡</i> 
+                      <span class="like-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">16</span>
+                    </span>
+                    <span class="discussion-stat reply-stat" style="cursor: pointer; margin-right: 15px;">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☐</i> 
+                      <span class="comment-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">32</span>
+                    </span>
+                    <span class="discussion-stat collect-stat" style="cursor: pointer;" data-collected="false" data-count="8">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☆</i> 
+                      <span class="collect-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">8</span>
+                    </span>
+                  </div>
+                                      <div class="discussion-actions-right" style="position: relative;">
+                    <span class="report-btn" style="cursor: pointer; padding: 5px; border-radius: 4px; font-size: 0.85rem; color: #595959; display: flex; align-items: center;" title="举报" data-post-id="1">
+                      <i style="margin-right: 5px; font-size: 1rem;">🚩</i>举报
+                    </span>
+                  </div>
+                </div>
+                <div class="comments-section" style="display: none;">
+                  <div class="comments-list">
+                    <div class="comment-item" data-comment-id="1-1" data-author="算法专家">
+                      <div class="comment-content">
+                        <span class="comment-author">算法专家:</span> 
+                        <span class="comment-text">你可以考虑三数取中法选择pivot，能有效避免最坏情况。</span>
+                        <span class="comment-delete" title="删除评论" style="display: none;">×</span>
+                      </div>
+                    </div>
+                    <div class="comment-item" data-comment-id="1-2" data-author="代码小能手">
+                      <div class="comment-content">
+                        <span class="comment-author">代码小能手:</span> 
+                        <span class="comment-text">对于小规模数据，可以切换到插入排序，会更高效。</span>
+                        <span class="comment-delete" title="删除评论" style="display: none;">×</span>
+                      </div>
+                    </div>
+                    <div class="comment-item" data-comment-id="1-3" data-author="用户001">
+                      <div class="comment-content">
+                        <span class="comment-author">用户001:</span> 
+                        <span class="comment-text">还可以使用随机选择pivot，这样即使数据有特定模式也能保持期望O(nlogn)的性能。</span>
+                        <span class="comment-delete" title="删除评论">×</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="comment-form">
+                    <textarea class="comment-input" placeholder="发表评论..." rows="2"></textarea>
+                    <button class="comment-submit">发表</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 讨论卡片2 -->
+              <div class="discussion-card" data-card-id="2">
+                <div class="discussion-header">
+                  <div class="discussion-info">
+                    <h3 class="discussion-title">动态规划问题集锦</h3>
+                    <div class="discussion-meta">
+                      <span class="discussion-author" style="font-size: 0.8rem; color: #595959;">算法达人</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="discussion-desc">整理了一些经典的动态规划问题及其解题思路，希望对大家有所帮助。</p>
+                <div class="post-tags">
+                  <span class="post-tag" style="background-color: #fff0f6; color: #eb2f96;">内推</span>
+                  <span class="post-tag" style="background-color: #f0f7ff; color: #1890ff;">动态规划</span>
+                  <span class="post-tag" style="background-color: #f9f0ff; color: #722ed1;">题集</span>
+                </div>
+                <div class="discussion-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                  <div class="discussion-actions-left" style="display: flex; align-items: center;">
+                    <span class="discussion-stat like-stat" style="cursor: pointer; margin-right: 15px;" data-liked="false" data-count="64">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">♡</i> 
+                      <span class="like-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">64</span>
+                    </span>
+                    <span class="discussion-stat reply-stat" style="cursor: pointer; margin-right: 15px;">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☐</i> 
+                      <span class="comment-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">48</span>
+                    </span>
+                    <span class="discussion-stat collect-stat" style="cursor: pointer;" data-collected="false" data-count="21">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☆</i> 
+                      <span class="collect-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">21</span>
+                    </span>
+                  </div>
+                                      <div class="discussion-actions-right" style="position: relative;">
+                    <span class="report-btn" style="cursor: pointer; padding: 5px; border-radius: 4px; font-size: 0.85rem; color: #595959; display: flex; align-items: center;" title="举报" data-post-id="2">
+                      <i style="margin-right: 5px; font-size: 1rem;">🚩</i>举报
+                    </span>
+                  </div>
+                </div>
+                <div class="comments-section" style="display: none;">
+                  <div class="comments-list">
+                    <div class="comment-item" data-comment-id="2-1" data-author="编程小白">
+                      <div class="comment-content">
+                        <span class="comment-author">编程小白:</span> 
+                        <span class="comment-text">这些题目难度如何？适合初学者吗？</span>
+                        <span class="comment-delete" title="删除评论" style="display: none;">×</span>
+                      </div>
+                    </div>
+                    <div class="comment-item" data-comment-id="2-2" data-author="算法达人">
+                      <div class="comment-content">
+                        <span class="comment-author">算法达人:</span> 
+                        <span class="comment-text">我按难度分类了，从基础到进阶都有，初学者可以先看前面几章。</span>
+                        <span class="comment-delete" title="删除评论" style="display: none;">×</span>
+                      </div>
+                    </div>
+                    <div class="comment-item" data-comment-id="2-3" data-author="用户001">
+                      <div class="comment-content">
+                        <span class="comment-author">用户001:</span> 
+                        <span class="comment-text">我是新手，学完了前面几章的题目，感觉收获很多，谢谢分享！</span>
+                        <span class="comment-delete" title="删除评论">×</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="comment-form">
+                    <textarea class="comment-input" placeholder="发表评论..." rows="2"></textarea>
+                    <button class="comment-submit">发表</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 讨论卡片3 -->
+              <div class="discussion-card" data-card-id="3">
+                <div class="discussion-header">
+                  <div class="discussion-info">
+                    <h3 class="discussion-title">关于图论算法的学习路径</h3>
+                    <div class="discussion-meta">
+                      <span class="discussion-author" style="font-size: 0.8rem; color: #595959;">学习探索者</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="discussion-desc">想系统学习图论算法，有没有推荐的学习路径和资源？从哪些算法入手比较好？</p>
+                <div class="post-tags">
+                  <span class="post-tag" style="background-color: #e6f7ff; color: #1890ff;">校招</span>
+                  <span class="post-tag" style="background-color: #f0f7ff; color: #096dd9;">图论</span>
+                  <span class="post-tag" style="background-color: #fcffe6; color: #7cb305;">学习资源</span>
+                </div>
+                <div class="discussion-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                  <div class="discussion-actions-left" style="display: flex; align-items: center;">
+                    <span class="discussion-stat like-stat" style="cursor: pointer; margin-right: 15px;" data-liked="false" data-count="32">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">♡</i> 
+                      <span class="like-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">32</span>
+                    </span>
+                    <span class="discussion-stat reply-stat" style="cursor: pointer; margin-right: 15px;">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☐</i> 
+                      <span class="comment-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">24</span>
+                    </span>
+                    <span class="discussion-stat collect-stat" style="cursor: pointer;" data-collected="false" data-count="12">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☆</i> 
+                      <span class="collect-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">12</span>
+                    </span>
+                  </div>
+                                      <div class="discussion-actions-right" style="position: relative;">
+                    <span class="report-btn" style="cursor: pointer; padding: 5px; border-radius: 4px; font-size: 0.85rem; color: #595959; display: flex; align-items: center;" title="举报" data-post-id="3">
+                      <i style="margin-right: 5px; font-size: 1rem;">🚩</i>举报
+                    </span>
+                  </div>
+                </div>
+                <div class="comments-section" style="display: none;">
+                  <div class="comments-list">
+                    <div class="comment-item" data-comment-id="3-1" data-author="图论专家">
+                      <div class="comment-content">
+                        <span class="comment-author">图论专家:</span> 
+                        <span class="comment-text">建议从基础的BFS和DFS入手，然后学习最短路径算法如Dijkstra。</span>
+                        <span class="comment-delete" title="删除评论" style="display: none;">×</span>
+                      </div>
+                    </div>
+                    <div class="comment-item" data-comment-id="3-2" data-author="面试官">
+                      <div class="comment-content">
+                        <span class="comment-author">面试官:</span> 
+                        <span class="comment-text">面试中经常考察的是最小生成树和网络流问题，可以重点关注。</span>
+                        <span class="comment-delete" title="删除评论" style="display: none;">×</span>
+                      </div>
+                    </div>
+                    <div class="comment-item" data-comment-id="3-3" data-author="用户001">
+                      <div class="comment-content">
+                        <span class="comment-author">用户001:</span> 
+                        <span class="comment-text">除了算法书，有没有推荐的网站或视频资源学习图论？</span>
+                        <span class="comment-delete" title="删除评论">×</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="comment-form">
+                    <textarea class="comment-input" placeholder="发表评论..." rows="2"></textarea>
+                    <button class="comment-submit">发表</button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 讨论卡片4 -->
+              <div class="discussion-card" data-card-id="4">
+                <div class="discussion-header">
+                  <div class="discussion-info">
+                    <h3 class="discussion-title">前端框架选择：React vs Vue vs Angular</h3>
+                    <div class="discussion-meta">
+                      <span class="discussion-author" style="font-size: 0.8rem; color: #595959;">前端工程师</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="discussion-desc">作为初学者，应该选择哪个前端框架入门？各有什么优缺点和适用场景？欢迎分享经验。</p>
+                <div class="post-tags">
+                  <span class="post-tag" style="background-color: #e6fffb; color: #13c2c2;">前端</span>
+                  <span class="post-tag" style="background-color: #fff2e8; color: #fa541c;">框架选择</span>
+                  <span class="post-tag" style="background-color: #f4ffb8; color: #389e0d;">技术讨论</span>
+                </div>
+                <div class="discussion-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                  <div class="discussion-actions-left" style="display: flex; align-items: center;">
+                    <span class="discussion-stat like-stat" style="cursor: pointer; margin-right: 15px;" data-liked="false" data-count="45">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">♡</i> 
+                      <span class="like-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">45</span>
+                    </span>
+                    <span class="discussion-stat reply-stat" style="cursor: pointer; margin-right: 15px;">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☐</i> 
+                      <span class="comment-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">37</span>
+                    </span>
+                    <span class="discussion-stat collect-stat" style="cursor: pointer;" data-collected="false" data-count="18">
+                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☆</i> 
+                      <span class="collect-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">18</span>
+                    </span>
+                  </div>
+                  <div class="discussion-actions-right" style="position: relative;">
+                    <span class="report-btn" style="cursor: pointer; padding: 5px; border-radius: 4px; font-size: 0.85rem; color: #595959; display: flex; align-items: center;" title="举报" data-post-id="4">
+                      <i style="margin-right: 5px; font-size: 1rem;">🚩</i>举报
+                    </span>
+                  </div>
+                </div>
+                <div class="comments-section" style="display: none;">
+                  <div class="comments-list">
+                    <div class="comment-item" data-comment-id="4-1" data-author="React爱好者">
+                      <div class="comment-content">
+                        <span class="comment-author">React爱好者:</span> 
+                        <span class="comment-text">React生态丰富，就业机会多，适合想深入前端开发的人。</span>
+                        <span class="comment-delete" title="删除评论" style="display: none;">×</span>
+                      </div>
+                    </div>
+                    <div class="comment-item" data-comment-id="4-2" data-author="Vue粉丝">
+                      <div class="comment-content">
+                        <span class="comment-author">Vue粉丝:</span> 
+                        <span class="comment-text">Vue上手更简单，文档友好，对初学者非常友好，推荐从Vue开始。</span>
+                        <span class="comment-delete" title="删除评论" style="display: none;">×</span>
+                      </div>
+                    </div>
+                    <div class="comment-item" data-comment-id="4-3" data-author="全栈开发">
+                      <div class="comment-content">
+                        <span class="comment-author">全栈开发:</span> 
+                        <span class="comment-text">Angular适合大型企业应用，但学习曲线较陡。建议先了解JS基础，再选择适合自己的框架。</span>
+                        <span class="comment-delete" title="删除评论">×</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="comment-form">
+                    <textarea class="comment-input" placeholder="发表评论..." rows="2"></textarea>
+                    <button class="comment-submit">发表</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="view-more-container" style="margin-top: 15px; padding-left: 16px; margin-bottom: 20px; clear: both;">
+              <a href="discussion.html" class="view-more-btn">查看更多讨论 <span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <!-- 每日用户活跃度 -->
+          <div style="width: 400px; position: absolute; right: -400px; top: 0;">
+            <div class="daily-challenge-card" style="margin-top: 44px; width: 90%; margin-left: auto;">
+              <div class="daily-challenge-header">
+                <div class="daily-challenge-title">
+                  <i>📊</i>用户活跃度
+                </div>
+                <span class="problem-difficulty-tag" style="background-color: rgba(52, 152, 219, 0.1); color: #3498db;">实时数据</span>
+              </div>
+              
+              <div class="daily-challenge-content" style="padding: 10px 15px;">
+                <!-- 数据概览 -->
+                <div style="display: flex; justify-content: space-between; margin: 5px 0 15px 0;">
+                  <div style="text-align: center; flex: 1;">
+                    <div style="font-size: 1.2rem; font-weight: 600; color: #3498db;">238</div>
+                    <div style="font-size: 0.8rem; color: #718096;">活跃用户</div>
+                  </div>
+                  <div style="text-align: center; flex: 1;">
+                    <div style="font-size: 1.2rem; font-weight: 600; color: #3498db;">1024</div>
+                    <div style="font-size: 0.8rem; color: #718096;">提交数</div>
+                  </div>
+                  <div style="text-align: center; flex: 1;">
+                    <div style="font-size: 1.2rem; font-weight: 600; color: #3498db;">56</div>
+                    <div style="font-size: 0.8rem; color: #718096;">讨论数</div>
+                  </div>
+                </div>
+                
+                <!-- 活动时间分布 -->
+                <div style="margin: 15px 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.9rem; font-weight: 600; color: #2d3748;">活动时间分布</span>
+                    <span style="font-size: 0.75rem; color: #718096;">今日</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; height: 130px; margin-top: 5px;">
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 15%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">0</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 10%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">2</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 5%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">4</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 8%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">6</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 20%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">8</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 40%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">10</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 60%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">12</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 70%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">14</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 90%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">16</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 80%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">18</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 65%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">20</div>
+                    </div>
+                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+                      <div style="width: 100%; background: #3498db; height: 45%; border-radius: 2px 2px 0 0;"></div>
+                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">22</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 用户排名 -->
+                <div style="margin: 20px 0 10px 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.9rem; font-weight: 600; color: #2d3748;">活跃用户排名</span>
+                    <span style="font-size: 0.75rem; color: #3498db; cursor: pointer;">查看全部 ›</span>
+                  </div>
+                  
+                  <div style="margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                      <div style="display: flex; align-items: center;">
+                        <span style="width: 18px; height: 18px; background: gold; color: #fff; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; margin-right: 8px;">1</span>
+                        <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">王者编程</span>
+                      </div>
+                      <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">103题</span>
+                    </div>
+                    <div style="height: 6px; background-color: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                      <div style="width: 85%; height: 100%; background: linear-gradient(to right, #4facfe, #00f2fe);"></div>
+                    </div>
+                  </div>
+                  
+                  <div style="margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                      <div style="display: flex; align-items: center;">
+                        <span style="width: 18px; height: 18px; background: silver; color: #fff; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; margin-right: 8px;">2</span>
+                        <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">算法专家</span>
+                      </div>
+                      <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">76题</span>
+                    </div>
+                    <div style="height: 6px; background-color: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                      <div style="width: 62%; height: 100%; background: linear-gradient(to right, #4facfe, #00f2fe);"></div>
+                    </div>
+                  </div>
+                  
+                  <div style="margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                      <div style="display: flex; align-items: center;">
+                        <span style="width: 18px; height: 18px; background: #cd7f32; color: #fff; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; margin-right: 8px;">3</span>
+                        <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">代码小能手</span>
+                      </div>
+                      <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">42题</span>
+                    </div>
+                    <div style="height: 6px; background-color: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                      <div style="width: 38%; height: 100%; background: linear-gradient(to right, #4facfe, #00f2fe);"></div>
+                    </div>
+                  </div>
+                  
+                  <div style="margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                      <div style="display: flex; align-items: center;">
+                        <span style="width: 18px; height: 18px; background: #e2e8f0; color: #718096; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; margin-right: 8px;">4</span>
+                        <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">编程新手</span>
+                      </div>
+                      <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">21题</span>
+                    </div>
+                    <div style="height: 6px; background-color: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                      <div style="width: 20%; height: 100%; background: linear-gradient(to right, #4facfe, #00f2fe);"></div>
+                    </div>
+                  </div>
+                  
+                  <div style="margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                      <div style="display: flex; align-items: center;">
+                        <span style="width: 18px; height: 18px; background: #e2e8f0; color: #718096; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; margin-right: 8px;">5</span>
+                        <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">学习探索者</span>
+                      </div>
+                      <span style="font-size: 0.85rem; color: #4a5568; font-weight: 500;">18题</span>
+                    </div>
+                    <div style="height: 6px; background-color: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                      <div style="width: 15%; height: 100%; background: linear-gradient(to right, #4facfe, #00f2fe);"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 热门标签 -->
+                <div style="margin: 20px 0 5px 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.9rem; font-weight: 600; color: #2d3748;">热门标签</span>
+                  </div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span style="padding: 4px 10px; background-color: rgba(52, 152, 219, 0.1); color: #3498db; border-radius: 12px; font-size: 0.75rem;">#动态规划 (56)</span>
+                    <span style="padding: 4px 10px; background-color: rgba(231, 76, 60, 0.1); color: #e74c3c; border-radius: 12px; font-size: 0.75rem;">#校招 (42)</span>
+                    <span style="padding: 4px 10px; background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; border-radius: 12px; font-size: 0.75rem;">#算法 (38)</span>
+                    <span style="padding: 4px 10px; background-color: rgba(155, 89, 182, 0.1); color: #9b59b6; border-radius: 12px; font-size: 0.75rem;">#面试 (29)</span>
+                    <span style="padding: 4px 10px; background-color: rgba(241, 196, 15, 0.1); color: #f1c40f; border-radius: 12px; font-size: 0.75rem;">#图论 (21)</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="daily-challenge-actions" style="justify-content: center; margin-top: 5px;">
+                <button class="btn-solve" style="width: 100%; padding: 6px 0;">查看完整排行榜</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
       <!-- 每日一题部分 -->
       <div class="daily-challenge-column">
-        <div class="section-header">
-          <h2 class="section-title">每日一题</h2>
-          <p class="section-subtitle">每天一道精选题目，提升你的编程技能</p>
-        </div>
-        
-        <div class="daily-challenge-card">
+        <div class="daily-challenge-card" style="margin-top: 30px;">
           <div class="daily-challenge-header">
             <div class="daily-challenge-title">
-              <i>📝</i>今日挑战
+              <i>📝</i>每日一题
             </div>
-            <div class="daily-challenge-timer">
-              剩余时间: <span id="challenge-timer">23:45:12</span>
-            </div>
+            <span class="problem-difficulty-tag easy">简单</span>
           </div>
           
           <div class="daily-challenge-content">
-            <div class="daily-challenge-problem">
-              <h3>
-                两数之和
-                <span class="problem-difficulty-tag easy">简单</span>
-              </h3>
-              
-              <div class="daily-challenge-description">
-                <p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。</p>
-                <p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-              </div>
-              
-              <div class="daily-challenge-example">
-                <strong>示例:</strong><br>
-                输入: nums = [2,7,11,15], target = 9<br>
-                输出: [0,1]<br>
-                解释: 因为 nums[0] + nums[1] == 9，所以返回 [0, 1]
-              </div>
-            </div>
-          </div>
-          
-          <div class="daily-challenge-stats-row">
-            <div class="daily-challenge-stats">
-              <div class="daily-challenge-stat">
-                <i>👥</i> 已提交: 1,245
-              </div>
-              <div class="daily-challenge-stat">
-                <i>✅</i> 通过率: 76.3%
-              </div>
+            <h3 class="daily-challenge-problem-title">两数之和</h3>
+            <div class="daily-challenge-description">
+              <p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。</p>
             </div>
           </div>
             
           <div class="daily-challenge-actions">
-            <div class="daily-challenge-buttons">
-              <button class="daily-challenge-btn btn-details">查看详情</button>
-              <button class="daily-challenge-btn btn-solve">立即解题</button>
+            <button class="daily-challenge-btn btn-solve">立即解题</button>
+          </div>
+        </div>
+        
+        <!-- 知识点复习提醒 -->
+        <div class="daily-challenge-card" style="margin-top: 30px;">
+          <div class="daily-challenge-header">
+            <div class="daily-challenge-title">
+              <i>🔄</i>复习提醒
             </div>
+            <span class="problem-difficulty-tag hard">待复习</span>
+          </div>
+          
+          <div class="daily-challenge-content">
+            <h3 class="daily-challenge-problem-title">动态规划知识点</h3>
+            <div class="daily-challenge-description">
+              <p>您已经3周未复习动态规划相关知识点，根据艾宾浩斯记忆曲线，现在是巩固记忆的最佳时机。建议复习3道经典题型。</p>
+            </div>
+          </div>
+            
+          <div class="daily-challenge-actions">
+            <button class="daily-challenge-btn btn-solve">开始复习</button>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- 推荐区域 -->
-  <section class="recommendations">
-    <div class="recommendations-container">
-      <div class="section-header">
-        <h2 class="section-title">热门题目</h2>
-        <p class="section-subtitle">开始你的编程之旅，尝试解决这些热门题目</p>
-      </div>
-      <div class="problems-preview">
-        <div class="problems-header">
-          <h3 class="problems-title">新手推荐</h3>
-          <a href="problems.html" class="view-all">查看全部 →</a>
-        </div>
-        <div class="problems-grid">
-          <div class="problem-card">
-            <span class="problem-difficulty difficulty-easy">简单</span>
-            <a href="#" class="problem-name">1. 两数之和</a>
-            <p class="problem-info">提交次数: 9823 | 通过率: 45.3%</p>
-          </div>
-          <div class="problem-card">
-            <span class="problem-difficulty difficulty-easy">简单</span>
-            <a href="#" class="problem-name">9. 回文数</a>
-            <p class="problem-info">提交次数: 7651 | 通过率: 57.6%</p>
-          </div>
-          <div class="problem-card">
-            <span class="problem-difficulty difficulty-medium">中等</span>
-            <a href="#" class="problem-name">3. 无重复字符的最长子串</a>
-            <p class="problem-info">提交次数: 8932 | 通过率: 33.2%</p>
-          </div>
-          <div class="problem-card">
-            <span class="problem-difficulty difficulty-medium">中等</span>
-            <a href="#" class="problem-name">5. 最长回文子串</a>
-            <p class="problem-info">提交次数: 6754 | 通过率: 30.5%</p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="problems-preview">
-        <div class="problems-header">
-          <h3 class="problems-title">本周热门</h3>
-          <a href="problems.html" class="view-all">查看全部 →</a>
-        </div>
-        <div class="problems-grid">
-          <div class="problem-card">
-            <span class="problem-difficulty difficulty-medium">中等</span>
-            <a href="#" class="problem-name">2. 两数相加</a>
-            <p class="problem-info">提交次数: 8271 | 通过率: 36.8%</p>
-          </div>
-          <div class="problem-card">
-            <span class="problem-difficulty difficulty-hard">困难</span>
-            <a href="#" class="problem-name">4. 寻找两个正序数组的中位数</a>
-            <p class="problem-info">提交次数: 5482 | 通过率: 37.9%</p>
-          </div>
-          <div class="problem-card">
-            <span class="problem-difficulty difficulty-medium">中等</span>
-            <a href="#" class="problem-name">6. Z 字形变换</a>
-            <p class="problem-info">提交次数: 4932 | 通过率: 46.7%</p>
-          </div>
-          <div class="problem-card">
-            <span class="problem-difficulty difficulty-hard">困难</span>
-            <a href="#" class="problem-name">10. 正则表达式匹配</a>
-            <p class="problem-info">提交次数: 3987 | 通过率: 28.7%</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 题目难度分布 -->
-      <div class="difficulty-distribution">
-        <div class="distribution-header">
-          <h3 class="distribution-title">题目难度分布</h3>
-          <div class="distribution-stats">
-            <div class="total-problems">总题数: <span>2,345</span></div>
-            <div class="solved-problems">已解决: <span>347</span></div>
-          </div>
-        </div>
-        
-        <div class="distribution-chart">
-          <div class="chart-row">
-            <div class="difficulty-label easy">简单</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar">
-                <div class="chart-progress easy" style="width: 75%"></div>
-              </div>
-            </div>
-            <div class="chart-stats">
-              <div class="solved">已解决 <span>187</span></div>
-              <div class="total">/ 652</div>
-            </div>
-          </div>
-          
-          <div class="chart-row">
-            <div class="difficulty-label medium">中等</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar">
-                <div class="chart-progress medium" style="width: 45%"></div>
-              </div>
-            </div>
-            <div class="chart-stats">
-              <div class="solved">已解决 <span>135</span></div>
-              <div class="total">/ 1,247</div>
-            </div>
-          </div>
-          
-          <div class="chart-row">
-            <div class="difficulty-label hard">困难</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar">
-                <div class="chart-progress hard" style="width: 15%"></div>
-              </div>
-            </div>
-            <div class="chart-stats">
-              <div class="solved">已解决 <span>25</span></div>
-              <div class="total">/ 446</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="distribution-footer">
-          <div class="progress-summary">总进度: <span>14.8%</span></div>
-          <a href="problems.html" class="solve-more-btn">继续挑战 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 竞赛日历区域 -->
-  <section class="contest-calendar">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">竞赛日历</h2>
-        <p class="section-subtitle">参加编程竞赛，挑战自我，提升能力</p>
-      </div>
-      
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <button class="calendar-nav-btn"><i class="arrow-left">←</i></button>
-          <h3 class="calendar-month">2025年7月</h3>
-          <button class="calendar-nav-btn"><i class="arrow-right">→</i></button>
-        </div>
-        
-        <div class="contest-list">
-          <div class="contest-card upcoming">
-            <div class="contest-date">
-              <div class="contest-day">12</div>
-              <div class="contest-month">7月</div>
-            </div>
-            <div class="contest-info">
-              <h4 class="contest-title">周赛 #455</h4>
-              <div class="contest-time">09:30 - 11:30</div>
-              <div class="contest-details">
-                <span class="contest-duration"><i class="icon">⏱️</i> 2小时</span>
-                <span class="contest-problems"><i class="icon">📝</i> 4题</span>
-                <span class="contest-participants"><i class="icon">👥</i> 已报名: 3,245</span>
-              </div>
-            </div>
-            <div class="contest-actions">
-              <button class="contest-btn">立即报名</button>
-              <div class="contest-countdown">
-                <div class="countdown-label">距离开始</div>
-                <div class="countdown-time" id="contest-countdown-1">2天 18:45:30</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="contest-card upcoming">
-            <div class="contest-date">
-              <div class="contest-day">19</div>
-              <div class="contest-month">7月</div>
-            </div>
-            <div class="contest-info">
-              <h4 class="contest-title">双周赛 #148</h4>
-              <div class="contest-time">21:30 - 23:30</div>
-              <div class="contest-details">
-                <span class="contest-duration"><i class="icon">⏱️</i> 2小时</span>
-                <span class="contest-problems"><i class="icon">📝</i> 4题</span>
-                <span class="contest-participants"><i class="icon">👥</i> 已报名: 2,187</span>
-              </div>
-            </div>
-            <div class="contest-actions">
-              <button class="contest-btn">立即报名</button>
-              <div class="contest-countdown">
-                <div class="countdown-label">距离开始</div>
-                <div class="countdown-time" id="contest-countdown-2">9天 06:45:30</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="contest-card past">
-            <div class="contest-date">
-              <div class="contest-day">5</div>
-              <div class="contest-month">7月</div>
-            </div>
-            <div class="contest-info">
-              <h4 class="contest-title">周赛 #454</h4>
-              <div class="contest-time">09:30 - 11:30</div>
-              <div class="contest-details">
-                <span class="contest-duration"><i class="icon">⏱️</i> 2小时</span>
-                <span class="contest-problems"><i class="icon">📝</i> 4题</span>
-                <span class="contest-participants"><i class="icon">👥</i> 参与: 4,127</span>
-              </div>
-            </div>
-            <div class="contest-actions">
-              <button class="contest-btn secondary">查看题目</button>
-              <div class="contest-result">
-                <div class="result-label">你的排名</div>
-                <div class="result-rank">1,245 / 4,127</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="calendar-footer">
-          <a href="#" class="view-all-contests">查看全部竞赛 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- 特点区域 -->
-  <section class="features">
-    <div class="features-container">
-      <div class="section-header">
-        <h2 class="section-title">平台特点</h2>
-        <p class="section-subtitle">SwustOJ提供全面的编程学习解决方案，从入门到精通</p>
-      </div>
-      <div class="features-grid">
-      <div class="feature-card">
-          <div class="feature-icon">📝</div>
-        <h3 class="feature-title">丰富的题库资源</h3>
-        <p class="feature-description">数千道精心挑选的编程题目，涵盖基础算法、数据结构、竞赛真题等多个领域，难度由易到难，帮助你循序渐进地提升能力。</p>
-      </div>
-      <div class="feature-card">
-          <div class="feature-icon">🚀</div>
-        <h3 class="feature-title">实时在线评测</h3>
-        <p class="feature-description">代码提交后即时评测，获得详细的执行结果、运行时间和内存消耗，帮助你优化代码效率，提升算法性能。</p>
-      </div>
-      <div class="feature-card">
-          <div class="feature-icon">🏆</div>
-        <h3 class="feature-title">竞赛与排行榜</h3>
-        <p class="feature-description">定期举办校内编程竞赛，培养竞争意识和团队协作能力。实时更新的排行榜让你了解自己在校内的水平和进步。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 页脚 -->
-  <footer class="footer">
-    <div class="footer-content">
-        <ul class="footer-links">
-        <li><a href="#" class="footer-link">关于我们</a></li>
-        <li><a href="#" class="footer-link">帮助中心</a></li>
-        <li><a href="#" class="footer-link">学习资料</a></li>
-        <li><a href="#" class="footer-link">联系我们</a></li>
-        </ul>
-      <div class="copyright">
-        © 2025 SwustOJ - 西南科技大学在线编程评测平台
-      </div>
-      </div>
-  </footer>
+      </section>
+  </div><!-- 结束 page-content -->
 
   <!-- 登录弹窗 -->
   <div class="modal-overlay" id="loginModal">
@@ -3920,8 +4760,8 @@
       const prevLastDay = new Date(currentYear, currentMonth, 0);
       const prevDaysInMonth = prevLastDay.getDate();
       
-      // 计算下个月开始的天数
-      const nextDays = 42 - (firstDayIndex + daysInMonth);
+      // 计算下个月开始的天数（总共显示5行，即35天）
+      const nextDays = 35 - (firstDayIndex + daysInMonth);
       
       // 清空日历天数
       const daysContainer = document.getElementById('calendar-days');
@@ -4321,7 +5161,623 @@
         }
       });
     });
+  
+    // 点赞、取消点赞功能以及评论功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取所有点赞按钮
+      const likeButtons = document.querySelectorAll('.like-stat');
+      
+      // 为每个点赞按钮添加点击事件
+      likeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // 获取当前点赞状态和数量
+          const isLiked = this.getAttribute('data-liked') === 'true';
+          let likeCount = parseInt(this.getAttribute('data-count'));
+          
+          // 切换点赞状态
+          if (isLiked) {
+            // 取消点赞
+            likeCount--;
+            this.setAttribute('data-liked', 'false');
+            this.classList.remove('liked');
+          } else {
+            // 点赞
+            likeCount++;
+            this.setAttribute('data-liked', 'true');
+            this.classList.add('liked');
+          }
+          
+          // 更新点赞数量
+          this.setAttribute('data-count', likeCount);
+          this.querySelector('.like-count').textContent = likeCount;
+          
+          // 点击模态框外部关闭模态框
+          window.addEventListener('click', function(e) {
+            if (e.target === reportModal) {
+              reportModal.classList.remove('show');
+            }
+          });
+          
+          // 在实际项目中，这里应该发送 AJAX 请求到服务器更新点赞状态
+          // 例如：
+          /*
+          fetch('/api/discussions/like', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              discussionId: this.closest('.discussion-card').dataset.id,
+              liked: !isLiked
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            // 如果请求失败，恢复原状态
+            this.setAttribute('data-liked', isLiked);
+            this.setAttribute('data-count', isLiked ? likeCount + 1 : likeCount - 1);
+            this.querySelector('.like-count').textContent = isLiked ? likeCount + 1 : likeCount - 1;
+            if (isLiked) {
+              this.classList.add('liked');
+            } else {
+              this.classList.remove('liked');
+            }
+          });
+          */
+        });
+      });
+      
+      // 获取所有回复按钮
+      const replyButtons = document.querySelectorAll('.reply-stat');
+      
+      // 为每个回复按钮添加点击事件
+      replyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // 获取评论区域
+          const card = this.closest('.discussion-card');
+          const commentsSection = card.querySelector('.comments-section');
+          
+          // 显示或隐藏评论区
+          if (commentsSection.style.display === 'none') {
+            commentsSection.style.display = 'block';
+            
+            // 聚焦到评论输入框
+            const commentInput = commentsSection.querySelector('.comment-input');
+            setTimeout(() => {
+              commentInput.focus();
+            }, 100);
+          } else {
+            commentsSection.style.display = 'none';
+          }
+        });
+      });
+      
+      // 获取所有评论提交按钮
+      const submitButtons = document.querySelectorAll('.comment-submit');
+      
+      // 为每个提交按钮添加点击事件
+      submitButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // 获取评论输入框
+          const commentInput = this.previousElementSibling;
+          const commentText = commentInput.value.trim();
+          
+          // 如果评论为空，不做任何处理
+          if (!commentText) return;
+          
+          // 获取讨论卡片和评论区
+          const card = this.closest('.discussion-card');
+          const commentsList = card.querySelector('.comments-list');
+          const cardId = card.getAttribute('data-card-id');
+          
+          // 生成评论ID（卡片ID + 当前时间戳）
+          const commentId = cardId + '-' + new Date().getTime();
+          
+          // 创建新评论元素
+          const newComment = document.createElement('div');
+          newComment.className = 'comment-item';
+          newComment.setAttribute('data-comment-id', commentId);
+          
+          // 设置当前用户名（在实际应用中应从登录会话获取）
+          const currentUser = "用户001"; 
+          
+          // 设置评论内容
+          newComment.innerHTML = `
+            <div class="comment-content">
+              <span class="comment-author">${currentUser}:</span>
+              <span class="comment-text">${commentText}</span>
+              <span class="comment-delete" title="删除评论">×</span>
+            </div>
+          `;
+          
+          // 添加作者数据属性，用于权限检查
+          newComment.setAttribute('data-author', currentUser);
+          
+          // 添加新评论到评论列表
+          commentsList.appendChild(newComment);
+          
+          // 更新评论数量
+          const commentCountElem = card.querySelector('.comment-count');
+          const commentCount = parseInt(commentCountElem.textContent) + 1;
+          commentCountElem.textContent = commentCount;
+          
+          // 清空输入框
+          commentInput.value = '';
+          
+          // 为新评论的删除按钮添加事件
+          const deleteButton = newComment.querySelector('.comment-delete');
+          deleteButton.addEventListener('click', function() {
+            handleDeleteComment(newComment, card);
+          });
+          
+          // 在实际项目中，应该发送AJAX请求保存评论
+          // 例如：
+          /*
+          fetch('/api/discussions/comment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              discussionId: cardId,
+              commentText: commentText
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Comment saved:', data);
+            // 使用服务器返回的ID替换临时ID
+            newComment.setAttribute('data-comment-id', data.commentId);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            // 如果请求失败，可以移除评论
+            commentsList.removeChild(newComment);
+            commentCountElem.textContent = commentCount - 1;
+          });
+          */
+        });
+      });
+      
+      // 设置当前登录的用户（在实际应用中应从登录会话获取）
+      const currentUser = "用户001";
+      
+      // 显示当前用户头像旁的用户名（如果存在）
+      const usernameElement = document.querySelector('.username');
+      if (usernameElement) {
+        usernameElement.textContent = currentUser;
+      }
+      
+      // 添加举报模态框到 body
+      const reportModal = document.createElement('div');
+      reportModal.className = 'report-modal';
+      reportModal.id = 'reportModal';
+      reportModal.innerHTML = `
+        <div class="report-modal-content">
+          <div class="report-modal-header">
+            <h3 class="report-modal-title">举报帖子</h3>
+            <button class="report-close-btn">&times;</button>
+          </div>
+          <div class="report-types">
+            <div class="report-type">
+              <input type="radio" id="report-spam" name="report-reason" value="spam">
+              <label for="report-spam">垃圾信息/广告</label>
+            </div>
+            <div class="report-type">
+              <input type="radio" id="report-inappropriate" name="report-reason" value="inappropriate">
+              <label for="report-inappropriate">不当内容</label>
+            </div>
+            <div class="report-type">
+              <input type="radio" id="report-irrelevant" name="report-reason" value="irrelevant">
+              <label for="report-irrelevant">与主题无关</label>
+            </div>
+            <div class="report-type">
+              <input type="radio" id="report-copyright" name="report-reason" value="copyright">
+              <label for="report-copyright">侵犯版权</label>
+            </div>
+            <div class="report-type">
+              <input type="radio" id="report-other" name="report-reason" value="other">
+              <label for="report-other">其他原因</label>
+            </div>
+          </div>
+          <div class="report-details">
+            <textarea placeholder="请详细说明举报原因（选填）"></textarea>
+          </div>
+          <div class="report-footer">
+            <button class="report-btn-cancel">取消</button>
+            <button class="report-btn-submit">提交</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(reportModal);
+      
+      // 绑定举报功能
+      const reportButtons = document.querySelectorAll('.report-btn');
+      const reportCloseBtn = document.querySelector('.report-close-btn');
+      const reportCancelBtn = document.querySelector('.report-btn-cancel');
+      const reportSubmitBtn = document.querySelector('.report-btn-submit');
+      
+      // 当前被举报的帖子ID
+      let reportingPostId = null;
+      
+      // 点击举报按钮
+      reportButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          reportingPostId = this.getAttribute('data-post-id');
+          reportModal.classList.add('show');
+          
+          // 重置表单
+          document.querySelectorAll('input[name="report-reason"]').forEach(radio => {
+            radio.checked = false;
+          });
+          document.querySelector('.report-details textarea').value = '';
+        });
+      });
+      
+      // 关闭举报模态框
+      reportCloseBtn.addEventListener('click', function() {
+        reportModal.classList.remove('show');
+      });
+      
+      reportCancelBtn.addEventListener('click', function() {
+        reportModal.classList.remove('show');
+      });
+      
+      // 提交举报
+      reportSubmitBtn.addEventListener('click', function() {
+        const selectedReason = document.querySelector('input[name="report-reason"]:checked');
+        const details = document.querySelector('.report-details textarea').value.trim();
+        
+        if (!selectedReason) {
+          alert('请选择举报原因');
+          return;
+        }
+        
+        // 在实际应用中，这里应该发送举报信息到服务器
+        // 以下是模拟提交举报
+        console.log('举报信息:', {
+          postId: reportingPostId,
+          reason: selectedReason.value,
+          details: details
+        });
+        
+        // 关闭模态框并显示成功提示
+        reportModal.classList.remove('show');
+        alert('举报已提交，我们会尽快处理');
+      });
+      
+      // 仅显示当前用户自己的评论的删除按钮
+      document.querySelectorAll('.comment-item').forEach(comment => {
+        const commentAuthor = comment.getAttribute('data-author');
+        const deleteButton = comment.querySelector('.comment-delete');
+        
+        if (commentAuthor === currentUser && deleteButton) {
+          deleteButton.style.display = 'inline';
+        }
+      });
+      
+      // 为所有现有评论的删除按钮添加事件
+      const deleteButtons = document.querySelectorAll('.comment-delete');
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const commentItem = this.closest('.comment-item');
+          const card = this.closest('.discussion-card');
+          handleDeleteComment(commentItem, card);
+        });
+      });
+      
+      // 处理删除评论的函数
+      function handleDeleteComment(commentItem, card) {
+        // 获取评论ID和作者
+        const commentId = commentItem.getAttribute('data-comment-id');
+        const commentAuthor = commentItem.getAttribute('data-author');
+        
+        // 获取当前用户（在实际应用中应从登录会话获取）
+        const currentUser = "用户001";
+        
+        // 检查是否是自己的评论
+        if (commentAuthor !== currentUser) {
+          alert('只能删除自己发布的评论！');
+          return;
+        }
+        
+        // 确认删除
+        if (confirm('确定要删除这条评论吗？')) {
+          // 删除评论元素
+          commentItem.remove();
+          
+          // 更新评论数量
+          const commentCountElem = card.querySelector('.comment-count');
+          const commentCount = parseInt(commentCountElem.textContent) - 1;
+          commentCountElem.textContent = commentCount;
+          
+          // 在实际项目中，应该发送AJAX请求删除评论
+          // 例如：
+          /*
+          fetch('/api/discussions/comment/' + commentId, {
+            method: 'DELETE'
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Comment deleted:', data);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            // 如果请求失败，可以还原评论（需要保存评论内容）
+          });
+          */
+        }
+      }
+    });
   </script>
+
+  <!-- 排行榜实时更新功能 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 更新排行榜时间显示
+      function updateRankingTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        
+        const timeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        document.getElementById('ranking-time').textContent = timeString;
+      }
+      
+      // 初始化时更新一次时间
+      updateRankingTime();
+      
+      // 每30秒更新一次时间和排名数据
+      setInterval(function() {
+        updateRankingTime();
+        
+        // 这里可以添加逻辑来模拟实时数据更新
+        console.log("实时更新排行榜数据...");
+        
+        // 如果需要，可以在这里添加AJAX请求来获取最新的排行榜数据
+      }, 30000);
+      
+      // 处理讨论卡片的交互
+      const likeButtons = document.querySelectorAll('.like-stat');
+      const replyButtons = document.querySelectorAll('.reply-stat');
+      const collectButtons = document.querySelectorAll('.collect-stat');
+      
+      // 移除处理更多操作按钮的代码，因为我们现在直接显示举报按钮
+      
+      // 移除点击页面其他地方关闭下拉菜单的代码，因为不再需要
+      
+      // 添加点赞动画样式
+      const styleElement = document.createElement('style');
+      styleElement.textContent = `
+        @keyframes heartBeat {
+          0% { transform: scale(1); }
+          15% { transform: scale(1.3); }
+          30% { transform: scale(0.95); }
+          45% { transform: scale(1.2); }
+          60% { transform: scale(0.95); }
+          100% { transform: scale(1); }
+        }
+        
+        @keyframes popIn {
+          0% { transform: scale(0.5); opacity: 0; }
+          70% { transform: scale(1.1); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .icon-animate {
+          animation: heartBeat 0.6s ease;
+        }
+        
+        /* 图标颜色样式 */
+        .like-stat[data-liked="true"] .icon {
+          color: #ff4d4f !important;
+          text-shadow: 0 0 1px #ff4d4f, 0 0 2px #ff4d4f;
+          font-weight: bold;
+        }
+        
+        .reply-stat.active .icon {
+          color: #1890ff !important;
+          text-shadow: 0 0 1px #1890ff, 0 0 2px #1890ff;
+          font-weight: bold;
+        }
+        
+        .collect-stat[data-collected="true"] .icon {
+          color: #faad14 !important;
+          text-shadow: 0 0 1px #faad14, 0 0 2px #faad14;
+          font-weight: bold;
+        }
+      `;
+      document.head.appendChild(styleElement);
+      
+      // 处理点赞按钮点击事件
+      likeButtons.forEach(button => {
+        // 从本地存储中恢复状态
+        const cardId = button.closest('.discussion-card').getAttribute('data-card-id');
+        const likeStorageKey = `like_${cardId}`;
+        const savedLikeState = localStorage.getItem(likeStorageKey);
+        
+        if (savedLikeState === 'true') {
+          const likeIcon = button.querySelector('.icon');
+          button.setAttribute('data-liked', 'true');
+          likeIcon.textContent = '♥'; // 实心心形
+        }
+        
+        button.addEventListener('click', function() {
+          const isLiked = this.getAttribute('data-liked') === 'true';
+          const likeCount = parseInt(this.getAttribute('data-count'));
+          const likeIcon = this.querySelector('.icon');
+          const likeCountElement = this.querySelector('.like-count');
+          const cardId = this.closest('.discussion-card').getAttribute('data-card-id');
+          const likeStorageKey = `like_${cardId}`;
+          
+          if (isLiked) {
+            // 取消点赞
+            this.setAttribute('data-liked', 'false');
+            likeIcon.textContent = '♡'; // 镂空心形
+            likeCountElement.textContent = likeCount - 1;
+            this.setAttribute('data-count', likeCount - 1);
+            localStorage.removeItem(likeStorageKey);
+          } else {
+            // 点赞
+            this.setAttribute('data-liked', 'true');
+            likeIcon.textContent = '♥'; // 实心心形
+            likeCountElement.textContent = likeCount + 1;
+            this.setAttribute('data-count', likeCount + 1);
+            localStorage.setItem(likeStorageKey, 'true');
+            
+            // 添加点赞动画
+            likeIcon.classList.add('icon-animate');
+            setTimeout(() => {
+              likeIcon.classList.remove('icon-animate');
+            }, 600);
+          }
+        });
+      });
+      
+      // 处理回复按钮点击事件
+      replyButtons.forEach(button => {
+        // 从本地存储中恢复状态
+        const cardId = button.closest('.discussion-card').getAttribute('data-card-id');
+        const commentStorageKey = `comment_${cardId}`;
+        const savedCommentState = localStorage.getItem(commentStorageKey);
+        const card = button.closest('.discussion-card');
+        const commentsSection = card.querySelector('.comments-section');
+        const replyIcon = button.querySelector('.icon');
+        
+        if (savedCommentState === 'true') {
+          commentsSection.style.display = 'block';
+          replyIcon.textContent = '☑';
+          button.classList.add('active');
+        }
+        
+        button.addEventListener('click', function() {
+          const card = this.closest('.discussion-card');
+          const commentsSection = card.querySelector('.comments-section');
+          const replyIcon = this.querySelector('.icon');
+          const cardId = card.getAttribute('data-card-id');
+          const commentStorageKey = `comment_${cardId}`;
+          
+          // 显示或隐藏评论区
+          if (commentsSection.style.display === 'none') {
+            commentsSection.style.display = 'block';
+            // 改变图标为实心
+            replyIcon.textContent = '☑';
+            
+            // 添加active类以改变颜色
+            this.classList.add('active');
+            
+            // 保存状态到本地存储
+            localStorage.setItem(commentStorageKey, 'true');
+            
+            // 添加动画效果
+            replyIcon.classList.add('icon-animate');
+            setTimeout(() => {
+              replyIcon.classList.remove('icon-animate');
+            }, 600);
+            
+            // 聚焦到评论输入框
+            const commentInput = commentsSection.querySelector('.comment-input');
+            setTimeout(() => {
+              commentInput.focus();
+            }, 100);
+          } else {
+            commentsSection.style.display = 'none';
+            // 恢复图标为镂空
+            replyIcon.textContent = '☐';
+            
+            // 移除active类
+            this.classList.remove('active');
+            
+            // 从本地存储中移除状态
+            localStorage.removeItem(commentStorageKey);
+          }
+        });
+      });
+      
+      // 处理收藏按钮点击事件
+      collectButtons.forEach(button => {
+        // 从本地存储中恢复状态
+        const cardId = button.closest('.discussion-card').getAttribute('data-card-id');
+        const collectStorageKey = `collect_${cardId}`;
+        const savedCollectState = localStorage.getItem(collectStorageKey);
+        
+        if (savedCollectState === 'true') {
+          const collectIcon = button.querySelector('.icon');
+          const collectCountElement = button.querySelector('.collect-count');
+          const collectCount = parseInt(button.getAttribute('data-count'));
+          
+          button.setAttribute('data-collected', 'true');
+          collectIcon.textContent = '★';
+          // 不需要更新计数，因为已经在HTML中设置了初始值
+        }
+        
+        button.addEventListener('click', function() {
+          const collectIcon = this.querySelector('.icon');
+          const collectCountElement = this.querySelector('.collect-count');
+          const isCollected = this.getAttribute('data-collected') === 'true';
+          const collectCount = parseInt(this.getAttribute('data-count'));
+          const cardId = this.closest('.discussion-card').getAttribute('data-card-id');
+          const collectStorageKey = `collect_${cardId}`;
+          
+          if (!isCollected) {
+            // 收藏
+            this.setAttribute('data-collected', 'true');
+            collectIcon.textContent = '★';
+            collectCountElement.textContent = collectCount + 1;
+            this.setAttribute('data-count', collectCount + 1);
+            
+            // 保存状态到本地存储
+            localStorage.setItem(collectStorageKey, 'true');
+            
+            // 添加动画效果
+            collectIcon.classList.add('icon-animate');
+            setTimeout(() => {
+              collectIcon.classList.remove('icon-animate');
+            }, 600);
+          } else {
+            // 取消收藏
+            this.setAttribute('data-collected', 'false');
+            collectIcon.textContent = '☆';
+            collectCountElement.textContent = collectCount - 1;
+            this.setAttribute('data-count', collectCount - 1);
+            
+            // 从本地存储中移除状态
+            localStorage.removeItem(collectStorageKey);
+          }
+        });
+      });
+      
+      // 处理举报按钮点击事件
+      const reportButtons = document.querySelectorAll('.report-btn');
+      reportButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const postId = this.getAttribute('data-post-id');
+          
+          // 显示举报模态框
+          const reportModal = document.getElementById('reportModal');
+          reportingPostId = postId;
+          reportModal.classList.add('show');
+          
+          // 重置表单
+          document.querySelectorAll('input[name="report-reason"]').forEach(radio => {
+            radio.checked = false;
+          });
+          document.querySelector('.report-details textarea').value = '';
+        });
+      });
+    });
+  </script>
+  
+
 </body>
 
 </html>
