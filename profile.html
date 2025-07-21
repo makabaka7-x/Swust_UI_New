@@ -459,7 +459,7 @@
       flex: 3; /* 右侧列占3份宽度 */
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 15px;
     }
     
     /* 确保右侧列的卡片高度适合内容 */
@@ -506,7 +506,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 15px;
     }
     
     .right-card {
@@ -846,6 +846,46 @@
     }
 
     /* 能力模型样式 */
+    .ability-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .export-report-btn,
+    .view-chart-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .export-report-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .export-report-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .view-chart-btn {
+      background: rgba(52, 152, 219, 0.1);
+      color: #3498db;
+      border: 1px solid rgba(52, 152, 219, 0.2);
+    }
+
+    .view-chart-btn:hover {
+      background: rgba(52, 152, 219, 0.2);
+      transform: translateY(-2px);
+    }
+
     .ability-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -856,12 +896,27 @@
     .ability-card {
       background: rgba(255, 255, 255, 0.7);
       border-radius: 12px;
-      padding: 15px;
+      padding: 20px 15px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
       text-align: center;
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(226, 232, 240, 0.7);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .ability-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .ability-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
 
     .ability-name {
@@ -881,6 +936,43 @@
     .ability-level {
       font-size: 13px;
       color: #718096;
+      margin-bottom: 15px;
+    }
+
+    .ability-progress {
+      margin-top: 15px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background-color: rgba(226, 232, 240, 0.5);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      border-radius: 3px;
+      transition: width 1s ease-in-out;
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     .ability-card::before {
@@ -1161,14 +1253,36 @@
     body.dark-theme .ability-name {
       color: #e2e8f0;
     }
-    
+
     body.dark-theme .ability-level {
       color: #a0aec0;
     }
-    
+
     body.dark-theme .ability-card {
       background: rgba(26, 32, 44, 0.7);
       border: 1px solid rgba(60, 70, 90, 0.5);
+    }
+
+    body.dark-theme .ability-card:hover {
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+
+    body.dark-theme .export-report-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    body.dark-theme .view-chart-btn {
+      background: rgba(52, 152, 219, 0.2);
+      color: #60a5fa;
+      border-color: rgba(52, 152, 219, 0.3);
+    }
+
+    body.dark-theme .view-chart-btn:hover {
+      background: rgba(52, 152, 219, 0.3);
+    }
+
+    body.dark-theme .progress-bar {
+      background-color: rgba(60, 70, 90, 0.5);
     }
     
     body.dark-theme .recommendation-title {
@@ -1218,7 +1332,7 @@
       background-color: rgba(255, 255, 255, 0.7);
       border-radius: 12px;
       border: 1px solid rgba(226, 232, 240, 0.7);
-      display: flex;
+      display: none; /* 默认隐藏图表容器 */
       align-items: center;
       justify-content: center;
       padding: 20px;
@@ -1657,12 +1771,12 @@
   <main class="container">
     <!-- 使用两列布局 -->
     <div class="two-column-layout">
-      <!-- 左列 - 用户画像和能力模型 -->
+      <!-- 左列 - 用户标签和能力模型 -->
       <div class="left-column">
-        <!-- 用户画像卡片 -->
+        <!-- 用户标签卡片 -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">用户画像</h3>
+            <h3 class="card-title">用户标签</h3>
             <a href="#" class="card-link">管理标签</a>
           </div>
           <div class="card-body">
@@ -1683,39 +1797,84 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">能力模型</h3>
-            <a href="#" class="card-link">查看详情</a>
+            <div class="ability-actions">
+              <button class="export-report-btn" id="exportAbilityReport">
+                <span class="export-icon">📊</span>
+                导出报告
+              </button>
+              <button class="view-chart-btn" id="toggleChartView">
+                <span class="chart-icon">📈</span>
+                图表视图
+              </button>
+            </div>
           </div>
           <div class="card-body">
-            <div class="ability-grid">
-              <div class="ability-card">
+            <div class="ability-grid" id="abilityGrid">
+              <div class="ability-card" data-ability="algorithm">
+                <div class="ability-icon">🧮</div>
                 <div class="ability-name">算法能力</div>
                 <div class="ability-score">85</div>
                 <div class="ability-level">高级水平</div>
+                <div class="ability-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="ability-card">
+              <div class="ability-card" data-ability="datastructure">
+                <div class="ability-icon">🏗️</div>
                 <div class="ability-name">数据结构</div>
                 <div class="ability-score">78</div>
                 <div class="ability-level">中高级水平</div>
+                <div class="ability-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 78%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="ability-card">
+              <div class="ability-card" data-ability="dp">
+                <div class="ability-icon">🔄</div>
                 <div class="ability-name">动态规划</div>
                 <div class="ability-score">92</div>
                 <div class="ability-level">专家水平</div>
+                <div class="ability-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 92%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="ability-card">
+              <div class="ability-card" data-ability="search">
+                <div class="ability-icon">🔍</div>
                 <div class="ability-name">搜索算法</div>
                 <div class="ability-score">88</div>
                 <div class="ability-level">高级水平</div>
+                <div class="ability-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 88%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="ability-card">
+              <div class="ability-card" data-ability="math">
+                <div class="ability-icon">📐</div>
                 <div class="ability-name">数学能力</div>
                 <div class="ability-score">75</div>
                 <div class="ability-level">中级水平</div>
+                <div class="ability-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="ability-card">
+              <div class="ability-card" data-ability="graph">
+                <div class="ability-icon">🕸️</div>
                 <div class="ability-name">图论算法</div>
                 <div class="ability-score">82</div>
                 <div class="ability-level">高级水平</div>
+                <div class="ability-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 82%"></div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="chart-container">
@@ -1805,7 +1964,7 @@
       <!-- 右列 - 个人信息、成就徽章和近期参与竞赛 -->
       <div class="right-column">
         <!-- 个人信息卡片 -->
-        <div class="card" style="margin-bottom: 30px;">
+        <div class="card">
           <div class="card-header">
             <h3 class="card-title">个人信息</h3>
           </div>
@@ -1840,7 +1999,7 @@
         </div>
 
         <!-- 成就徽章卡片 -->
-        <div class="card" style="margin-bottom: 30px;">
+        <div class="card">
           <div class="card-header">
             <h3 class="card-title">成就徽章</h3>
           </div>
@@ -2253,7 +2412,287 @@
         }
       });
     });
+
+    // 能力模型功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 导出报告功能
+      const exportReportBtn = document.getElementById('exportAbilityReport');
+      if (exportReportBtn) {
+        exportReportBtn.addEventListener('click', function() {
+          generateAbilityReport();
+        });
+      }
+
+      // 图表视图切换功能
+      const toggleChartBtn = document.getElementById('toggleChartView');
+      let isChartView = false;
+
+      if (toggleChartBtn) {
+        toggleChartBtn.addEventListener('click', function() {
+          isChartView = !isChartView;
+          toggleAbilityView(isChartView);
+
+          // 更新按钮文本和图标
+          const chartIcon = toggleChartBtn.querySelector('.chart-icon');
+          if (isChartView) {
+            toggleChartBtn.innerHTML = '<span class="chart-icon">📊</span>卡片视图';
+          } else {
+            toggleChartBtn.innerHTML = '<span class="chart-icon">📈</span>图表视图';
+          }
+        });
+      }
+
+      // 能力卡片点击功能
+      const abilityCards = document.querySelectorAll('.ability-card');
+      abilityCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const abilityType = this.getAttribute('data-ability');
+          showAbilityDetail(abilityType);
+        });
+      });
+
+      // 进度条动画
+      const progressBars = document.querySelectorAll('.progress-fill');
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const progressObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const progressBar = entry.target;
+            const width = progressBar.style.width;
+            progressBar.style.width = '0%';
+            setTimeout(() => {
+              progressBar.style.width = width;
+            }, 300);
+          }
+        });
+      }, observerOptions);
+
+      progressBars.forEach(bar => {
+        progressObserver.observe(bar);
+      });
+    });
+
+    // 生成能力报告
+    function generateAbilityReport() {
+      // 收集能力数据
+      const abilityData = {
+        userInfo: {
+          name: '用户001',
+          school: '西南科技大学',
+          generateTime: new Date().toLocaleString('zh-CN')
+        },
+        abilities: [
+          { name: '算法能力', score: 85, level: '高级水平', icon: '🧮' },
+          { name: '数据结构', score: 78, level: '中高级水平', icon: '🏗️' },
+          { name: '动态规划', score: 92, level: '专家水平', icon: '🔄' },
+          { name: '搜索算法', score: 88, level: '高级水平', icon: '🔍' },
+          { name: '数学能力', score: 75, level: '中级水平', icon: '📐' },
+          { name: '图论算法', score: 82, level: '高级水平', icon: '🕸️' }
+        ],
+        summary: {
+          averageScore: 83.3,
+          strongestAbility: '动态规划',
+          improvementArea: '数学能力',
+          totalAbilities: 6
+        }
+      };
+
+      // 显示生成进度
+      const originalText = document.getElementById('exportAbilityReport').innerHTML;
+      document.getElementById('exportAbilityReport').innerHTML = '<span class="export-icon">⏳</span>生成中...';
+      document.getElementById('exportAbilityReport').disabled = true;
+
+      // 模拟报告生成过程
+      setTimeout(() => {
+        generatePDFReport(abilityData);
+
+        // 恢复按钮状态
+        document.getElementById('exportAbilityReport').innerHTML = originalText;
+        document.getElementById('exportAbilityReport').disabled = false;
+      }, 2000);
+    }
+
+    // 生成PDF报告
+    function generatePDFReport(data) {
+      // 创建报告内容
+      let reportContent = `
+📊 能力模型分析报告
+
+👤 用户信息:
+• 姓名: ${data.userInfo.name}
+• 学校: ${data.userInfo.school}
+• 生成时间: ${data.userInfo.generateTime}
+
+📈 能力评估详情:
+`;
+
+      data.abilities.forEach(ability => {
+        const stars = '★'.repeat(Math.floor(ability.score / 20));
+        const emptyStars = '☆'.repeat(5 - Math.floor(ability.score / 20));
+        reportContent += `
+${ability.icon} ${ability.name}: ${ability.score}分 (${ability.level})
+   评级: ${stars}${emptyStars}
+   百分位: ${ability.score}%`;
+      });
+
+      reportContent += `
+
+📊 综合分析:
+• 平均能力得分: ${data.summary.averageScore}分
+• 最强能力领域: ${data.summary.strongestAbility}
+• 建议提升领域: ${data.summary.improvementArea}
+• 评估能力总数: ${data.summary.totalAbilities}项
+
+💡 学习建议:
+1. 继续保持在${data.summary.strongestAbility}方面的优势
+2. 重点提升${data.summary.improvementArea}相关知识
+3. 建议多做综合性算法题目
+4. 参与编程竞赛提升实战能力
+
+📝 报告说明:
+本报告基于用户在SwustOJ平台的学习数据生成，
+包含题目完成情况、代码质量、解题时间等多维度分析。
+`;
+
+      // 显示报告预览
+      if (confirm('报告生成完成！\n\n' + reportContent + '\n\n是否下载PDF文件？')) {
+        // 模拟下载
+        downloadReport(reportContent, data.userInfo.name);
+      }
+    }
+
+    // 下载报告
+    function downloadReport(content, userName) {
+      // 创建下载链接
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${userName}_能力模型报告_${new Date().toISOString().split('T')[0]}.txt`;
+
+      // 触发下载
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      alert('报告已下载到您的下载文件夹！');
+    }
+
+    // 切换能力视图
+    function toggleAbilityView(isChartView) {
+      const abilityGrid = document.getElementById('abilityGrid');
+      const radarChart = document.querySelector('.chart-container');
+
+      if (isChartView) {
+        // 显示图表视图
+        abilityGrid.style.display = 'none';
+        radarChart.style.display = 'flex';
+
+        // 添加图表视图的额外功能
+        addChartInteractivity();
+      } else {
+        // 显示卡片视图
+        abilityGrid.style.display = 'grid';
+        radarChart.style.display = 'none';
+      }
+    }
+
+    // 添加图表交互功能
+    function addChartInteractivity() {
+      const radarSvg = document.querySelector('.radar-svg');
+      if (radarSvg) {
+        // 添加鼠标悬停效果
+        radarSvg.addEventListener('mousemove', function(e) {
+          // 这里可以添加图表的交互效果
+          console.log('图表交互:', e.offsetX, e.offsetY);
+        });
+      }
+    }
+
+    // 显示能力详情
+    function showAbilityDetail(abilityType) {
+      const abilityDetails = {
+        algorithm: {
+          name: '算法能力',
+          icon: '🧮',
+          score: 85,
+          description: '在算法设计和实现方面表现优秀',
+          strengths: ['递归算法', '贪心算法', '分治算法'],
+          improvements: ['高级算法优化', '复杂度分析'],
+          recentProgress: '+5分 (本月)',
+          recommendations: ['深入学习高级算法', '参与算法竞赛']
+        },
+        datastructure: {
+          name: '数据结构',
+          icon: '🏗️',
+          score: 78,
+          description: '对基础数据结构掌握良好，需要加强高级数据结构',
+          strengths: ['数组操作', '链表', '栈和队列'],
+          improvements: ['树结构', '图结构', '高级数据结构'],
+          recentProgress: '+3分 (本月)',
+          recommendations: ['练习树和图的题目', '学习平衡树']
+        },
+        dp: {
+          name: '动态规划',
+          icon: '🔄',
+          score: 92,
+          description: '动态规划能力突出，是您的强项领域',
+          strengths: ['状态转移', '最优子结构', '记忆化搜索'],
+          improvements: ['状态压缩DP', '区间DP'],
+          recentProgress: '+2分 (本月)',
+          recommendations: ['挑战高难度DP题目', '总结DP模板']
+        },
+        search: {
+          name: '搜索算法',
+          icon: '🔍',
+          score: 88,
+          description: '搜索算法掌握扎实，DFS和BFS运用熟练',
+          strengths: ['深度优先搜索', '广度优先搜索', '回溯算法'],
+          improvements: ['启发式搜索', 'A*算法'],
+          recentProgress: '+4分 (本月)',
+          recommendations: ['学习高级搜索算法', '优化搜索效率']
+        },
+        math: {
+          name: '数学能力',
+          icon: '📐',
+          score: 75,
+          description: '数学基础良好，但在高等数学应用方面需要提升',
+          strengths: ['基础数论', '组合数学'],
+          improvements: ['概率论', '线性代数', '高等数学'],
+          recentProgress: '+8分 (本月)',
+          recommendations: ['加强数学理论学习', '多做数学建模题']
+        },
+        graph: {
+          name: '图论算法',
+          icon: '🕸️',
+          score: 82,
+          description: '图论基础扎实，在最短路径算法方面表现良好',
+          strengths: ['最短路径', '最小生成树'],
+          improvements: ['网络流', '二分图匹配'],
+          recentProgress: '+6分 (本月)',
+          recommendations: ['学习高级图论算法', '练习网络流题目']
+        }
+      };
+
+      const detail = abilityDetails[abilityType];
+      if (detail) {
+        let detailMessage = `${detail.icon} ${detail.name} 详细分析\n\n`;
+        detailMessage += `📊 当前得分: ${detail.score}分\n`;
+        detailMessage += `📈 近期进步: ${detail.recentProgress}\n\n`;
+        detailMessage += `📝 能力描述:\n${detail.description}\n\n`;
+        detailMessage += `✅ 优势领域:\n${detail.strengths.map(s => `• ${s}`).join('\n')}\n\n`;
+        detailMessage += `📚 提升方向:\n${detail.improvements.map(i => `• ${i}`).join('\n')}\n\n`;
+        detailMessage += `💡 学习建议:\n${detail.recommendations.map(r => `• ${r}`).join('\n')}`;
+
+        alert(detailMessage);
+      }
+    }
   </script>
 </body>
 
-</html> 
+</html>

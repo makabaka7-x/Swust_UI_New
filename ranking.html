@@ -13,25 +13,98 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     }
 
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #f8f9fa;
+      background-color: #e8f0ff;
+      background-image:
+        linear-gradient(135deg,
+          rgba(210, 235, 255, 0.95) 0%,
+          rgba(195, 225, 255, 0.93) 20%,
+          rgba(180, 215, 252, 0.91) 35%,
+          rgba(165, 205, 250, 0.9) 50%,
+          rgba(185, 215, 250, 0.85) 65%,
+          rgba(205, 225, 250, 0.8) 80%,
+          rgba(215, 235, 250, 0.7) 100%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background-attachment: fixed;
       color: #2d3748;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+      padding-top: 60px;
+    }
+
+    .page-content {
+      flex: 1 0 auto;
+    }
+
+    /* 添加一个悬浮的背景动画效果 */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      animation: float 25s infinite linear;
+      opacity: 0.3;
+    }
+
+    body::before {
+      background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, rgba(52, 152, 219, 0) 70%);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    body::after {
+      background: radial-gradient(circle, rgba(255, 204, 240, 0.3) 0%, rgba(255, 204, 240, 0) 70%);
+      bottom: 10%;
+      right: 10%;
+      animation-delay: -12.5s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(10%, 15%) scale(1.1);
+      }
+      50% {
+        transform: translate(5%, -5%) scale(0.9);
+      }
+      75% {
+        transform: translate(-10%, 5%) scale(1.05);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
     }
 
     /* 导航栏 */
     .navbar {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       height: 60px;
       display: flex;
       align-items: center;
       padding: 0 20px;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 100;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1000;
     }
 
     .container {
@@ -86,19 +159,185 @@
       color: #3498db;
     }
 
-    .user-avatar {
-      margin-left: 8px;
-      display: flex;
-      align-items: center;
+    .navbar .user-avatar {
+      margin-left: 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      position: relative;
+      cursor: pointer;
+      width: auto !important;
+      height: auto !important;
+      background-color: transparent !important;
+      border-radius: 0 !important;
+      justify-content: flex-start !important;
+      font-weight: normal !important;
     }
-    
-    .avatar-img {
+
+    .navbar .username {
+      margin-right: 8px;
+      font-size: 14px;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .navbar .avatar-img {
       width: 38px;
       height: 38px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #3498db;
+    }
+
+    /* 搜索图标和搜索框样式 */
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      margin-right: 15px;
+      position: relative;
+    }
+
+    .search-icon {
+      font-size: 18px;
+      color: #4a5568;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .search-icon:hover {
+      color: #3498db;
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+
+    .search-container {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 300px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      padding: 12px;
+      display: none;
+      z-index: 1000;
+      gap: 8px;
+      transform: scale(0.95);
+      transform-origin: top right;
+      transition: all 0.2s ease;
+      opacity: 0;
+    }
+
+    .search-container.show {
+      display: flex;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .search-input {
+      flex: 1;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: #3498db;
+    }
+
+    .search-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .search-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 150px;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      z-index: 1000;
+      display: none;
+      margin-top: 10px;
+      transform: scale(0.95);
+      transform-origin: top right;
+      transition: all 0.2s ease;
+      opacity: 0;
       padding: 0;
+    }
+
+    .user-dropdown.show {
+      display: block;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .user-dropdown::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: 16px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid white;
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 10px 15px;
+      color: #4a5568;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f7fafc;
+      color: #3498db;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background-color: #e2e8f0;
+      margin: 5px 0;
+    }
+
+    .teacher-only {
+      display: block;
+    }
+
+    /* 排行榜中的用户头像样式保持不变 */
+    .ranking-table .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      color: #4a5568;
+      margin-right: 12px;
     }
 
     .auth-buttons {
@@ -195,8 +434,9 @@
       align-items: center;
       gap: 5px;
       padding: 6px 12px;
-      background-color: white;
-      border: 1px solid #e2e8f0;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
       border-radius: 4px;
       font-size: 14px;
       color: #4a5568;
@@ -207,6 +447,73 @@
       border-color: #cbd5e0;
     }
 
+    /* 下拉菜单样式 */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: none;
+      margin-top: 4px;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+      animation: fadeInDown 0.2s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 10px 15px;
+      color: #4a5568;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-item:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+      color: #3498db;
+    }
+
+    .dropdown-item.active {
+      background-color: rgba(52, 152, 219, 0.15);
+      color: #3498db;
+      font-weight: 500;
+    }
+
+    /* 下拉箭头 */
+    .filter-btn .arrow {
+      margin-left: 5px;
+      transition: transform 0.2s ease;
+    }
+
+    .filter-btn.active .arrow {
+      transform: rotate(180deg);
+    }
+
     .search-bar {
       flex-grow: 1;
       display: flex;
@@ -215,10 +522,12 @@
     .search-input {
       width: 100%;
       padding: 8px 12px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid rgba(226, 232, 240, 0.5);
       border-radius: 4px;
       font-size: 14px;
       color: #4a5568;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
     }
 
     .search-input:focus {
@@ -232,7 +541,9 @@
       width: 100%;
       border-collapse: separate;
       border-spacing: 0;
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -247,7 +558,7 @@
     }
 
     .ranking-table th {
-      background-color: #f8f9fa;
+      background-color: rgba(248, 249, 250, 0.8);
       font-weight: 600;
       color: #4a5568;
       font-size: 14px;
@@ -296,7 +607,7 @@
       gap: 12px;
     }
 
-    .user-avatar {
+    .ranking-content .user-avatar {
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -358,8 +669,9 @@
       text-decoration: none;
       color: #4a5568;
       font-size: 14px;
-      border: 1px solid #e2e8f0;
-      background-color: white;
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
       padding: 0 12px;
     }
 
@@ -376,8 +688,9 @@
 
     /* 页脚 */
     .footer {
-      background-color: white;
-      border-top: 1px solid #e2e8f0;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
       padding: 20px;
       margin-top: auto;
     }
@@ -464,7 +777,7 @@
         <img src="images/logo.png" alt="SwustOJ Logo" class="logo-img">
         <span class="welcome-text">欢迎来到SwustOJ</span>
       </a>
-      <div class="nav-links">
+    <div class="nav-links">
         <a href="index.html" class="nav-link">首页</a>
         <a href="problems.html" class="nav-link">题库</a>
         <a href="contest.html" class="nav-link">竞赛</a>
@@ -472,14 +785,29 @@
         <a href="discussion.html" class="nav-link">讨论</a>
         <a href="ranking.html" class="nav-link active">排行榜</a>
         <a href="learning.html" class="nav-link">学习</a>
+    </div>
+    <div class="nav-tools">
+      <div class="search-icon" id="search-icon">🔍</div>
+      <div class="search-container" id="search-container">
+        <input type="text" class="search-input" placeholder="搜索题目、竞赛、文章..." />
+        <button class="search-btn">搜索</button>
       </div>
-      <div class="auth-buttons">
-        <a href="index.html#login" class="btn btn-outline">登录</a>
-        <a href="index.html#register" class="btn btn-primary">注册</a>
-        <div class="user-avatar">
-          <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
-        </div>
+    </div>
+    <div class="auth-buttons">
+      <a href="javascript:void(0)" class="btn btn-outline">登录</a>
+      <a href="javascript:void(0)" class="btn btn-primary">注册</a>
+    </div>
+    <div class="user-avatar">
+      <span class="username">用户001</span>
+      <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
+      <div class="user-dropdown">
+        <a href="profile.html" class="dropdown-item">个人主页</a>
+        <div class="dropdown-divider"></div>
+        <a href="class-team.html" class="dropdown-item teacher-only">班级管理</a>
+        <div class="dropdown-divider teacher-only"></div>
+        <a href="javascript:void(0)" class="dropdown-item" onclick="handleLogout()">退出登录</a>
       </div>
+    </div>
     </div>
   </nav>
 
@@ -492,17 +820,45 @@
       
       <div class="ranking-tabs">
         <div class="ranking-tab active">总榜</div>
-        <div class="ranking-tab">周榜</div>
         <div class="ranking-tab">月榜</div>
+        <div class="ranking-tab">周榜</div>
         <div class="ranking-tab">竞赛榜</div>
       </div>
       
       <div class="ranking-filters">
         <div class="filter-dropdown">
-          <button class="filter-btn">学院</button>
+          <button class="filter-btn" id="collegeFilterBtn">
+            学院
+            <span class="arrow">▼</span>
+          </button>
+          <div class="dropdown-menu" id="collegeDropdown">
+            <a href="#" class="dropdown-item active" data-value="">全部学院</a>
+            <a href="#" class="dropdown-item" data-value="cs">计算机科学与技术学院</a>
+            <a href="#" class="dropdown-item" data-value="se">软件工程学院</a>
+            <a href="#" class="dropdown-item" data-value="ai">人工智能学院</a>
+            <a href="#" class="dropdown-item" data-value="ee">电子与电气工程学院</a>
+            <a href="#" class="dropdown-item" data-value="me">机械工程学院</a>
+            <a href="#" class="dropdown-item" data-value="math">数学学院</a>
+            <a href="#" class="dropdown-item" data-value="phy">物理学院</a>
+            <a href="#" class="dropdown-item" data-value="chem">化学工程学院</a>
+            <a href="#" class="dropdown-item" data-value="bio">生物工程学院</a>
+            <a href="#" class="dropdown-item" data-value="econ">经济管理学院</a>
+          </div>
         </div>
         <div class="filter-dropdown">
-          <button class="filter-btn">年级</button>
+          <button class="filter-btn" id="gradeFilterBtn">
+            年级
+            <span class="arrow">▼</span>
+          </button>
+          <div class="dropdown-menu" id="gradeDropdown">
+            <a href="#" class="dropdown-item active" data-value="">全部年级</a>
+            <a href="#" class="dropdown-item" data-value="2024">2024级</a>
+            <a href="#" class="dropdown-item" data-value="2023">2023级</a>
+            <a href="#" class="dropdown-item" data-value="2022">2022级</a>
+            <a href="#" class="dropdown-item" data-value="2021">2021级</a>
+            <a href="#" class="dropdown-item" data-value="2020">2020级</a>
+            <a href="#" class="dropdown-item" data-value="graduate">研究生</a>
+          </div>
         </div>
         <div class="search-bar">
           <input type="text" class="search-input" placeholder="搜索用户...">
@@ -718,20 +1074,146 @@
   </footer>
 
   <script>
+    // 下拉菜单功能
+    function initDropdowns() {
+      const collegeBtn = document.getElementById('collegeFilterBtn');
+      const collegeDropdown = document.getElementById('collegeDropdown');
+      const gradeBtn = document.getElementById('gradeFilterBtn');
+      const gradeDropdown = document.getElementById('gradeDropdown');
+
+      // 学院下拉菜单
+      collegeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // 关闭年级下拉菜单
+        gradeDropdown.classList.remove('show');
+        gradeBtn.classList.remove('active');
+
+        // 切换学院下拉菜单
+        collegeDropdown.classList.toggle('show');
+        collegeBtn.classList.toggle('active');
+      });
+
+      // 年级下拉菜单
+      gradeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // 关闭学院下拉菜单
+        collegeDropdown.classList.remove('show');
+        collegeBtn.classList.remove('active');
+
+        // 切换年级下拉菜单
+        gradeDropdown.classList.toggle('show');
+        gradeBtn.classList.toggle('active');
+      });
+
+      // 学院选项点击事件
+      const collegeItems = collegeDropdown.querySelectorAll('.dropdown-item');
+      collegeItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          // 移除所有active状态
+          collegeItems.forEach(i => i.classList.remove('active'));
+          // 添加当前项的active状态
+          this.classList.add('active');
+
+          // 更新按钮文本
+          const value = this.getAttribute('data-value');
+          const text = this.textContent;
+          collegeBtn.innerHTML = `${text} <span class="arrow">▼</span>`;
+
+          // 关闭下拉菜单
+          collegeDropdown.classList.remove('show');
+          collegeBtn.classList.remove('active');
+
+          // 筛选排行榜数据
+          filterRankingByCollege(value, text);
+        });
+      });
+
+      // 年级选项点击事件
+      const gradeItems = gradeDropdown.querySelectorAll('.dropdown-item');
+      gradeItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          // 移除所有active状态
+          gradeItems.forEach(i => i.classList.remove('active'));
+          // 添加当前项的active状态
+          this.classList.add('active');
+
+          // 更新按钮文本
+          const value = this.getAttribute('data-value');
+          const text = this.textContent;
+          gradeBtn.innerHTML = `${text} <span class="arrow">▼</span>`;
+
+          // 关闭下拉菜单
+          gradeDropdown.classList.remove('show');
+          gradeBtn.classList.remove('active');
+
+          // 筛选排行榜数据
+          filterRankingByGrade(value, text);
+        });
+      });
+
+      // 点击页面其他地方关闭下拉菜单
+      document.addEventListener('click', function() {
+        collegeDropdown.classList.remove('show');
+        gradeDropdown.classList.remove('show');
+        collegeBtn.classList.remove('active');
+        gradeBtn.classList.remove('active');
+      });
+    }
+
+    // 根据学院筛选排行榜
+    function filterRankingByCollege(value, text) {
+      console.log('筛选学院:', value, text);
+      // 这里可以添加实际的筛选逻辑
+      // 例如：发送AJAX请求获取特定学院的排行榜数据
+
+      // 模拟筛选效果：更新页面标题
+      const pageTitle = document.querySelector('.section-title');
+      if (value) {
+        pageTitle.textContent = `${text} - 排行榜`;
+      } else {
+        pageTitle.textContent = '排行榜';
+      }
+    }
+
+    // 根据年级筛选排行榜
+    function filterRankingByGrade(value, text) {
+      console.log('筛选年级:', value, text);
+      // 这里可以添加实际的筛选逻辑
+
+      // 模拟筛选效果：更新页面标题
+      const pageTitle = document.querySelector('.section-title');
+      if (value) {
+        pageTitle.textContent = `${text} - 排行榜`;
+      } else {
+        pageTitle.textContent = '排行榜';
+      }
+    }
+
     // 页面加载时
     window.addEventListener('load', function() {
+      // 初始化下拉菜单
+      initDropdowns();
+
       // 修改导航栏按钮事件
       const loginBtn = document.querySelector('.auth-buttons .btn-outline');
       if (loginBtn) {
         loginBtn.href = 'index.html#login';
       }
-      
+
       // 替换注册按钮链接
       const registerBtn = document.querySelector('.auth-buttons .btn-primary');
       if (registerBtn) {
         registerBtn.href = 'index.html#register';
       }
-      
+
       // 点击排行榜标签切换激活状态
       const rankingTabs = document.querySelectorAll('.ranking-tab');
       rankingTabs.forEach(tab => {
@@ -740,6 +1222,60 @@
           this.classList.add('active');
         });
       });
+
+      // 搜索和用户下拉菜单功能
+      const userAvatar = document.querySelector('.navbar .avatar-img');
+      const userDropdown = document.querySelector('.user-dropdown');
+      const searchIcon = document.getElementById('search-icon');
+      const searchContainer = document.getElementById('search-container');
+
+      // 点击头像时显示/隐藏下拉菜单
+      if (userAvatar && userDropdown) {
+        userAvatar.addEventListener('click', function(event) {
+          event.stopPropagation();
+          userDropdown.classList.toggle('show');
+
+          // 隐藏搜索框
+          if (searchContainer && searchContainer.classList.contains('show')) {
+            searchContainer.classList.remove('show');
+          }
+        });
+      }
+
+      // 搜索图标点击功能
+      if (searchIcon && searchContainer) {
+        searchIcon.addEventListener('click', function(event) {
+          event.stopPropagation();
+          searchContainer.classList.toggle('show');
+
+          // 隐藏用户下拉菜单
+          if (userDropdown && userDropdown.classList.contains('show')) {
+            userDropdown.classList.remove('show');
+          }
+
+          // 自动聚焦到搜索输入框
+          if (searchContainer.classList.contains('show')) {
+            const searchInput = searchContainer.querySelector('.search-input');
+            if (searchInput) {
+              setTimeout(() => searchInput.focus(), 100);
+            }
+          }
+        });
+      }
+
+      // 点击页面其他地方关闭下拉菜单和搜索框
+      document.addEventListener('click', function() {
+        if (userDropdown) userDropdown.classList.remove('show');
+        if (searchContainer) searchContainer.classList.remove('show');
+      });
+
+      // 退出登录功能
+      window.handleLogout = function() {
+        if (confirm('确定要退出登录吗？')) {
+          alert('已退出登录');
+          // 这里可以添加实际的退出登录逻辑
+        }
+      };
     });
   </script>
 </body>

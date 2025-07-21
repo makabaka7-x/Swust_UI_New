@@ -14,24 +14,42 @@
     }
 
     body {
-      background-color: #f8f9fa;
+      background-color: #e8f0ff;
+      background-image:
+        linear-gradient(135deg,
+          rgba(210, 235, 255, 0.95) 0%,
+          rgba(195, 225, 255, 0.93) 20%,
+          rgba(180, 215, 252, 0.91) 35%,
+          rgba(165, 205, 250, 0.9) 50%,
+          rgba(185, 215, 250, 0.85) 65%,
+          rgba(205, 225, 250, 0.8) 80%,
+          rgba(215, 235, 250, 0.7) 100%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background-attachment: fixed;
       color: #2d3748;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+      padding-top: 60px;
     }
 
     /* 导航栏 */
     .navbar {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       height: 60px;
       display: flex;
       align-items: center;
       padding: 0 20px;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 100;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1000;
     }
 
     .container {
@@ -90,8 +108,17 @@
       margin-left: 8px;
       display: flex;
       align-items: center;
+      position: relative;
+      cursor: pointer;
     }
-    
+
+    .username {
+      margin-right: 8px;
+      font-size: 14px;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
     .avatar-img {
       width: 38px;
       height: 38px;
@@ -99,6 +126,143 @@
       object-fit: cover;
       border: 2px solid #3498db;
       padding: 0;
+    }
+
+    /* 搜索图标和搜索框样式 */
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      margin-right: 15px;
+      position: relative;
+    }
+
+    .search-icon {
+      font-size: 18px;
+      color: #4a5568;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .search-icon:hover {
+      color: #3498db;
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+
+    .search-container {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 300px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      padding: 12px;
+      display: none;
+      z-index: 1000;
+      gap: 8px;
+      transform: scale(0.95);
+      transform-origin: top right;
+      transition: all 0.2s ease;
+      opacity: 0;
+    }
+
+    .search-container.show {
+      display: flex;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .search-input {
+      flex: 1;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: #3498db;
+    }
+
+    .search-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .search-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 150px;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      z-index: 1000;
+      display: none;
+      margin-top: 10px;
+      transform: scale(0.95);
+      transform-origin: top right;
+      transition: all 0.2s ease;
+      opacity: 0;
+      padding: 0;
+    }
+
+    .user-dropdown.show {
+      display: block;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .user-dropdown::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: 16px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid white;
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 10px 15px;
+      color: #4a5568;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f7fafc;
+      color: #3498db;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background-color: #e2e8f0;
+      margin: 5px 0;
+    }
+
+    .teacher-only {
+      display: block;
     }
 
     .auth-buttons {
@@ -210,6 +374,55 @@
 
     .filter-btn:hover {
       border-color: #cbd5e0;
+    }
+
+    .dropdown-arrow {
+      margin-left: 8px;
+      font-size: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .filter-dropdown.active .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      display: none;
+      margin-top: 4px;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-item {
+      padding: 8px 12px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f7fafc;
+      color: #3498db;
+    }
+
+    .dropdown-item:first-child {
+      border-radius: 4px 4px 0 0;
+    }
+
+    .dropdown-item:last-child {
+      border-radius: 0 0 4px 4px;
     }
 
     .search-bar {
@@ -455,7 +668,7 @@
         <img src="images/logo.png" alt="SwustOJ Logo" class="logo-img">
         <span class="welcome-text">欢迎来到SwustOJ</span>
       </a>
-      <div class="nav-links">
+    <div class="nav-links">
         <a href="index.html" class="nav-link">首页</a>
         <a href="problems.html" class="nav-link">题库</a>
         <a href="contest.html" class="nav-link active">竞赛</a>
@@ -463,14 +676,29 @@
         <a href="discussion.html" class="nav-link">讨论</a>
         <a href="ranking.html" class="nav-link">排行榜</a>
         <a href="learning.html" class="nav-link">学习</a>
+    </div>
+    <div class="nav-tools">
+      <div class="search-icon" id="search-icon">🔍</div>
+      <div class="search-container" id="search-container">
+        <input type="text" class="search-input" placeholder="搜索题目、竞赛、文章..." />
+        <button class="search-btn">搜索</button>
       </div>
-      <div class="auth-buttons">
-        <a href="index.html#login" class="btn btn-outline">登录</a>
-        <a href="index.html#register" class="btn btn-primary">注册</a>
-        <div class="user-avatar">
-          <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
-        </div>
+    </div>
+    <div class="auth-buttons">
+      <a href="javascript:void(0)" class="btn btn-outline">登录</a>
+      <a href="javascript:void(0)" class="btn btn-primary">注册</a>
+    </div>
+    <div class="user-avatar">
+      <span class="username">用户001</span>
+      <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
+      <div class="user-dropdown">
+        <a href="profile.html" class="dropdown-item">个人主页</a>
+        <div class="dropdown-divider"></div>
+        <a href="class-team.html" class="dropdown-item teacher-only">班级管理</a>
+        <div class="dropdown-divider teacher-only"></div>
+        <a href="javascript:void(0)" class="dropdown-item" onclick="handleLogout()">退出登录</a>
       </div>
+    </div>
     </div>
   </nav>
 
@@ -493,10 +721,27 @@
       
       <div class="contest-filters">
         <div class="filter-dropdown">
-          <button class="filter-btn">状态</button>
+          <button class="filter-btn" onclick="toggleTypeDropdown()">
+            类型 <span class="dropdown-arrow">▼</span>
+          </button>
+          <div class="dropdown-menu" id="typeDropdown">
+            <div class="dropdown-item" onclick="filterByType('all')">全部</div>
+            <div class="dropdown-item" onclick="filterByType('个人赛')">个人赛</div>
+            <div class="dropdown-item" onclick="filterByType('团队赛')">团队赛</div>
+            <div class="dropdown-item" onclick="filterByType('练习赛')">练习赛</div>
+            <div class="dropdown-item" onclick="filterByType('正式赛')">正式赛</div>
+          </div>
         </div>
         <div class="filter-dropdown">
-          <button class="filter-btn">类型</button>
+          <button class="filter-btn" onclick="toggleStatusDropdown()">
+            状态 <span class="dropdown-arrow">▼</span>
+          </button>
+          <div class="dropdown-menu" id="statusDropdown">
+            <div class="dropdown-item" onclick="filterByStatus('all')">全部</div>
+            <div class="dropdown-item" onclick="filterByStatus('未开始')">未开始</div>
+            <div class="dropdown-item" onclick="filterByStatus('进行中')">进行中</div>
+            <div class="dropdown-item" onclick="filterByStatus('已结束')">已结束</div>
+          </div>
         </div>
         <div class="search-bar">
           <input type="text" class="search-input" placeholder="搜索竞赛...">
@@ -504,7 +749,7 @@
       </div>
       
       <div class="contest-list">
-        <div class="contest-card">
+        <div class="contest-card" data-type="正式赛" data-status="未开始">
           <div class="contest-header">
             <a href="#" class="contest-title">2023年西南科技大学程序设计新生赛</a>
             <span class="contest-status status-upcoming">即将开始</span>
@@ -525,7 +770,7 @@
           </div>
         </div>
         
-        <div class="contest-card">
+        <div class="contest-card" data-type="练习赛" data-status="进行中">
           <div class="contest-header">
             <a href="#" class="contest-title">ACM算法训练赛 #12</a>
             <span class="contest-status status-ongoing">进行中</span>
@@ -546,7 +791,7 @@
           </div>
         </div>
         
-        <div class="contest-card">
+        <div class="contest-card" data-type="团队赛" data-status="已结束">
           <div class="contest-header">
             <a href="#" class="contest-title">西南科技大学第14届ACM程序设计竞赛</a>
             <span class="contest-status status-finished">已结束</span>
@@ -567,7 +812,7 @@
           </div>
         </div>
         
-        <div class="contest-card">
+        <div class="contest-card" data-type="个人赛" data-status="已结束">
           <div class="contest-header">
             <a href="#" class="contest-title">每周算法练习赛 #23</a>
             <span class="contest-status status-finished">已结束</span>
@@ -588,7 +833,7 @@
           </div>
         </div>
         
-        <div class="contest-card">
+        <div class="contest-card" data-type="练习赛" data-status="已结束">
           <div class="contest-header">
             <a href="#" class="contest-title">数据结构专题训练赛</a>
             <span class="contest-status status-finished">已结束</span>
@@ -609,7 +854,7 @@
           </div>
         </div>
         
-        <div class="contest-card">
+        <div class="contest-card" data-type="个人赛" data-status="未开始">
           <div class="contest-header">
             <a href="#" class="contest-title">动态规划进阶训练</a>
             <span class="contest-status status-upcoming">即将开始</span>
@@ -681,6 +926,100 @@
           this.classList.add('active');
         });
       });
+    });
+
+    // 切换类型下拉菜单显示
+    function toggleTypeDropdown() {
+      const dropdown = document.getElementById('typeDropdown');
+      const filterDropdown = dropdown.parentElement;
+
+      // 关闭其他下拉菜单
+      closeAllDropdowns();
+
+      dropdown.classList.toggle('show');
+      filterDropdown.classList.toggle('active');
+    }
+
+    // 切换状态下拉菜单显示
+    function toggleStatusDropdown() {
+      const dropdown = document.getElementById('statusDropdown');
+      const filterDropdown = dropdown.parentElement;
+
+      // 关闭其他下拉菜单
+      closeAllDropdowns();
+
+      dropdown.classList.toggle('show');
+      filterDropdown.classList.toggle('active');
+    }
+
+    // 关闭所有下拉菜单
+    function closeAllDropdowns() {
+      const dropdowns = document.querySelectorAll('.dropdown-menu');
+      const filterDropdowns = document.querySelectorAll('.filter-dropdown');
+
+      dropdowns.forEach(dropdown => dropdown.classList.remove('show'));
+      filterDropdowns.forEach(filterDropdown => filterDropdown.classList.remove('active'));
+    }
+
+    // 根据类型筛选竞赛
+    function filterByType(type) {
+      const dropdown = document.getElementById('typeDropdown');
+      const filterDropdown = dropdown.parentElement;
+      const cards = document.querySelectorAll('.contest-card');
+
+      // 隐藏下拉菜单
+      closeAllDropdowns();
+
+      // 更新按钮文本
+      const filterBtn = filterDropdown.querySelector('.filter-btn');
+      filterBtn.innerHTML = `${type === 'all' ? '类型' : type} <span class="dropdown-arrow">▼</span>`;
+
+      // 筛选竞赛
+      cards.forEach(card => {
+        const cardType = card.getAttribute('data-type');
+        if (type === 'all' || cardType === type) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 根据状态筛选竞赛
+    function filterByStatus(status) {
+      const dropdown = document.getElementById('statusDropdown');
+      const filterDropdown = dropdown.parentElement;
+      const cards = document.querySelectorAll('.contest-card');
+
+      // 隐藏下拉菜单
+      closeAllDropdowns();
+
+      // 更新按钮文本
+      const filterBtn = filterDropdown.querySelector('.filter-btn');
+      filterBtn.innerHTML = `${status === 'all' ? '状态' : status} <span class="dropdown-arrow">▼</span>`;
+
+      // 筛选竞赛
+      cards.forEach(card => {
+        const cardStatus = card.getAttribute('data-status');
+        if (status === 'all' || cardStatus === status) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 点击页面其他地方关闭下拉菜单
+    document.addEventListener('click', function(event) {
+      const typeDropdown = document.getElementById('typeDropdown');
+      const statusDropdown = document.getElementById('statusDropdown');
+      const typeFilterDropdown = typeDropdown.parentElement;
+      const statusFilterDropdown = statusDropdown.parentElement;
+
+      if (!typeFilterDropdown.contains(event.target) &&
+          !statusFilterDropdown.contains(event.target)) {
+        closeAllDropdowns();
+      }
       
       // 创建竞赛按钮事件
       const createContestBtn = document.querySelector('.section-actions .btn-primary');
@@ -700,6 +1039,60 @@
       function isLoggedIn() {
         return false; // 为了演示效果，默认返回未登录状态
       }
+
+      // 搜索和用户下拉菜单功能
+      const userAvatar = document.querySelector('.avatar-img');
+      const userDropdown = document.querySelector('.user-dropdown');
+      const searchIcon = document.getElementById('search-icon');
+      const searchContainer = document.getElementById('search-container');
+
+      // 点击头像时显示/隐藏下拉菜单
+      if (userAvatar && userDropdown) {
+        userAvatar.addEventListener('click', function(event) {
+          event.stopPropagation();
+          userDropdown.classList.toggle('show');
+
+          // 隐藏搜索框
+          if (searchContainer && searchContainer.classList.contains('show')) {
+            searchContainer.classList.remove('show');
+          }
+        });
+      }
+
+      // 搜索图标点击功能
+      if (searchIcon && searchContainer) {
+        searchIcon.addEventListener('click', function(event) {
+          event.stopPropagation();
+          searchContainer.classList.toggle('show');
+
+          // 隐藏用户下拉菜单
+          if (userDropdown && userDropdown.classList.contains('show')) {
+            userDropdown.classList.remove('show');
+          }
+
+          // 自动聚焦到搜索输入框
+          if (searchContainer.classList.contains('show')) {
+            const searchInput = searchContainer.querySelector('.search-input');
+            if (searchInput) {
+              setTimeout(() => searchInput.focus(), 100);
+            }
+          }
+        });
+      }
+
+      // 点击页面其他地方关闭下拉菜单和搜索框
+      document.addEventListener('click', function() {
+        if (userDropdown) userDropdown.classList.remove('show');
+        if (searchContainer) searchContainer.classList.remove('show');
+      });
+
+      // 退出登录功能
+      window.handleLogout = function() {
+        if (confirm('确定要退出登录吗？')) {
+          alert('已退出登录');
+          // 这里可以添加实际的退出登录逻辑
+        }
+      };
     });
   </script>
 </body>

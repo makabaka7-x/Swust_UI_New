@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级团队管理 - OJ系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #e8f0ff;
+            background-image:
+                linear-gradient(135deg,
+                    rgba(210, 235, 255, 0.95) 0%,
+                    rgba(195, 225, 255, 0.93) 20%,
+                    rgba(180, 215, 252, 0.91) 35%,
+                    rgba(165, 205, 250, 0.9) 50%,
+                    rgba(185, 215, 250, 0.85) 65%,
+                    rgba(205, 225, 250, 0.8) 80%,
+                    rgba(215, 235, 250, 0.7) 100%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+            color: #2d3748;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 添加悬浮的背景动画效果 */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 25s infinite linear;
+            opacity: 0.3;
+        }
+
+        body::before {
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, rgba(52, 152, 219, 0) 70%);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        body::after {
+            background: radial-gradient(circle, rgba(255, 204, 240, 0.3) 0%, rgba(255, 204, 240, 0) 70%);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: -12.5s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(10%, 15%) scale(1.1);
+            }
+            50% {
+                transform: translate(5%, -5%) scale(0.9);
+            }
+            75% {
+                transform: translate(-10%, 5%) scale(1.05);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            color: #2d3748;
+            border-right: 1px solid rgba(226, 232, 240, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        .sidebar .nav-link {
+            color: #4a5568;
+            border-radius: 8px;
+            margin: 2px 0;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+        .main-content {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 2px 8px rgba(79, 172, 254, 0.4);
+            transform: translateY(-1px);
+        }
+        .btn-outline-primary {
+            border-color: #3498db;
+            color: #3498db;
+            border-radius: 8px;
+            background-color: transparent;
+        }
+        .btn-outline-primary:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-color: #3498db;
+            color: #3498db;
+        }
+        .table th {
+            background-color: rgba(248, 249, 250, 0.8);
+            border: none;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .badge {
+            border-radius: 6px;
+        }
+        .search-box {
+            border-radius: 25px;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        .search-box:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .course-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(79, 172, 254, 0.4);
+        }
+
+        /* 模态框样式统一 */
+        .modal-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        /* 表格样式优化 */
+        .table {
+            background-color: transparent;
+        }
+        .table tbody tr {
+            background-color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        .table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 统一按钮样式 */
+        .btn {
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* 页面标题样式 */
+        h2 {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏 -->
+            <div class="col-md-3 col-lg-2 sidebar p-3">
+                <div class="d-flex align-items-center mb-4">
+                    <img src="images/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                    <h5 class="mb-0">班级管理</h5>
+                </div>
+                
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="#" onclick="showTab('course-management')">
+                        <i class="bi bi-book me-2"></i>课程管理
+                    </a>
+                    <a class="nav-link" href="#" onclick="showTab('student-management')">
+                        <i class="bi bi-people me-2"></i>学生管理
+                    </a>
+                    <a class="nav-link" href="#" onclick="showTab('course-students')">
+                        <i class="bi bi-person-lines-fill me-2"></i>课程学生
+                    </a>
+                    <a class="nav-link" href="#" onclick="showTab('batch-query')">
+                        <i class="bi bi-search me-2"></i>批量查询
+                    </a>
+                    <a href="index.html" class="nav-link">
+                        <i class="bi bi-house me-2"></i>返回首页
+                    </a>
+                </nav>
+            </div>
+
+            <!-- 主内容区 -->
+            <div class="col-md-9 col-lg-10 main-content p-4">
+                <!-- 课程管理 -->
+                <div id="course-management" class="tab-content active">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="bi bi-book text-primary me-2"></i>课程管理</h2>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCourseModal">
+                            <i class="bi bi-plus-circle me-2"></i>创建课程
+                        </button>
+                    </div>
+
+                    <!-- 搜索和筛选 -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control search-box" placeholder="搜索课程名称..." id="courseSearch">
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="courseStatus">
+                                        <option value="">全部状态</option>
+                                        <option value="active">进行中</option>
+                                        <option value="archived">已归档</option>
+                                        <option value="draft">草稿</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="courseSemester">
+                                        <option value="">全部学期</option>
+                                        <option value="2024-1">2024春季</option>
+                                        <option value="2024-2">2024秋季</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-outline-primary w-100" onclick="searchCourses()">
+                                        <i class="bi bi-search"></i> 搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 课程列表 -->
+                    <div class="row" id="courseList">
+                        <!-- 课程卡片示例 -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card course-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h5 class="card-title">数据结构与算法</h5>
+                                        <span class="badge bg-success">进行中</span>
+                                    </div>
+                                    <p class="card-text text-muted">
+                                        <i class="bi bi-calendar me-2"></i>2024春季学期<br>
+                                        <i class="bi bi-people me-2"></i>45名学生<br>
+                                        <i class="bi bi-clock me-2"></i>创建于 2024-02-15
+                                    </p>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editCourse(1)">
+                                            <i class="bi bi-pencil"></i> 编辑
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning" onclick="archiveCourse(1)">
+                                            <i class="bi bi-archive"></i> 归档
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="viewCourseStudents(1)">
+                                            <i class="bi bi-people"></i> 学生
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card course-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h5 class="card-title">计算机网络</h5>
+                                        <span class="badge bg-success">进行中</span>
+                                    </div>
+                                    <p class="card-text text-muted">
+                                        <i class="bi bi-calendar me-2"></i>2024春季学期<br>
+                                        <i class="bi bi-people me-2"></i>38名学生<br>
+                                        <i class="bi bi-clock me-2"></i>创建于 2024-02-20
+                                    </p>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editCourse(2)">
+                                            <i class="bi bi-pencil"></i> 编辑
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning" onclick="archiveCourse(2)">
+                                            <i class="bi bi-archive"></i> 归档
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="viewCourseStudents(2)">
+                                            <i class="bi bi-people"></i> 学生
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card course-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h5 class="card-title">操作系统</h5>
+                                        <span class="badge bg-success">进行中</span>
+                                    </div>
+                                    <p class="card-text text-muted">
+                                        <i class="bi bi-calendar me-2"></i>2024春季学期<br>
+                                        <i class="bi bi-people me-2"></i>42名学生<br>
+                                        <i class="bi bi-clock me-2"></i>创建于 2024-02-25
+                                    </p>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editCourse(3)">
+                                            <i class="bi bi-pencil"></i> 编辑
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning" onclick="archiveCourse(3)">
+                                            <i class="bi bi-archive"></i> 归档
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="viewCourseStudents(3)">
+                                            <i class="bi bi-people"></i> 学生
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card course-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h5 class="card-title">数据库系统</h5>
+                                        <span class="badge bg-warning">草稿</span>
+                                    </div>
+                                    <p class="card-text text-muted">
+                                        <i class="bi bi-calendar me-2"></i>2024秋季学期<br>
+                                        <i class="bi bi-people me-2"></i>0名学生<br>
+                                        <i class="bi bi-clock me-2"></i>创建于 2024-03-01
+                                    </p>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editCourse(4)">
+                                            <i class="bi bi-pencil"></i> 编辑
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-success" onclick="publishCourse(4)">
+                                            <i class="bi bi-check-circle"></i> 发布
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="viewCourseStudents(4)">
+                                            <i class="bi bi-people"></i> 学生
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card course-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h5 class="card-title">软件工程</h5>
+                                        <span class="badge bg-secondary">已归档</span>
+                                    </div>
+                                    <p class="card-text text-muted">
+                                        <i class="bi bi-calendar me-2"></i>2023秋季学期<br>
+                                        <i class="bi bi-people me-2"></i>52名学生<br>
+                                        <i class="bi bi-clock me-2"></i>创建于 2023-09-01
+                                    </p>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editCourse(5)">
+                                            <i class="bi bi-pencil"></i> 编辑
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-success" onclick="restoreCourse(5)">
+                                            <i class="bi bi-arrow-clockwise"></i> 恢复
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="viewCourseStudents(5)">
+                                            <i class="bi bi-people"></i> 学生
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card course-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h5 class="card-title">人工智能基础</h5>
+                                        <span class="badge bg-success">进行中</span>
+                                    </div>
+                                    <p class="card-text text-muted">
+                                        <i class="bi bi-calendar me-2"></i>2024春季学期<br>
+                                        <i class="bi bi-people me-2"></i>35名学生<br>
+                                        <i class="bi bi-clock me-2"></i>创建于 2024-02-28
+                                    </p>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editCourse(6)">
+                                            <i class="bi bi-pencil"></i> 编辑
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning" onclick="archiveCourse(6)">
+                                            <i class="bi bi-archive"></i> 归档
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="viewCourseStudents(6)">
+                                            <i class="bi bi-people"></i> 学生
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 学生管理 -->
+                <div id="student-management" class="tab-content">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="bi bi-people text-primary me-2"></i>学生管理</h2>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+                                <i class="bi bi-person-plus me-2"></i>手动添加学生
+                            </button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#batchImportModal">
+                                <i class="bi bi-upload me-2"></i>批量导入学生
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 学生搜索和筛选 -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control search-box" placeholder="搜索学生姓名或学号..." id="studentSearch">
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="studentRole">
+                                        <option value="">全部角色</option>
+                                        <option value="student">学生</option>
+                                        <option value="assistant">助教</option>
+                                        <option value="monitor">班长</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="studentCourse">
+                                        <option value="">全部课程</option>
+                                        <option value="1">数据结构与算法</option>
+                                        <option value="2">计算机网络</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-outline-primary w-100" onclick="searchStudents()">
+                                        <i class="bi bi-search"></i> 搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 学生列表 -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <input type="checkbox" class="form-check-input" id="selectAllStudents" onchange="toggleSelectAll()">
+                                            </th>
+                                            <th>学生信息</th>
+                                            <th>学号</th>
+                                            <th>角色</th>
+                                            <th>所属课程</th>
+                                            <th>加入时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="studentTableBody">
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input student-checkbox" value="1">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="student-avatar me-3">张</div>
+                                                    <div>
+                                                        <div class="fw-bold">张三</div>
+                                                        <small class="text-muted">zhangsan@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>2021001</td>
+                                            <td><span class="badge bg-primary">学生</span></td>
+                                            <td>数据结构与算法</td>
+                                            <td>2024-02-20</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="updateStudentRole(1)" title="更新角色">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger" onclick="removeStudent(1)" title="移除学生">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input student-checkbox" value="2">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="student-avatar me-3">李</div>
+                                                    <div>
+                                                        <div class="fw-bold">李四</div>
+                                                        <small class="text-muted">lisi@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>2021002</td>
+                                            <td><span class="badge bg-warning">助教</span></td>
+                                            <td>数据结构与算法</td>
+                                            <td>2024-02-20</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="updateStudentRole(2)" title="更新角色">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger" onclick="removeStudent(2)" title="移除学生">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input student-checkbox" value="3">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="student-avatar me-3">王</div>
+                                                    <div>
+                                                        <div class="fw-bold">王五</div>
+                                                        <small class="text-muted">wangwu@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>2021003</td>
+                                            <td><span class="badge bg-info">班长</span></td>
+                                            <td>数据结构与算法</td>
+                                            <td>2024-02-21</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="updateStudentRole(3)" title="更新角色">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger" onclick="removeStudent(3)" title="移除学生">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input student-checkbox" value="4">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="student-avatar me-3">赵</div>
+                                                    <div>
+                                                        <div class="fw-bold">赵六</div>
+                                                        <small class="text-muted">zhaoliu@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>2021004</td>
+                                            <td><span class="badge bg-primary">学生</span></td>
+                                            <td>计算机网络</td>
+                                            <td>2024-02-22</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="updateStudentRole(4)" title="更新角色">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger" onclick="removeStudent(4)" title="移除学生">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input student-checkbox" value="5">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="student-avatar me-3">钱</div>
+                                                    <div>
+                                                        <div class="fw-bold">钱七</div>
+                                                        <small class="text-muted">qianqi@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>2021005</td>
+                                            <td><span class="badge bg-primary">学生</span></td>
+                                            <td>数据结构与算法</td>
+                                            <td>2024-02-23</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="updateStudentRole(5)" title="更新角色">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger" onclick="removeStudent(5)" title="移除学生">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input student-checkbox" value="6">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="student-avatar me-3">孙</div>
+                                                    <div>
+                                                        <div class="fw-bold">孙八</div>
+                                                        <small class="text-muted">sunba@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>2021006</td>
+                                            <td><span class="badge bg-primary">学生</span></td>
+                                            <td>操作系统</td>
+                                            <td>2024-02-24</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="updateStudentRole(6)" title="更新角色">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger" onclick="removeStudent(6)" title="移除学生">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input student-checkbox" value="7">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="student-avatar me-3">周</div>
+                                                    <div>
+                                                        <div class="fw-bold">周九</div>
+                                                        <small class="text-muted">zhoujiu@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>2021007</td>
+                                            <td><span class="badge bg-warning">助教</span></td>
+                                            <td>计算机网络</td>
+                                            <td>2024-02-25</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="updateStudentRole(7)" title="更新角色">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger" onclick="removeStudent(7)" title="移除学生">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input student-checkbox" value="8">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="student-avatar me-3">吴</div>
+                                                    <div>
+                                                        <div class="fw-bold">吴十</div>
+                                                        <small class="text-muted">wushi@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>2021008</td>
+                                            <td><span class="badge bg-primary">学生</span></td>
+                                            <td>数据结构与算法</td>
+                                            <td>2024-02-26</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="updateStudentRole(8)" title="更新角色">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger" onclick="removeStudent(8)" title="移除学生">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- 批量操作按钮 -->
+                            <div class="mt-3" id="batchActions" style="display: none;">
+                                <div class="alert alert-info">
+                                    <span id="selectedCount">0</span> 名学生已选中
+                                    <div class="btn-group ms-3">
+                                        <button class="btn btn-sm btn-outline-warning" onclick="batchUpdateRole()">
+                                            <i class="bi bi-person-gear me-1"></i>批量更新角色
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="batchRemoveStudents()">
+                                            <i class="bi bi-person-dash me-1"></i>批量移除
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程学生查看 -->
+                <div id="course-students" class="tab-content">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="bi bi-person-lines-fill text-primary me-2"></i>查看课程下的学生</h2>
+                        <select class="form-select w-auto" id="courseSelectForStudents" onchange="loadCourseStudents()">
+                            <option value="">选择课程</option>
+                            <option value="1">数据结构与算法</option>
+                            <option value="2">计算机网络</option>
+                            <option value="3">操作系统</option>
+                        </select>
+                    </div>
+
+                    <div class="card" id="courseStudentsCard" style="display: none;">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0" id="selectedCourseName">课程：数据结构与算法</h5>
+                                <div>
+                                    <span class="badge bg-info me-2" id="studentCount">12名学生</span>
+                                    <button class="btn btn-sm btn-outline-success" onclick="exportStudentList()">
+                                        <i class="bi bi-download me-1"></i>导出名单
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- 统计信息 -->
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <div class="h4 text-primary mb-0" id="totalStudents">12</div>
+                                        <small class="text-muted">总学生数</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <div class="h4 text-success mb-0" id="activeStudents">9</div>
+                                        <small class="text-muted">普通学生</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <div class="h4 text-warning mb-0" id="assistants">2</div>
+                                        <small class="text-muted">助教</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <div class="h4 text-info mb-0" id="monitors">1</div>
+                                        <small class="text-muted">班长</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 学生卡片列表 -->
+                            <div class="row" id="courseStudentsList">
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">张</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">张三</div>
+                                                    <small class="text-muted">2021001</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">李</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">李四</div>
+                                                    <small class="text-muted">2021002</small>
+                                                </div>
+                                                <span class="badge bg-warning">助教</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">王</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">王五</div>
+                                                    <small class="text-muted">2021003</small>
+                                                </div>
+                                                <span class="badge bg-info">班长</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">赵</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">赵六</div>
+                                                    <small class="text-muted">2021004</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">钱</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">钱七</div>
+                                                    <small class="text-muted">2021005</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">孙</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">孙八</div>
+                                                    <small class="text-muted">2021006</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">周</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">周九</div>
+                                                    <small class="text-muted">2021007</small>
+                                                </div>
+                                                <span class="badge bg-warning">助教</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">吴</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">吴十</div>
+                                                    <small class="text-muted">2021008</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">郑</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">郑十一</div>
+                                                    <small class="text-muted">2021009</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">冯</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">冯十二</div>
+                                                    <small class="text-muted">2021010</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">陈</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">陈十三</div>
+                                                    <small class="text-muted">2021011</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="student-avatar me-3">褚</div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-bold">褚十四</div>
+                                                    <small class="text-muted">2021012</small>
+                                                </div>
+                                                <span class="badge bg-primary">学生</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 批量查询课程 -->
+                <div id="batch-query" class="tab-content">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="bi bi-search text-primary me-2"></i>批量查询课程</h2>
+                        <button class="btn btn-outline-success" onclick="exportAllCourses()">
+                            <i class="bi bi-file-earmark-excel me-2"></i>导出全部课程
+                        </button>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">查询条件设置</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">课程状态</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="includeActive" checked>
+                                        <label class="form-check-label" for="includeActive">进行中的课程</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="includeArchived">
+                                        <label class="form-check-label" for="includeArchived">已归档的课程</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="includeDraft">
+                                        <label class="form-check-label" for="includeDraft">草稿课程</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="semesterFilter" class="form-label">学期筛选</label>
+                                    <select class="form-select" id="semesterFilter">
+                                        <option value="">全部学期</option>
+                                        <option value="2024-1">2024春季</option>
+                                        <option value="2024-2">2024秋季</option>
+                                        <option value="2023-2">2023秋季</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="dateRange" class="form-label">创建时间</label>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" id="startDate">
+                                        <span class="input-group-text">至</span>
+                                        <input type="date" class="form-control" id="endDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn btn-primary" onclick="batchQueryCourses()">
+                                    <i class="bi bi-search me-2"></i>执行查询
+                                </button>
+                                <button class="btn btn-outline-secondary ms-2" onclick="resetQueryForm()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>重置条件
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 查询结果 -->
+                    <div class="card" id="queryResults" style="display: none;">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">查询结果</h5>
+                                <span class="badge bg-info" id="resultCount">找到 0 门课程</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>课程名称</th>
+                                            <th>课程代码</th>
+                                            <th>学期</th>
+                                            <th>状态</th>
+                                            <th>学生数</th>
+                                            <th>创建时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="queryResultsBody">
+                                        <!-- 查询结果将在这里显示 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 创建课程模态框 -->
+    <div class="modal fade" id="createCourseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>创建新课程</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createCourseForm">
+                        <div class="mb-3">
+                            <label for="courseName" class="form-label">课程名称 <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="courseName" required placeholder="请输入课程名称">
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseCode" class="form-label">课程代码 <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="courseCode" required placeholder="如：CS101">
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseSemesterCreate" class="form-label">学期 <span class="text-danger">*</span></label>
+                            <select class="form-select" id="courseSemesterCreate" required>
+                                <option value="">选择学期</option>
+                                <option value="2024-1">2024春季</option>
+                                <option value="2024-2">2024秋季</option>
+                                <option value="2025-1">2025春季</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseDescription" class="form-label">课程描述</label>
+                            <textarea class="form-control" id="courseDescription" rows="3" placeholder="请输入课程描述（可选）"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseCapacity" class="form-label">课程容量</label>
+                            <input type="number" class="form-control" id="courseCapacity" min="1" max="200" placeholder="最大学生数（可选）">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="createCourse()">
+                        <i class="bi bi-check-circle me-2"></i>创建课程
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑课程模态框 -->
+    <div class="modal fade" id="editCourseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-pencil me-2"></i>修改课程信息</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editCourseForm">
+                        <input type="hidden" id="editCourseId">
+                        <div class="mb-3">
+                            <label for="editCourseName" class="form-label">课程名称 <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editCourseName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCourseCode" class="form-label">课程代码 <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editCourseCode" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCourseSemester" class="form-label">学期 <span class="text-danger">*</span></label>
+                            <select class="form-select" id="editCourseSemester" required>
+                                <option value="">选择学期</option>
+                                <option value="2024-1">2024春季</option>
+                                <option value="2024-2">2024秋季</option>
+                                <option value="2025-1">2025春季</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCourseDescription" class="form-label">课程描述</label>
+                            <textarea class="form-control" id="editCourseDescription" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCourseCapacity" class="form-label">课程容量</label>
+                            <input type="number" class="form-control" id="editCourseCapacity" min="1" max="200">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCourseStatus" class="form-label">课程状态</label>
+                            <select class="form-select" id="editCourseStatus">
+                                <option value="active">进行中</option>
+                                <option value="archived">已归档</option>
+                                <option value="draft">草稿</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="updateCourse()">
+                        <i class="bi bi-check-circle me-2"></i>保存修改
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 手动添加学生模态框 -->
+    <div class="modal fade" id="addStudentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-person-plus me-2"></i>手动添加单个学生</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addStudentForm">
+                        <div class="mb-3">
+                            <label for="studentCourseSelect" class="form-label">选择课程 <span class="text-danger">*</span></label>
+                            <select class="form-select" id="studentCourseSelect" required>
+                                <option value="">选择课程</option>
+                                <option value="1">数据结构与算法</option>
+                                <option value="2">计算机网络</option>
+                                <option value="3">操作系统</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentName" class="form-label">学生姓名 <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="studentName" required placeholder="请输入学生姓名">
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentNumber" class="form-label">学号 <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="studentNumber" required placeholder="请输入学号">
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentEmail" class="form-label">邮箱 <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="studentEmail" required placeholder="请输入邮箱地址">
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentRoleSelect" class="form-label">角色</label>
+                            <select class="form-select" id="studentRoleSelect">
+                                <option value="student">学生</option>
+                                <option value="assistant">助教</option>
+                                <option value="monitor">班长</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="addStudent()">
+                        <i class="bi bi-check-circle me-2"></i>添加学生
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 批量导入学生模态框 -->
+    <div class="modal fade" id="batchImportModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-upload me-2"></i>批量导入学生名单</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="importCourseSelect" class="form-label">选择课程 <span class="text-danger">*</span></label>
+                        <select class="form-select" id="importCourseSelect" required>
+                            <option value="">选择课程</option>
+                            <option value="1">数据结构与算法</option>
+                            <option value="2">计算机网络</option>
+                            <option value="3">操作系统</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="studentFile" class="form-label">选择文件 <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="studentFile" accept=".xlsx,.csv,.xls" required>
+                        <div class="form-text">支持 Excel (.xlsx, .xls) 和 CSV (.csv) 格式文件</div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h6><i class="bi bi-info-circle me-2"></i>文件格式要求：</h6>
+                        <p class="mb-2">请确保文件包含以下列（按顺序）：</p>
+                        <ol class="mb-0">
+                            <li>学生姓名</li>
+                            <li>学号</li>
+                            <li>邮箱地址</li>
+                            <li>角色（可选：student/assistant/monitor，默认为student）</li>
+                        </ol>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary" onclick="downloadTemplate()">
+                            <i class="bi bi-download me-2"></i>下载导入模板
+                        </button>
+                        <div>
+                            <span class="text-muted me-2">文件预览：</span>
+                            <span id="filePreview" class="text-info">未选择文件</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="importStudents()" id="importBtn" disabled>
+                        <i class="bi bi-upload me-2"></i>开始导入
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 更新学生角色模态框 -->
+    <div class="modal fade" id="updateRoleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-person-gear me-2"></i>更新学生角色</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateRoleForm">
+                        <input type="hidden" id="updateStudentId">
+                        <div class="mb-3">
+                            <label class="form-label">学生信息</label>
+                            <div class="card bg-light">
+                                <div class="card-body p-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="student-avatar me-3" id="updateStudentAvatar">张</div>
+                                        <div>
+                                            <div class="fw-bold" id="updateStudentName">张三</div>
+                                            <small class="text-muted" id="updateStudentNumber">2021001</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newRole" class="form-label">新角色 <span class="text-danger">*</span></label>
+                            <select class="form-select" id="newRole" required>
+                                <option value="student">学生</option>
+                                <option value="assistant">助教</option>
+                                <option value="monitor">班长</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="roleReason" class="form-label">变更原因</label>
+                            <textarea class="form-control" id="roleReason" rows="2" placeholder="请输入角色变更原因（可选）"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmUpdateRole()">
+                        <i class="bi bi-check-circle me-2"></i>确认更新
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认删除模态框 -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger"><i class="bi bi-exclamation-triangle me-2"></i>确认操作</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <span id="deleteMessage">此操作不可撤销，请确认是否继续？</span>
+                    </div>
+                    <div id="deleteDetails" class="text-muted"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                        <i class="bi bi-trash me-2"></i>确认删除
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 归档课程确认模态框 -->
+    <div class="modal fade" id="archiveCourseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-warning"><i class="bi bi-archive me-2"></i>归档课程</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        归档后的课程将不再显示在活跃课程列表中，但可以在归档列表中查看。
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">课程信息</label>
+                        <div class="card bg-light">
+                            <div class="card-body p-3">
+                                <div class="fw-bold" id="archiveCourseName">数据结构与算法</div>
+                                <small class="text-muted" id="archiveCourseInfo">2024春季学期 • 45名学生</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="archiveReason" class="form-label">归档原因</label>
+                        <textarea class="form-control" id="archiveReason" rows="2" placeholder="请输入归档原因（可选）"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-warning" onclick="confirmArchiveCourse()">
+                        <i class="bi bi-archive me-2"></i>确认归档
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 全局变量
+        let currentTab = 'course-management';
+        let selectedStudents = [];
+        let currentCourseId = null;
+        let currentStudentId = null;
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化文件上传监听
+            document.getElementById('studentFile').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                const preview = document.getElementById('filePreview');
+                const importBtn = document.getElementById('importBtn');
+
+                if (file) {
+                    preview.textContent = file.name;
+                    importBtn.disabled = false;
+                } else {
+                    preview.textContent = '未选择文件';
+                    importBtn.disabled = true;
+                }
+            });
+
+            // 初始化学生复选框监听
+            document.addEventListener('change', function(e) {
+                if (e.target.classList.contains('student-checkbox')) {
+                    updateSelectedStudents();
+                }
+            });
+        });
+
+
+
+        // 切换标签页
+        function showTab(tabName) {
+            // 隐藏所有标签内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // 显示选中的标签
+            document.getElementById(tabName).classList.add('active');
+
+            // 更新导航状态
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            currentTab = tabName;
+        }
+
+        // 课程管理相关函数
+        function createCourse() {
+            const form = document.getElementById('createCourseForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const courseData = {
+                name: document.getElementById('courseName').value,
+                code: document.getElementById('courseCode').value,
+                semester: document.getElementById('courseSemesterCreate').value,
+                description: document.getElementById('courseDescription').value,
+                capacity: document.getElementById('courseCapacity').value
+            };
+
+            // 这里应该调用 POST /courses API
+            console.log('创建课程:', courseData);
+
+            // 模拟API调用成功
+            alert('课程创建成功！');
+            bootstrap.Modal.getInstance(document.getElementById('createCourseModal')).hide();
+            form.reset();
+
+            // 刷新课程列表
+            loadCourseList();
+        }
+
+        function editCourse(courseId) {
+            currentCourseId = courseId;
+
+            // 这里应该调用 GET /courses/{id} API 获取课程详情
+            console.log('获取课程详情:', courseId);
+
+            // 模拟填充表单数据
+            document.getElementById('editCourseId').value = courseId;
+            document.getElementById('editCourseName').value = '数据结构与算法';
+            document.getElementById('editCourseCode').value = 'CS101';
+            document.getElementById('editCourseSemester').value = '2024-1';
+            document.getElementById('editCourseDescription').value = '这是一门重要的计算机科学基础课程';
+            document.getElementById('editCourseCapacity').value = '50';
+            document.getElementById('editCourseStatus').value = 'active';
+
+            new bootstrap.Modal(document.getElementById('editCourseModal')).show();
+        }
+
+        function updateCourse() {
+            const form = document.getElementById('editCourseForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const courseData = {
+                id: document.getElementById('editCourseId').value,
+                name: document.getElementById('editCourseName').value,
+                code: document.getElementById('editCourseCode').value,
+                semester: document.getElementById('editCourseSemester').value,
+                description: document.getElementById('editCourseDescription').value,
+                capacity: document.getElementById('editCourseCapacity').value,
+                status: document.getElementById('editCourseStatus').value
+            };
+
+            // 这里应该调用 PUT /courses/{id} API
+            console.log('修改课程信息:', courseData);
+
+            alert('课程信息修改成功！');
+            bootstrap.Modal.getInstance(document.getElementById('editCourseModal')).hide();
+
+            // 刷新课程列表
+            loadCourseList();
+        }
+
+        function archiveCourse(courseId) {
+            currentCourseId = courseId;
+
+            // 设置归档确认信息
+            document.getElementById('archiveCourseName').textContent = '数据结构与算法';
+            document.getElementById('archiveCourseInfo').textContent = '2024春季学期 • 45名学生';
+
+            new bootstrap.Modal(document.getElementById('archiveCourseModal')).show();
+        }
+
+        function confirmArchiveCourse() {
+            const reason = document.getElementById('archiveReason').value;
+
+            // 这里应该调用 PAT /courses/{id}/archive API
+            console.log('归档课程:', currentCourseId, '原因:', reason);
+
+            alert('课程已成功归档！');
+            bootstrap.Modal.getInstance(document.getElementById('archiveCourseModal')).hide();
+
+            // 刷新课程列表
+            loadCourseList();
+        }
+
+        function searchCourses() {
+            const searchTerm = document.getElementById('courseSearch').value;
+            const status = document.getElementById('courseStatus').value;
+            const semester = document.getElementById('courseSemester').value;
+
+            // 这里应该调用 GET /courses API 进行查询
+            console.log('查询课程信息:', { searchTerm, status, semester });
+
+            // 模拟查询结果
+            loadCourseList();
+        }
+
+        function loadCourseList() {
+            // 这里应该调用 GET /courses API 获取课程列表
+            console.log('加载课程列表');
+            // 实际实现中会更新 courseList 的内容
+        }
+
+        function publishCourse(courseId) {
+            // 这里应该调用 PUT /courses/{id}/publish API
+            console.log('发布课程:', courseId);
+
+            if (confirm('确定要发布这门课程吗？发布后学生就可以看到并加入课程。')) {
+                alert('课程发布成功！');
+                loadCourseList();
+            }
+        }
+
+        function restoreCourse(courseId) {
+            // 这里应该调用 PUT /courses/{id}/restore API
+            console.log('恢复课程:', courseId);
+
+            if (confirm('确定要恢复这门已归档的课程吗？')) {
+                alert('课程恢复成功！');
+                loadCourseList();
+            }
+        }
+
+        // 学生管理相关函数
+        function addStudent() {
+            const form = document.getElementById('addStudentForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const studentData = {
+                courseId: document.getElementById('studentCourseSelect').value,
+                name: document.getElementById('studentName').value,
+                studentNumber: document.getElementById('studentNumber').value,
+                email: document.getElementById('studentEmail').value,
+                role: document.getElementById('studentRoleSelect').value
+            };
+
+            // 这里应该调用 POST /courses/{courseId}/students API
+            console.log('手动添加单个学生:', studentData);
+
+            alert('学生添加成功！');
+            bootstrap.Modal.getInstance(document.getElementById('addStudentModal')).hide();
+            form.reset();
+
+            // 刷新学生列表
+            loadStudentList();
+        }
+
+        function importStudents() {
+            const courseId = document.getElementById('importCourseSelect').value;
+            const fileInput = document.getElementById('studentFile');
+
+            if (!courseId) {
+                alert('请选择课程');
+                return;
+            }
+
+            if (!fileInput.files[0]) {
+                alert('请选择要导入的文件');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('courseId', courseId);
+            formData.append('file', fileInput.files[0]);
+
+            // 这里应该调用 POST /courses/{courseId}/students/batch API
+            console.log('批量导入学生名单:', courseId, fileInput.files[0].name);
+
+            // 模拟导入过程
+            const importBtn = document.getElementById('importBtn');
+            importBtn.disabled = true;
+            importBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>导入中...';
+
+            setTimeout(() => {
+                alert('学生名单导入成功！');
+                bootstrap.Modal.getInstance(document.getElementById('batchImportModal')).hide();
+                document.getElementById('importCourseSelect').value = '';
+                fileInput.value = '';
+                document.getElementById('filePreview').textContent = '未选择文件';
+                importBtn.disabled = true;
+                importBtn.innerHTML = '<i class="bi bi-upload me-2"></i>开始导入';
+
+                // 刷新学生列表
+                loadStudentList();
+            }, 2000);
+        }
+
+        function removeStudent(studentId) {
+            currentStudentId = studentId;
+
+            document.getElementById('deleteMessage').textContent = '确定要移除该学生吗？';
+            document.getElementById('deleteDetails').textContent = '移除后该学生将无法访问课程内容。';
+
+            const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+            modal.show();
+
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                // 这里应该调用 DEL /courses/{courseId}/students/{studentId} API
+                console.log('移除学生:', studentId);
+
+                alert('学生已移除！');
+                modal.hide();
+
+                // 刷新学生列表
+                loadStudentList();
+            };
+        }
+
+        function updateStudentRole(studentId) {
+            currentStudentId = studentId;
+
+            // 模拟获取学生信息
+            document.getElementById('updateStudentId').value = studentId;
+            document.getElementById('updateStudentAvatar').textContent = '张';
+            document.getElementById('updateStudentName').textContent = '张三';
+            document.getElementById('updateStudentNumber').textContent = '2021001';
+            document.getElementById('newRole').value = 'student';
+
+            new bootstrap.Modal(document.getElementById('updateRoleModal')).show();
+        }
+
+        function confirmUpdateRole() {
+            const form = document.getElementById('updateRoleForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const roleData = {
+                studentId: document.getElementById('updateStudentId').value,
+                newRole: document.getElementById('newRole').value,
+                reason: document.getElementById('roleReason').value
+            };
+
+            // 这里应该调用 PAT /courses/{courseId}/students/{studentId}/role API
+            console.log('更新学生角色:', roleData);
+
+            alert('学生角色更新成功！');
+            bootstrap.Modal.getInstance(document.getElementById('updateRoleModal')).hide();
+
+            // 刷新学生列表
+            loadStudentList();
+        }
+
+        function searchStudents() {
+            const searchTerm = document.getElementById('studentSearch').value;
+            const role = document.getElementById('studentRole').value;
+            const courseId = document.getElementById('studentCourse').value;
+
+            // 这里应该调用相应的API进行学生搜索
+            console.log('搜索学生:', { searchTerm, role, courseId });
+
+            // 模拟搜索结果
+            loadStudentList();
+        }
+
+        function loadStudentList() {
+            // 这里应该调用相应的API获取学生列表
+            console.log('加载学生列表');
+            // 实际实现中会更新学生表格内容
+        }
+
+        // 课程学生查看相关函数
+        function loadCourseStudents() {
+            const courseId = document.getElementById('courseSelectForStudents').value;
+            const card = document.getElementById('courseStudentsCard');
+
+            if (!courseId) {
+                card.style.display = 'none';
+                return;
+            }
+
+            // 这里应该调用 GET /courses/{courseId}/students API
+            console.log('查看课程下的学生:', courseId);
+
+            // 模拟显示课程学生信息
+            card.style.display = 'block';
+            document.getElementById('selectedCourseName').textContent = '课程：数据结构与算法';
+            document.getElementById('studentCount').textContent = '45名学生';
+            document.getElementById('totalStudents').textContent = '45';
+            document.getElementById('activeStudents').textContent = '42';
+            document.getElementById('assistants').textContent = '2';
+            document.getElementById('monitors').textContent = '1';
+        }
+
+        function exportStudentList() {
+            const courseId = document.getElementById('courseSelectForStudents').value;
+            if (!courseId) {
+                alert('请先选择课程');
+                return;
+            }
+
+            // 这里应该调用导出API
+            console.log('导出学生名单:', courseId);
+            alert('学生名单导出成功！');
+        }
+
+        // 批量查询相关函数
+        function batchQueryCourses() {
+            const includeActive = document.getElementById('includeActive').checked;
+            const includeArchived = document.getElementById('includeArchived').checked;
+            const includeDraft = document.getElementById('includeDraft').checked;
+            const semester = document.getElementById('semesterFilter').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            const queryParams = {
+                includeActive,
+                includeArchived,
+                includeDraft,
+                semester,
+                startDate,
+                endDate
+            };
+
+            // 这里应该调用 GET /courses/batch API 进行批量查询
+            console.log('批量查询课程:', queryParams);
+
+            // 模拟查询结果
+            const resultsCard = document.getElementById('queryResults');
+            const resultCount = document.getElementById('resultCount');
+            const resultsBody = document.getElementById('queryResultsBody');
+
+            // 显示查询结果
+            resultsCard.style.display = 'block';
+            resultCount.textContent = '找到 3 门课程';
+
+            // 模拟结果数据
+            resultsBody.innerHTML = `
+                <tr>
+                    <td>数据结构与算法</td>
+                    <td>CS101</td>
+                    <td>2024春季</td>
+                    <td><span class="badge bg-success">进行中</span></td>
+                    <td>45</td>
+                    <td>2024-02-15</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" onclick="editCourse(1)">编辑</button>
+                        <button class="btn btn-sm btn-outline-info" onclick="viewCourseStudents(1)">查看学生</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>计算机网络</td>
+                    <td>CS201</td>
+                    <td>2024春季</td>
+                    <td><span class="badge bg-success">进行中</span></td>
+                    <td>38</td>
+                    <td>2024-02-20</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" onclick="editCourse(2)">编辑</button>
+                        <button class="btn btn-sm btn-outline-info" onclick="viewCourseStudents(2)">查看学生</button>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function resetQueryForm() {
+            document.getElementById('includeActive').checked = true;
+            document.getElementById('includeArchived').checked = false;
+            document.getElementById('includeDraft').checked = false;
+            document.getElementById('semesterFilter').value = '';
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            document.getElementById('queryResults').style.display = 'none';
+        }
+
+        function exportAllCourses() {
+            // 这里应该调用导出所有课程的API
+            console.log('导出全部课程');
+            alert('课程信息导出成功！');
+        }
+
+        // 批量学生操作相关函数
+        function toggleSelectAll() {
+            const selectAll = document.getElementById('selectAllStudents');
+            const checkboxes = document.querySelectorAll('.student-checkbox');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll.checked;
+            });
+
+            updateSelectedStudents();
+        }
+
+        function updateSelectedStudents() {
+            const checkboxes = document.querySelectorAll('.student-checkbox:checked');
+            selectedStudents = Array.from(checkboxes).map(cb => cb.value);
+
+            const batchActions = document.getElementById('batchActions');
+            const selectedCount = document.getElementById('selectedCount');
+
+            if (selectedStudents.length > 0) {
+                batchActions.style.display = 'block';
+                selectedCount.textContent = selectedStudents.length;
+            } else {
+                batchActions.style.display = 'none';
+            }
+
+            // 更新全选复选框状态
+            const selectAll = document.getElementById('selectAllStudents');
+            const allCheckboxes = document.querySelectorAll('.student-checkbox');
+            selectAll.checked = selectedStudents.length === allCheckboxes.length;
+        }
+
+        function batchUpdateRole() {
+            if (selectedStudents.length === 0) {
+                alert('请先选择要更新的学生');
+                return;
+            }
+
+            const newRole = prompt('请输入新角色 (student/assistant/monitor):');
+            if (!newRole || !['student', 'assistant', 'monitor'].includes(newRole)) {
+                alert('角色输入无效');
+                return;
+            }
+
+            // 这里应该调用批量更新角色的API
+            console.log('批量更新学生角色:', selectedStudents, '新角色:', newRole);
+
+            alert(`已成功更新 ${selectedStudents.length} 名学生的角色！`);
+
+            // 清空选择
+            selectedStudents = [];
+            document.querySelectorAll('.student-checkbox').forEach(cb => cb.checked = false);
+            document.getElementById('selectAllStudents').checked = false;
+            updateSelectedStudents();
+
+            // 刷新学生列表
+            loadStudentList();
+        }
+
+        function batchRemoveStudents() {
+            if (selectedStudents.length === 0) {
+                alert('请先选择要移除的学生');
+                return;
+            }
+
+            if (!confirm(`确定要移除选中的 ${selectedStudents.length} 名学生吗？`)) {
+                return;
+            }
+
+            // 这里应该调用批量移除学生的API
+            console.log('批量移除学生:', selectedStudents);
+
+            alert(`已成功移除 ${selectedStudents.length} 名学生！`);
+
+            // 清空选择
+            selectedStudents = [];
+            document.querySelectorAll('.student-checkbox').forEach(cb => cb.checked = false);
+            document.getElementById('selectAllStudents').checked = false;
+            updateSelectedStudents();
+
+            // 刷新学生列表
+            loadStudentList();
+        }
+
+        // 辅助函数
+        function downloadTemplate() {
+            // 这里应该下载学生导入模板文件
+            console.log('下载导入模板');
+            alert('模板文件下载成功！');
+        }
+
+        function viewCourseStudents(courseId) {
+            // 切换到课程学生标签页并加载对应课程的学生
+            showTab('course-students');
+            document.getElementById('courseSelectForStudents').value = courseId;
+            loadCourseStudents();
+        }
+    </script>
+
+</body>
+</html>

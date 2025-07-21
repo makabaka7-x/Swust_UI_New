@@ -21,12 +21,12 @@
     
     body {
       background-color: #e8f0ff;
-      background-image: 
-        linear-gradient(135deg, 
-          rgba(210, 235, 255, 0.95) 0%, 
+      background-image:
+        linear-gradient(135deg,
+          rgba(210, 235, 255, 0.95) 0%,
           rgba(195, 225, 255, 0.93) 20%,
           rgba(180, 215, 252, 0.91) 35%,
-          rgba(165, 205, 250, 0.9) 50%, 
+          rgba(165, 205, 250, 0.9) 50%,
           rgba(185, 215, 250, 0.85) 65%,
           rgba(205, 225, 250, 0.8) 80%,
           rgba(215, 235, 250, 0.7) 100%),
@@ -38,14 +38,11 @@
       flex-direction: column;
       position: relative;
       overflow-x: hidden;
+      padding-top: 60px;
     }
     
     .page-content {
       flex: 1 0 auto;
-    }
-    
-    footer {
-      flex-shrink: 0;
     }
     
     /* 添加一个悬浮的背景动画效果 */
@@ -280,9 +277,12 @@
       display: flex;
       align-items: center;
       padding: 0 20px;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 100;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1000;
     }
 
     .container {
@@ -1736,6 +1736,8 @@
       border-color: rgba(52, 152, 219, 0.8);
     }
 
+
+
     /* 以下是热门问题相关样式，不再使用 */
     /* 问题相关样式 */
     .popular-problems {
@@ -2671,7 +2673,6 @@
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
       padding: 12px 0 100px 0; /* 大幅增加下边距，确保完全包含社区讨论 */
-      border-top: 1px solid rgba(226, 232, 240, 0.5);
       margin-bottom: 0; /* 移除底部外边距 */
     }
 
@@ -3154,7 +3155,6 @@
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
       padding: 50px 0;
-      border-top: 1px solid rgba(226, 232, 240, 0.5);
       position: relative;
       overflow: hidden;
     }
@@ -3187,24 +3187,355 @@
     }
     
     .discussion-card {
+      display: flex;
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
       border-radius: 12px;
-      padding: 8px 12px; /* 减少上下内边距 */
+      padding: 16px;
+      margin-bottom: 16px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(226, 232, 240, 0.5);
       transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      width: 100%;
     }
-    
+
     .discussion-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
     }
-    
+
+    .discussion-avatar {
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .avatar-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .discussion-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .discussion-header {
+      margin-bottom: 8px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .username {
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 14px;
+    }
+
+    .post-type {
+      color: #718096;
+      font-size: 13px;
+    }
+
+    .discussion-text {
+      color: #4a5568;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .discussion-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: #718096;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background-color: rgba(113, 128, 150, 0.1);
+      color: #4a5568;
+    }
+
+    .action-btn.liked {
+      color: #3498db;
+    }
+
+    .action-btn.starred {
+      color: #f39c12;
+    }
+
+    .action-icon {
+      font-size: 16px;
+    }
+
+    .action-count {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .more-actions {
+      position: relative;
+      margin-left: auto;
+    }
+
+    .more-btn {
+      background: none;
+      border: none;
+      color: #718096;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .more-btn:hover {
+      background-color: rgba(113, 128, 150, 0.1);
+      color: #4a5568;
+    }
+
+    .more-dots {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .more-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-width: 120px;
+      z-index: 1000;
+      display: none;
+    }
+
+    .more-menu.show {
+      display: block;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      font-size: 14px;
+    }
+
+    .menu-item:hover {
+      background-color: rgba(113, 128, 150, 0.1);
+    }
+
+    .menu-item:first-child {
+      border-radius: 8px 8px 0 0;
+    }
+
+    .menu-item:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+
+    .menu-icon {
+      font-size: 14px;
+    }
+
+    .menu-text {
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .report-item:hover .menu-text {
+      color: #e74c3c;
+    }
+
+    /* 举报模态框样式 */
+    .report-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .report-modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #718096;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background-color: rgba(113, 128, 150, 0.1);
+      color: #4a5568;
+    }
+
+    .modal-body {
+      padding: 20px 24px;
+    }
+
+    .report-reasons {
+      margin-bottom: 20px;
+    }
+
+    .reason-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+    }
+
+    .reason-item:last-child {
+      border-bottom: none;
+    }
+
+    .reason-item input[type="radio"] {
+      margin: 0;
+    }
+
+    .reason-item label {
+      color: #4a5568;
+      font-size: 14px;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .report-details {
+      margin-top: 20px;
+    }
+
+    .report-details label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .report-details textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px 12px;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      border-radius: 8px;
+      font-size: 14px;
+      color: #4a5568;
+      resize: vertical;
+      transition: all 0.2s ease;
+    }
+
+    .report-details textarea:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 16px 24px 20px;
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .btn-cancel, .btn-submit {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-cancel {
+      background-color: rgba(113, 128, 150, 0.1);
+      color: #4a5568;
+    }
+
+    .btn-cancel:hover {
+      background-color: rgba(113, 128, 150, 0.2);
+    }
+
+    .btn-submit {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .btn-submit:hover {
+      background-color: #c0392b;
+    }
+
     .discussion-header {
       display: flex;
       align-items: center;
@@ -3313,6 +3644,8 @@
       transform: translateY(-1px);
     }
     
+
+
     /* 帖子操作样式 */
     .discussion-meta {
       display: flex;
@@ -3340,6 +3673,8 @@
         background-color: rgba(229, 62, 62, 0.1);
       }
     
+
+
     /* 举报模态框样式 */
     .report-modal {
       display: none;
@@ -3581,16 +3916,18 @@
       </div>
     </div>
     <div class="auth-buttons">
-      <a href="login.html" class="btn btn-outline">登录</a>
-      <a href="register.html" class="btn btn-primary">注册</a>
+      <a href="javascript:void(0)" class="btn btn-outline">登录</a>
+      <a href="javascript:void(0)" class="btn btn-primary">注册</a>
     </div>
     <div class="user-avatar">
-      <span class="username">用户001</span>
+      <span class="username">张老师</span>
       <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
       <div class="user-dropdown">
         <a href="profile.html" class="dropdown-item">个人主页</a>
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">退出登录</a>
+        <a href="class-team.html" class="dropdown-item teacher-only">班级管理</a>
+        <div class="dropdown-divider teacher-only"></div>
+        <a href="javascript:void(0)" class="dropdown-item" onclick="handleLogout()">退出登录</a>
       </div>
     </div>
     </div>
@@ -3764,39 +4101,43 @@
             <div class="discussion-vertical-grid">
               <!-- 讨论卡片1 -->
               <div class="discussion-card" data-card-id="1">
-                <div class="discussion-header">
-                  <div class="discussion-info">
-                    <h3 class="discussion-title">如何优化快速排序算法？</h3>
-                    <div class="discussion-meta">
-                      <span class="discussion-author" style="font-size: 0.8rem; color: #595959;">程序员小王</span>
+                <div class="discussion-avatar">
+                  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNFNUU3RUIiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSI4IiB5PSI4Ij4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSIjOUM5Qzk5Ii8+CjxwYXRoIGQ9Ik0xMiAxNEM5LjMzIDE0IDQgMTUuMzQgNCAyMFYyMkgxNlYyMEMxNiAxNS4zNCAxMC42NyAxNCAxMiAxNFoiIGZpbGw9IiM5QzlDOTkiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="用户头像" class="avatar-img">
+                </div>
+                <div class="discussion-content">
+                  <div class="discussion-header">
+                    <div class="user-info">
+                      <span class="username">程序员小王</span>
+                      <span class="post-type">分享 | 算法优化</span>
                     </div>
                   </div>
-                </div>
-                <p class="discussion-desc">我在实现快速排序时，发现在数据量较大的情况下性能不佳，有没有优化技巧？</p>
-                <div class="post-tags">
-                  <span class="post-tag" style="background-color: #f0f7ff; color: #1890ff;">算法</span>
-                  <span class="post-tag" style="background-color: #f6ffed; color: #52c41a;">快速排序</span>
-                  <span class="post-tag" style="background-color: #fff7e6; color: #fa8c16;">性能优化</span>
-                </div>
-                <div class="discussion-footer" style="display: flex; justify-content: space-between; align-items: center;">
-                  <div class="discussion-actions-left" style="display: flex; align-items: center;">
-                    <span class="discussion-stat like-stat" style="cursor: pointer; margin-right: 15px;" data-liked="false" data-count="16">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">♡</i> 
-                      <span class="like-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">16</span>
-                    </span>
-                    <span class="discussion-stat reply-stat" style="cursor: pointer; margin-right: 15px;">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☐</i> 
-                      <span class="comment-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">32</span>
-                    </span>
-                    <span class="discussion-stat collect-stat" style="cursor: pointer;" data-collected="false" data-count="8">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☆</i> 
-                      <span class="collect-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">8</span>
-                    </span>
+                  <div class="discussion-text">
+                    我在实现快速排序时，发现在数据量较大的情况下性能不佳，有没有优化技巧？
                   </div>
-                                      <div class="discussion-actions-right" style="position: relative;">
-                    <span class="report-btn" style="cursor: pointer; padding: 5px; border-radius: 4px; font-size: 0.85rem; color: #595959; display: flex; align-items: center;" title="举报" data-post-id="1">
-                      <i style="margin-right: 5px; font-size: 1rem;">🚩</i>举报
-                    </span>
+                  <div class="discussion-actions">
+                    <button class="action-btn like-btn" data-liked="false" data-count="16">
+                      <span class="action-icon">👍</span>
+                      <span class="action-count">16</span>
+                    </button>
+                    <button class="action-btn comment-btn">
+                      <span class="action-icon">💬</span>
+                      <span class="action-count">32</span>
+                    </button>
+                    <button class="action-btn star-btn" data-starred="false" data-count="8">
+                      <span class="action-icon">⭐</span>
+                      <span class="action-count">8</span>
+                    </button>
+                    <div class="more-actions">
+                      <button class="more-btn">
+                        <span class="more-dots">⋯</span>
+                      </button>
+                      <div class="more-menu">
+                        <div class="menu-item report-item">
+                          <span class="menu-icon">🚨</span>
+                          <span class="menu-text">举报</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="comments-section" style="display: none;">
@@ -3832,39 +4173,43 @@
 
               <!-- 讨论卡片2 -->
               <div class="discussion-card" data-card-id="2">
-                <div class="discussion-header">
-                  <div class="discussion-info">
-                    <h3 class="discussion-title">动态规划问题集锦</h3>
-                    <div class="discussion-meta">
-                      <span class="discussion-author" style="font-size: 0.8rem; color: #595959;">算法达人</span>
+                <div class="discussion-avatar">
+                  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0RkFDRkUiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSI4IiB5PSI4Ij4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMTRDOS4zMyAxNCA0IDE1LjM0IDQgMjBWMjJIMTZWMjBDMTYgMTUuMzQgMTAuNjcgMTQgMTIgMTRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+Cg==" alt="用户头像" class="avatar-img">
+                </div>
+                <div class="discussion-content">
+                  <div class="discussion-header">
+                    <div class="user-info">
+                      <span class="username">算法达人</span>
+                      <span class="post-type">题解 | 动态规划问题集锦</span>
                     </div>
                   </div>
-                </div>
-                <p class="discussion-desc">整理了一些经典的动态规划问题及其解题思路，希望对大家有所帮助。</p>
-                <div class="post-tags">
-                  <span class="post-tag" style="background-color: #fff0f6; color: #eb2f96;">内推</span>
-                  <span class="post-tag" style="background-color: #f0f7ff; color: #1890ff;">动态规划</span>
-                  <span class="post-tag" style="background-color: #f9f0ff; color: #722ed1;">题集</span>
-                </div>
-                <div class="discussion-footer" style="display: flex; justify-content: space-between; align-items: center;">
-                  <div class="discussion-actions-left" style="display: flex; align-items: center;">
-                    <span class="discussion-stat like-stat" style="cursor: pointer; margin-right: 15px;" data-liked="false" data-count="64">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">♡</i> 
-                      <span class="like-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">64</span>
-                    </span>
-                    <span class="discussion-stat reply-stat" style="cursor: pointer; margin-right: 15px;">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☐</i> 
-                      <span class="comment-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">48</span>
-                    </span>
-                    <span class="discussion-stat collect-stat" style="cursor: pointer;" data-collected="false" data-count="21">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☆</i> 
-                      <span class="collect-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">21</span>
-                    </span>
+                  <div class="discussion-text">
+                    整理了一些经典的动态规划问题及其解题思路，希望对大家有所帮助。
                   </div>
-                                      <div class="discussion-actions-right" style="position: relative;">
-                    <span class="report-btn" style="cursor: pointer; padding: 5px; border-radius: 4px; font-size: 0.85rem; color: #595959; display: flex; align-items: center;" title="举报" data-post-id="2">
-                      <i style="margin-right: 5px; font-size: 1rem;">🚩</i>举报
-                    </span>
+                  <div class="discussion-actions">
+                    <button class="action-btn like-btn" data-liked="false" data-count="64">
+                      <span class="action-icon">👍</span>
+                      <span class="action-count">64</span>
+                    </button>
+                    <button class="action-btn comment-btn">
+                      <span class="action-icon">💬</span>
+                      <span class="action-count">48</span>
+                    </button>
+                    <button class="action-btn star-btn" data-starred="false" data-count="21">
+                      <span class="action-icon">⭐</span>
+                      <span class="action-count">21</span>
+                    </button>
+                    <div class="more-actions">
+                      <button class="more-btn">
+                        <span class="more-dots">⋯</span>
+                      </button>
+                      <div class="more-menu">
+                        <div class="menu-item report-item">
+                          <span class="menu-icon">🚨</span>
+                          <span class="menu-text">举报</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="comments-section" style="display: none;">
@@ -3900,39 +4245,43 @@
 
               <!-- 讨论卡片3 -->
               <div class="discussion-card" data-card-id="3">
-                <div class="discussion-header">
-                  <div class="discussion-info">
-                    <h3 class="discussion-title">关于图论算法的学习路径</h3>
-                    <div class="discussion-meta">
-                      <span class="discussion-author" style="font-size: 0.8rem; color: #595959;">学习探索者</span>
+                <div class="discussion-avatar">
+                  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMyRUNDNzEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSI4IiB5PSI4Ij4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMTRDOS4zMyAxNCA0IDE1LjM0IDQgMjBWMjJIMTZWMjBDMTYgMTUuMzQgMTAuNjcgMTQgMTIgMTRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+Cg==" alt="用户头像" class="avatar-img">
+                </div>
+                <div class="discussion-content">
+                  <div class="discussion-header">
+                    <div class="user-info">
+                      <span class="username">学习探索者</span>
+                      <span class="post-type">求助 | 图论算法学习路径</span>
                     </div>
                   </div>
-                </div>
-                <p class="discussion-desc">想系统学习图论算法，有没有推荐的学习路径和资源？从哪些算法入手比较好？</p>
-                <div class="post-tags">
-                  <span class="post-tag" style="background-color: #e6f7ff; color: #1890ff;">校招</span>
-                  <span class="post-tag" style="background-color: #f0f7ff; color: #096dd9;">图论</span>
-                  <span class="post-tag" style="background-color: #fcffe6; color: #7cb305;">学习资源</span>
-                </div>
-                <div class="discussion-footer" style="display: flex; justify-content: space-between; align-items: center;">
-                  <div class="discussion-actions-left" style="display: flex; align-items: center;">
-                    <span class="discussion-stat like-stat" style="cursor: pointer; margin-right: 15px;" data-liked="false" data-count="32">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">♡</i> 
-                      <span class="like-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">32</span>
-                    </span>
-                    <span class="discussion-stat reply-stat" style="cursor: pointer; margin-right: 15px;">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☐</i> 
-                      <span class="comment-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">24</span>
-                    </span>
-                    <span class="discussion-stat collect-stat" style="cursor: pointer;" data-collected="false" data-count="12">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☆</i> 
-                      <span class="collect-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">12</span>
-                    </span>
+                  <div class="discussion-text">
+                    想系统学习图论算法，有没有推荐的学习路径和资源？从哪些算法入手比较好？
                   </div>
-                                      <div class="discussion-actions-right" style="position: relative;">
-                    <span class="report-btn" style="cursor: pointer; padding: 5px; border-radius: 4px; font-size: 0.85rem; color: #595959; display: flex; align-items: center;" title="举报" data-post-id="3">
-                      <i style="margin-right: 5px; font-size: 1rem;">🚩</i>举报
-                    </span>
+                  <div class="discussion-actions">
+                    <button class="action-btn like-btn" data-liked="false" data-count="32">
+                      <span class="action-icon">👍</span>
+                      <span class="action-count">32</span>
+                    </button>
+                    <button class="action-btn comment-btn">
+                      <span class="action-icon">💬</span>
+                      <span class="action-count">24</span>
+                    </button>
+                    <button class="action-btn star-btn" data-starred="false" data-count="12">
+                      <span class="action-icon">⭐</span>
+                      <span class="action-count">12</span>
+                    </button>
+                    <div class="more-actions">
+                      <button class="more-btn">
+                        <span class="more-dots">⋯</span>
+                      </button>
+                      <div class="more-menu">
+                        <div class="menu-item report-item">
+                          <span class="menu-icon">🚨</span>
+                          <span class="menu-text">举报</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="comments-section" style="display: none;">
@@ -3968,39 +4317,43 @@
               
               <!-- 讨论卡片4 -->
               <div class="discussion-card" data-card-id="4">
-                <div class="discussion-header">
-                  <div class="discussion-info">
-                    <h3 class="discussion-title">前端框架选择：React vs Vue vs Angular</h3>
-                    <div class="discussion-meta">
-                      <span class="discussion-author" style="font-size: 0.8rem; color: #595959;">前端工程师</span>
+                <div class="discussion-avatar">
+                  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM5QjU5QjYiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSI4IiB5PSI4Ij4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMTRDOS4zMyAxNCA0IDE1LjM0IDQgMjBWMjJIMTZWMjBDMTYgMTUuMzQgMTAuNjcgMTQgMTIgMTRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+Cg==" alt="用户头像" class="avatar-img">
+                </div>
+                <div class="discussion-content">
+                  <div class="discussion-header">
+                    <div class="user-info">
+                      <span class="username">前端工程师</span>
+                      <span class="post-type">技术分享 | 前端框架选择</span>
                     </div>
                   </div>
-                </div>
-                <p class="discussion-desc">作为初学者，应该选择哪个前端框架入门？各有什么优缺点和适用场景？欢迎分享经验。</p>
-                <div class="post-tags">
-                  <span class="post-tag" style="background-color: #e6fffb; color: #13c2c2;">前端</span>
-                  <span class="post-tag" style="background-color: #fff2e8; color: #fa541c;">框架选择</span>
-                  <span class="post-tag" style="background-color: #f4ffb8; color: #389e0d;">技术讨论</span>
-                </div>
-                <div class="discussion-footer" style="display: flex; justify-content: space-between; align-items: center;">
-                  <div class="discussion-actions-left" style="display: flex; align-items: center;">
-                    <span class="discussion-stat like-stat" style="cursor: pointer; margin-right: 15px;" data-liked="false" data-count="45">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">♡</i> 
-                      <span class="like-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">45</span>
-                    </span>
-                    <span class="discussion-stat reply-stat" style="cursor: pointer; margin-right: 15px;">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☐</i> 
-                      <span class="comment-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">37</span>
-                    </span>
-                    <span class="discussion-stat collect-stat" style="cursor: pointer;" data-collected="false" data-count="18">
-                      <i class="icon" style="font-size: 1.1rem; color: #8c8c8c; transition: all 0.3s ease; font-style: normal;">☆</i> 
-                      <span class="collect-count" style="margin-left: 3px; font-size: 0.85rem; position: relative; top: 2px;">18</span>
-                    </span>
+                  <div class="discussion-text">
+                    作为初学者，应该选择哪个前端框架入门？各有什么优缺点和适用场景？欢迎分享经验。
                   </div>
-                  <div class="discussion-actions-right" style="position: relative;">
-                    <span class="report-btn" style="cursor: pointer; padding: 5px; border-radius: 4px; font-size: 0.85rem; color: #595959; display: flex; align-items: center;" title="举报" data-post-id="4">
-                      <i style="margin-right: 5px; font-size: 1rem;">🚩</i>举报
-                    </span>
+                  <div class="discussion-actions">
+                    <button class="action-btn like-btn" data-liked="false" data-count="45">
+                      <span class="action-icon">👍</span>
+                      <span class="action-count">45</span>
+                    </button>
+                    <button class="action-btn comment-btn">
+                      <span class="action-icon">💬</span>
+                      <span class="action-count">37</span>
+                    </button>
+                    <button class="action-btn star-btn" data-starred="false" data-count="18">
+                      <span class="action-icon">⭐</span>
+                      <span class="action-count">18</span>
+                    </button>
+                    <div class="more-actions">
+                      <button class="more-btn">
+                        <span class="more-dots">⋯</span>
+                      </button>
+                      <div class="more-menu">
+                        <div class="menu-item report-item">
+                          <span class="menu-icon">🚨</span>
+                          <span class="menu-text">举报</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="comments-section" style="display: none;">
@@ -4067,67 +4420,33 @@
                   </div>
                 </div>
                 
-                <!-- 活动时间分布 -->
+
+                
+                <!-- 今日活动概况 -->
                 <div style="margin: 15px 0;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-size: 0.9rem; font-weight: 600; color: #2d3748;">活动时间分布</span>
-                    <span style="font-size: 0.75rem; color: #718096;">今日</span>
+                    <span style="font-size: 0.9rem; font-weight: 600; color: #2d3748;">今日活动概况</span>
+                    <span style="font-size: 0.75rem; color: #718096;">实时更新</span>
                   </div>
-                  <div style="display: flex; justify-content: space-between; height: 130px; margin-top: 5px;">
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 15%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">0</div>
+                  <div style="display: flex; justify-content: space-between; background-color: rgba(52, 152, 219, 0.05); padding: 12px; border-radius: 8px;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="font-size: 1rem; font-weight: 600; color: #3498db;">89</div>
+                      <div style="font-size: 0.75rem; color: #718096;">在线用户</div>
                     </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 10%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">2</div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="font-size: 1rem; font-weight: 600; color: #3498db;">342</div>
+                      <div style="font-size: 0.75rem; color: #718096;">今日提交</div>
                     </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 5%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">4</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 8%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">6</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 20%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">8</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 40%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">10</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 60%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">12</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 70%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">14</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 90%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">16</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 80%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">18</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 65%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">20</div>
-                    </div>
-                    <div style="flex: 1; margin: 0 1px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-                      <div style="width: 100%; background: #3498db; height: 45%; border-radius: 2px 2px 0 0;"></div>
-                      <div style="font-size: 0.6rem; color: #a0aec0; margin-top: 2px;">22</div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="font-size: 1rem; font-weight: 600; color: #3498db;">16:30</div>
+                      <div style="font-size: 0.75rem; color: #718096;">峰值时间</div>
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- 用户排名 -->
-                <div style="margin: 20px 0 10px 0;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div style="margin: 15px 0 10px 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                     <span style="font-size: 0.9rem; font-weight: 600; color: #2d3748;">活跃用户排名</span>
                     <span style="font-size: 0.75rem; color: #3498db; cursor: pointer;">查看全部 ›</span>
                   </div>
@@ -4170,7 +4489,7 @@
                       <div style="width: 38%; height: 100%; background: linear-gradient(to right, #4facfe, #00f2fe);"></div>
                     </div>
                   </div>
-                  
+
                   <div style="margin: 10px 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                       <div style="display: flex; align-items: center;">
@@ -4183,7 +4502,7 @@
                       <div style="width: 20%; height: 100%; background: linear-gradient(to right, #4facfe, #00f2fe);"></div>
                     </div>
                   </div>
-                  
+
                   <div style="margin: 10px 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                       <div style="display: flex; align-items: center;">
@@ -4196,11 +4515,13 @@
                       <div style="width: 15%; height: 100%; background: linear-gradient(to right, #4facfe, #00f2fe);"></div>
                     </div>
                   </div>
+                  
+
                 </div>
                 
                 <!-- 热门标签 -->
-                <div style="margin: 20px 0 5px 0;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div style="margin: 15px 0 5px 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                     <span style="font-size: 0.9rem; font-weight: 600; color: #2d3748;">热门标签</span>
                   </div>
                   <div style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -4208,7 +4529,6 @@
                     <span style="padding: 4px 10px; background-color: rgba(231, 76, 60, 0.1); color: #e74c3c; border-radius: 12px; font-size: 0.75rem;">#校招 (42)</span>
                     <span style="padding: 4px 10px; background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; border-radius: 12px; font-size: 0.75rem;">#算法 (38)</span>
                     <span style="padding: 4px 10px; background-color: rgba(155, 89, 182, 0.1); color: #9b59b6; border-radius: 12px; font-size: 0.75rem;">#面试 (29)</span>
-                    <span style="padding: 4px 10px; background-color: rgba(241, 196, 15, 0.1); color: #f1c40f; border-radius: 12px; font-size: 0.75rem;">#图论 (21)</span>
                   </div>
                 </div>
               </div>
@@ -4220,6 +4540,8 @@
           </div>
         </div>
       </div>
+
+
       
       <!-- 每日一题部分 -->
       <div class="daily-challenge-column">
@@ -4266,6 +4588,8 @@
       </div>
     </div>
       </section>
+
+
   </div><!-- 结束 page-content -->
 
   <!-- 登录弹窗 -->
@@ -4280,16 +4604,16 @@
       <div class="login-tabs">
         <div class="login-tab active" onclick="switchTab('account')">账号密码登录</div>
         <div class="login-tab" onclick="switchTab('qrcode')">扫码登录</div>
-    </div>
+      </div>
 
       <div class="login-content">
         <div class="account-login active">
-          <form>
+          <form id="loginForm">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="学号/邮箱" required>
+              <input type="text" id="loginUsername" class="form-control" placeholder="学号/邮箱" required>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="密码" required>
+              <input type="password" id="loginPassword" class="form-control" placeholder="密码" required>
             </div>
             <button type="submit" class="submit-btn">登录</button>
             <div class="auth-footer">
@@ -4398,6 +4722,50 @@
     </div>
   </div>
 
+
+
+  <!-- 举报模态框 -->
+  <div id="reportModal" class="report-modal-overlay">
+    <div class="modal-content report-modal">
+      <div class="modal-header">
+        <h3 class="modal-title">举报内容</h3>
+        <button class="modal-close" onclick="closeReportModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="report-reasons">
+          <div class="reason-item">
+            <input type="radio" id="spam" name="reportReason" value="spam">
+            <label for="spam">垃圾信息</label>
+          </div>
+          <div class="reason-item">
+            <input type="radio" id="inappropriate" name="reportReason" value="inappropriate">
+            <label for="inappropriate">不当内容</label>
+          </div>
+          <div class="reason-item">
+            <input type="radio" id="harassment" name="reportReason" value="harassment">
+            <label for="harassment">骚扰他人</label>
+          </div>
+          <div class="reason-item">
+            <input type="radio" id="copyright" name="reportReason" value="copyright">
+            <label for="copyright">版权侵犯</label>
+          </div>
+          <div class="reason-item">
+            <input type="radio" id="other" name="reportReason" value="other">
+            <label for="other">其他原因</label>
+          </div>
+        </div>
+        <div class="report-details">
+          <label for="reportDetails">详细说明（选填）：</label>
+          <textarea id="reportDetails" placeholder="请详细描述举报原因..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeReportModal()">取消</button>
+        <button class="btn-submit" onclick="submitReport()">提交举报</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // 弹窗控制
     function showModal(modalId) {
@@ -4445,6 +4813,83 @@
       }
     }
 
+    // 处理登录
+    function handleLogin() {
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      // 基本验证
+      if (!username) {
+        alert('请输入学号或邮箱');
+        return;
+      }
+
+      if (!password) {
+        alert('请输入密码');
+        return;
+      }
+
+      // 显示加载状态
+      const submitBtn = document.querySelector('#loginForm .submit-btn');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = '登录中...';
+      submitBtn.disabled = true;
+
+      // 模拟登录请求（实际项目中应该发送到后端API）
+      setTimeout(() => {
+        // 模拟登录验证
+        if (username === 'admin' && password === '123456') {
+          // 登录成功
+          alert('登录成功！');
+          closeModal('loginModal');
+
+          // 更新UI显示已登录状态
+          updateLoginState(true, username);
+
+          // 清空表单
+          document.getElementById('loginForm').reset();
+        } else {
+          // 登录失败
+          alert('用户名或密码错误，请重试！\n\n提示：测试账号 admin，密码 123456');
+        }
+
+        // 恢复按钮状态
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }, 1000);
+    }
+
+    // 更新登录状态
+    function updateLoginState(isLoggedIn, username = '') {
+      const authButtons = document.querySelector('.auth-buttons');
+      const userAvatar = document.querySelector('.user-avatar');
+
+      if (isLoggedIn) {
+        // 隐藏登录注册按钮
+        authButtons.style.display = 'none';
+        // 显示用户头像和用户名
+        userAvatar.style.display = 'flex';
+        const usernameElement = userAvatar.querySelector('.username');
+        if (usernameElement) {
+          usernameElement.textContent = username;
+        }
+      } else {
+        // 显示登录注册按钮
+        authButtons.style.display = 'flex';
+        // 隐藏用户头像
+        userAvatar.style.display = 'none';
+      }
+    }
+
+    // 处理退出登录
+    function handleLogout() {
+      if (confirm('确定要退出登录吗？')) {
+        // 更新UI显示未登录状态
+        updateLoginState(false);
+        alert('已成功退出登录');
+      }
+    }
+
     // 根据URL hash参数显示不同的弹窗
     function handleHashChange() {
       const hash = window.location.hash.substring(1);
@@ -4460,7 +4905,7 @@
     // 页面加载时检查hash
     window.addEventListener('load', function() {
       handleHashChange();
-      
+
       // 修改导航栏按钮事件
       const loginBtn = document.querySelector('.auth-buttons .btn-outline');
       if (loginBtn) {
@@ -4468,6 +4913,15 @@
         loginBtn.addEventListener('click', function(e) {
           e.preventDefault();
           showModal('loginModal');
+        });
+      }
+
+      // 处理登录表单提交
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          handleLogin();
         });
       }
       
@@ -5774,9 +6228,102 @@
           document.querySelector('.report-details textarea').value = '';
         });
       });
+
+      // 更多操作按钮功能
+      // 为所有更多操作按钮添加点击事件
+      const moreButtons = document.querySelectorAll('.more-btn');
+      moreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const menu = this.nextElementSibling;
+
+          // 关闭其他打开的菜单
+          document.querySelectorAll('.more-menu.show').forEach(openMenu => {
+            if (openMenu !== menu) {
+              openMenu.classList.remove('show');
+            }
+          });
+
+          // 切换当前菜单
+          menu.classList.toggle('show');
+        });
+      });
+
+      // 为所有举报按钮添加点击事件
+      const reportMenuItems = document.querySelectorAll('.report-item');
+      reportMenuItems.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const discussionCard = this.closest('.discussion-card');
+          const cardId = discussionCard.getAttribute('data-card-id');
+          showReportModal(cardId);
+
+          // 关闭更多菜单
+          this.closest('.more-menu').classList.remove('show');
+        });
+      });
+
+      // 点击页面其他地方关闭菜单
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.more-menu.show').forEach(menu => {
+          menu.classList.remove('show');
+        });
+      });
+    });
+
+
+
+    // 显示举报模态框
+    function showReportModal(postId) {
+      const modal = document.getElementById('reportModal');
+      modal.setAttribute('data-post-id', postId);
+      modal.classList.add('show');
+    }
+
+    // 关闭举报模态框
+    function closeReportModal() {
+      const modal = document.getElementById('reportModal');
+      modal.classList.remove('show');
+
+      // 重置表单
+      document.querySelectorAll('input[name="reportReason"]').forEach(radio => {
+        radio.checked = false;
+      });
+      document.getElementById('reportDetails').value = '';
+    }
+
+    // 提交举报
+    function submitReport() {
+      const modal = document.getElementById('reportModal');
+      const postId = modal.getAttribute('data-post-id');
+      const selectedReason = document.querySelector('input[name="reportReason"]:checked');
+      const details = document.getElementById('reportDetails').value.trim();
+
+      if (!selectedReason) {
+        alert('请选择举报原因');
+        return;
+      }
+
+      // 这里可以添加实际的举报提交逻辑
+      console.log('举报信息:', {
+        postId: postId,
+        reason: selectedReason.value,
+        details: details
+      });
+
+      alert('举报已提交，我们会尽快处理');
+      closeReportModal();
+    }
+
+    // 点击举报模态框背景关闭模态框
+    document.getElementById('reportModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeReportModal();
+      }
     });
   </script>
-  
+
+
 
 </body>
 
