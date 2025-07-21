@@ -517,11 +517,12 @@
     .search-bar {
       flex-grow: 1;
       display: flex;
+      position: relative;
     }
 
     .search-input {
       width: 100%;
-      padding: 8px 12px;
+      padding: 8px 40px 8px 12px;
       border: 1px solid rgba(226, 232, 240, 0.5);
       border-radius: 4px;
       font-size: 14px;
@@ -534,6 +535,16 @@
       outline: none;
       border-color: #3498db;
       box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+    }
+
+    .search-bar-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #718096;
+      font-size: 14px;
+      pointer-events: none;
     }
 
     /* 排行榜表格 */
@@ -862,6 +873,7 @@
         </div>
         <div class="search-bar">
           <input type="text" class="search-input" placeholder="搜索用户...">
+          <span class="search-bar-icon">🔍</span>
         </div>
       </div>
       
