@@ -647,6 +647,16 @@
       background-color: rgba(226, 232, 240, 0.8);
       margin: 0;
     }
+
+    /* 管理员专用菜单项 */
+    .admin-only {
+      display: none; /* 默认隐藏 */
+    }
+
+    /* 当用户是管理员时显示 */
+    .user-avatar.is-admin .admin-only {
+      display: block;
+    }
     
     .auth-buttons {
       display: flex;
@@ -3920,14 +3930,24 @@
       <a href="javascript:void(0)" class="btn btn-primary">注册</a>
     </div>
     <div class="user-avatar">
-      <span class="username">张老师</span>
+      <span class="username">用户001</span>
       <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
       <div class="user-dropdown">
-        <a href="profile.html" class="dropdown-item">个人主页</a>
+        <a href="profile.html" class="dropdown-item">
+          <i class="fa fa-user" style="margin-right: 8px; color: #3498db;"></i>个人主页
+        </a>
         <div class="dropdown-divider"></div>
-        <a href="class-team.html" class="dropdown-item teacher-only">班级管理</a>
+        <a href="class-team.html" class="dropdown-item teacher-only">
+          <i class="fa fa-users" style="margin-right: 8px; color: #2ecc71;"></i>班级管理
+        </a>
         <div class="dropdown-divider teacher-only"></div>
-        <a href="javascript:void(0)" class="dropdown-item" onclick="handleLogout()">退出登录</a>
+        <a href="administrator.html" class="dropdown-item admin-only">
+          <i class="fa fa-cog" style="margin-right: 8px; color: #e74c3c;"></i>系统管理
+        </a>
+        <div class="dropdown-divider admin-only"></div>
+        <a href="javascript:void(0)" class="dropdown-item" onclick="handleLogout()">
+          <i class="fa fa-sign-out" style="margin-right: 8px; color: #95a5a6;"></i>退出登录
+        </a>
       </div>
     </div>
     </div>
@@ -4873,11 +4893,20 @@
         if (usernameElement) {
           usernameElement.textContent = username;
         }
+
+        // 检查是否是管理员用户
+        if (username === 'admin') {
+          userAvatar.classList.add('is-admin');
+        } else {
+          userAvatar.classList.remove('is-admin');
+        }
       } else {
         // 显示登录注册按钮
         authButtons.style.display = 'flex';
         // 隐藏用户头像
         userAvatar.style.display = 'none';
+        // 移除管理员标识
+        userAvatar.classList.remove('is-admin');
       }
     }
 
@@ -5798,12 +5827,18 @@
       });
       
       // 设置当前登录的用户（在实际应用中应从登录会话获取）
-      const currentUser = "用户001";
-      
+      const currentUser = "admin"; // 设置为管理员用户以显示管理员入口
+
       // 显示当前用户头像旁的用户名（如果存在）
       const usernameElement = document.querySelector('.username');
       if (usernameElement) {
-        usernameElement.textContent = currentUser;
+        usernameElement.textContent = "管理员";
+      }
+
+      // 为管理员用户显示管理员菜单
+      const userAvatar = document.querySelector('.user-avatar');
+      if (currentUser === 'admin' && userAvatar) {
+        userAvatar.classList.add('is-admin');
       }
       
       // 添加举报模态框到 body
