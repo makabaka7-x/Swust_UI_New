@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解题记录 - 在线判题系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      background-color: #e8f0ff;
+      background-image:
+        linear-gradient(135deg,
+          rgba(210, 235, 255, 0.95) 0%,
+          rgba(195, 225, 255, 0.93) 20%,
+          rgba(180, 215, 252, 0.91) 35%,
+          rgba(165, 205, 250, 0.9) 50%,
+          rgba(185, 215, 250, 0.85) 65%,
+          rgba(205, 225, 250, 0.8) 80%,
+          rgba(215, 235, 250, 0.7) 100%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background-attachment: fixed;
+      color: #2d3748;
+      min-height: 100vh;
+      padding: 80px 20px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 导航栏 */
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .welcome-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: #3182ce;
+      background-color: rgba(49, 130, 206, 0.1);
+    }
+
+    .nav-link.active {
+      color: #3182ce;
+      background-color: rgba(49, 130, 206, 0.15);
+    }
+
+    /* 页面标题 */
+    .page-header {
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .page-subtitle {
+      color: #718096;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .stats-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .summary-item {
+      background: rgba(52, 152, 219, 0.08);
+      padding: 25px 20px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(52, 152, 219, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .summary-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+    }
+
+    .summary-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #3498db;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .summary-label {
+      font-size: 14px;
+      color: #718096;
+      font-weight: 500;
+    }
+
+    /* 筛选和搜索 */
+    .filters {
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-label {
+      font-weight: 600;
+      color: #2c3e50;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .filter-select, .search-input {
+      padding: 10px 15px;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: 12px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+    }
+
+    .search-input {
+      min-width: 280px;
+    }
+
+    .filter-select:focus, .search-input:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      background: white;
+    }
+
+    /* 题目列表 */
+    .problems-list {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .list-header {
+      background: #f8f9fa;
+      padding: 20px 25px;
+      border-bottom: 1px solid #e9ecef;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .problem-item {
+      padding: 20px 25px;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.2s;
+    }
+
+    .problem-item:hover {
+      background: rgba(102, 126, 234, 0.05);
+    }
+
+    .problem-item:last-child {
+      border-bottom: none;
+    }
+
+    .problem-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .problem-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .problem-id {
+      font-size: 14px;
+      color: #667eea;
+      font-weight: 500;
+    }
+
+    .problem-difficulty {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .difficulty-easy {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .difficulty-medium {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .difficulty-hard {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .problem-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-accepted {
+      color: #28a745;
+      font-weight: 500;
+    }
+
+    /* 分页 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .page-btn {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .page-btn:hover {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+
+    .page-btn.active {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .navbar {
+        height: auto;
+        padding: 15px 0;
+      }
+
+      .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        gap: 15px;
+      }
+
+      .nav-link {
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-input {
+        min-width: auto;
+      }
+
+      .problem-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .problem-meta {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 导航栏 -->
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href="index.html" class="logo">
+          <img src="images/logo.png" alt="SwustOJ Logo" class="logo-img">
+          <span class="welcome-text">SwustOJ</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">返回首页</a>
+          <a href="profile.html" class="nav-link">返回个人中心</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <h1 class="page-title">解题记录</h1>
+      <p class="page-subtitle">查看您已解决的所有题目和提交记录</p>
+
+      <div class="stats-summary">
+        <div class="summary-item">
+          <span class="summary-number">125</span>
+          <div class="summary-label">总解题数</div>
+        </div>
+        <div class="summary-item">
+          <span class="summary-number">45</span>
+          <div class="summary-label">简单题目</div>
+        </div>
+        <div class="summary-item">
+          <span class="summary-number">65</span>
+          <div class="summary-label">中等题目</div>
+        </div>
+        <div class="summary-item">
+          <span class="summary-number">15</span>
+          <div class="summary-label">困难题目</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 筛选和搜索 -->
+    <div class="filters">
+      <div class="filter-row">
+        <div class="filter-group">
+          <label class="filter-label">难度:</label>
+          <select class="filter-select" id="difficultyFilter">
+            <option value="">全部</option>
+            <option value="easy">简单</option>
+            <option value="medium">中等</option>
+            <option value="hard">困难</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">标签:</label>
+          <select class="filter-select" id="tagFilter">
+            <option value="">全部</option>
+            <option value="array">数组</option>
+            <option value="string">字符串</option>
+            <option value="dp">动态规划</option>
+            <option value="graph">图论</option>
+            <option value="tree">树</option>
+            <option value="math">数学</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">语言:</label>
+          <select class="filter-select" id="languageFilter">
+            <option value="">全部</option>
+            <option value="python">Python</option>
+            <option value="cpp">C++</option>
+            <option value="java">Java</option>
+            <option value="javascript">JavaScript</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">搜索:</label>
+          <input type="text" class="search-input" placeholder="搜索题目名称或编号..." id="searchInput">
+        </div>
+      </div>
+    </div>
+
+    <!-- 题目列表 -->
+    <div class="problems-list">
+      <div class="list-header">
+        已解决的题目 (125题)
+      </div>
+
+      <div class="problem-item">
+        <div class="problem-header">
+          <div>
+            <div class="problem-title">两数之和</div>
+            <div class="problem-id">#1001</div>
+          </div>
+          <span class="problem-difficulty difficulty-easy">简单</span>
+        </div>
+        <div class="problem-meta">
+          <div class="meta-item">
+            <span>状态:</span>
+            <span class="status-accepted">✓ 已通过</span>
+          </div>
+          <div class="meta-item">
+            <span>语言:</span>
+            <span>Python</span>
+          </div>
+          <div class="meta-item">
+            <span>提交时间:</span>
+            <span>2024-01-15 14:30</span>
+          </div>
+          <div class="meta-item">
+            <span>用时:</span>
+            <span>32ms</span>
+          </div>
+          <div class="meta-item">
+            <span>内存:</span>
+            <span>14.2MB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <div class="problem-header">
+          <div>
+            <div class="problem-title">最长公共子序列</div>
+            <div class="problem-id">#1143</div>
+          </div>
+          <span class="problem-difficulty difficulty-medium">中等</span>
+        </div>
+        <div class="problem-meta">
+          <div class="meta-item">
+            <span>状态:</span>
+            <span class="status-accepted">✓ 已通过</span>
+          </div>
+          <div class="meta-item">
+            <span>语言:</span>
+            <span>C++</span>
+          </div>
+          <div class="meta-item">
+            <span>提交时间:</span>
+            <span>2024-01-14 16:45</span>
+          </div>
+          <div class="meta-item">
+            <span>用时:</span>
+            <span>128ms</span>
+          </div>
+          <div class="meta-item">
+            <span>内存:</span>
+            <span>25.6MB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <div class="problem-header">
+          <div>
+            <div class="problem-title">二叉树的最大路径和</div>
+            <div class="problem-id">#124</div>
+          </div>
+          <span class="problem-difficulty difficulty-hard">困难</span>
+        </div>
+        <div class="problem-meta">
+          <div class="meta-item">
+            <span>状态:</span>
+            <span class="status-accepted">✓ 已通过</span>
+          </div>
+          <div class="meta-item">
+            <span>语言:</span>
+            <span>Java</span>
+          </div>
+          <div class="meta-item">
+            <span>提交时间:</span>
+            <span>2024-01-13 20:15</span>
+          </div>
+          <div class="meta-item">
+            <span>用时:</span>
+            <span>256ms</span>
+          </div>
+          <div class="meta-item">
+            <span>内存:</span>
+            <span>42.1MB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <div class="problem-header">
+          <div>
+            <div class="problem-title">合并两个有序链表</div>
+            <div class="problem-id">#21</div>
+          </div>
+          <span class="problem-difficulty difficulty-easy">简单</span>
+        </div>
+        <div class="problem-meta">
+          <div class="meta-item">
+            <span>状态:</span>
+            <span class="status-accepted">✓ 已通过</span>
+          </div>
+          <div class="meta-item">
+            <span>语言:</span>
+            <span>Python</span>
+          </div>
+          <div class="meta-item">
+            <span>提交时间:</span>
+            <span>2024-01-12 10:20</span>
+          </div>
+          <div class="meta-item">
+            <span>用时:</span>
+            <span>48ms</span>
+          </div>
+          <div class="meta-item">
+            <span>内存:</span>
+            <span>13.8MB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <div class="problem-header">
+          <div>
+            <div class="problem-title">最长回文子串</div>
+            <div class="problem-id">#5</div>
+          </div>
+          <span class="problem-difficulty difficulty-medium">中等</span>
+        </div>
+        <div class="problem-meta">
+          <div class="meta-item">
+            <span>状态:</span>
+            <span class="status-accepted">✓ 已通过</span>
+          </div>
+          <div class="meta-item">
+            <span>语言:</span>
+            <span>JavaScript</span>
+          </div>
+          <div class="meta-item">
+            <span>提交时间:</span>
+            <span>2024-01-11 15:30</span>
+          </div>
+          <div class="meta-item">
+            <span>用时:</span>
+            <span>92ms</span>
+          </div>
+          <div class="meta-item">
+            <span>内存:</span>
+            <span>18.5MB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分页 -->
+    <div class="pagination">
+      <button class="page-btn" onclick="changePage('prev')">上一页</button>
+      <button class="page-btn active" onclick="changePage(1)">1</button>
+      <button class="page-btn" onclick="changePage(2)">2</button>
+      <button class="page-btn" onclick="changePage(3)">3</button>
+      <button class="page-btn">...</button>
+      <button class="page-btn" onclick="changePage(13)">13</button>
+      <button class="page-btn" onclick="changePage('next')">下一页</button>
+    </div>
+  </div>
+
+  <script>
+    // 搜索功能
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      filterProblems();
+    });
+
+    // 筛选功能
+    document.getElementById('difficultyFilter').addEventListener('change', filterProblems);
+    document.getElementById('tagFilter').addEventListener('change', filterProblems);
+    document.getElementById('languageFilter').addEventListener('change', filterProblems);
+
+    function filterProblems() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const difficulty = document.getElementById('difficultyFilter').value;
+      const tag = document.getElementById('tagFilter').value;
+      const language = document.getElementById('languageFilter').value;
+
+      const problemItems = document.querySelectorAll('.problem-item');
+      let visibleCount = 0;
+
+      problemItems.forEach(item => {
+        const title = item.querySelector('.problem-title').textContent.toLowerCase();
+        const id = item.querySelector('.problem-id').textContent.toLowerCase();
+        const itemDifficulty = item.querySelector('.problem-difficulty').classList.contains('difficulty-easy') ? 'easy' :
+                              item.querySelector('.problem-difficulty').classList.contains('difficulty-medium') ? 'medium' : 'hard';
+        const itemLanguage = item.querySelector('.meta-item:nth-child(2) span:last-child').textContent.toLowerCase();
+
+        const matchesSearch = title.includes(searchTerm) || id.includes(searchTerm);
+        const matchesDifficulty = !difficulty || itemDifficulty === difficulty;
+        const matchesLanguage = !language || itemLanguage.includes(language);
+
+        if (matchesSearch && matchesDifficulty && matchesLanguage) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // 更新题目计数
+      document.querySelector('.list-header').textContent = `已解决的题目 (${visibleCount}题)`;
+    }
+
+    // 分页功能
+    function changePage(page) {
+      const pageButtons = document.querySelectorAll('.page-btn');
+      pageButtons.forEach(btn => btn.classList.remove('active'));
+
+      if (typeof page === 'number') {
+        pageButtons[page].classList.add('active');
+      }
+
+      // 这里可以添加实际的分页逻辑
+      console.log('切换到页面:', page);
+    }
+
+    // 题目点击功能
+    document.querySelectorAll('.problem-title').forEach(title => {
+      title.style.cursor = 'pointer';
+      title.addEventListener('click', function() {
+        const problemId = this.parentElement.querySelector('.problem-id').textContent;
+        alert(`跳转到题目详情页面: ${problemId} - ${this.textContent}`);
+      });
+    });
+  </script>
+</body>
+</html>

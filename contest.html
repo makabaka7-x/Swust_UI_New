@@ -687,6 +687,7 @@
         <a href="discussion.html" class="nav-link">讨论</a>
         <a href="ranking.html" class="nav-link">排行榜</a>
         <a href="learning.html" class="nav-link">学习</a>
+        <a href="team.html" class="nav-link">团队</a>
     </div>
     <div class="nav-tools">
       <div class="search-icon" id="search-icon">🔍</div>
@@ -703,11 +704,21 @@
       <span class="username">用户001</span>
       <img src="images/avatar.jpg" alt="用户头像" class="avatar-img">
       <div class="user-dropdown">
-        <a href="profile.html" class="dropdown-item">个人主页</a>
+        <a href="profile.html" class="dropdown-item">
+          <i class="fa fa-user" style="margin-right: 8px; color: #3498db;"></i>个人主页
+        </a>
         <div class="dropdown-divider"></div>
-        <a href="class-team.html" class="dropdown-item teacher-only">班级管理</a>
+        <a href="class-team.html" class="dropdown-item teacher-only">
+          <i class="fa fa-users" style="margin-right: 8px; color: #2ecc71;"></i>班级管理
+        </a>
         <div class="dropdown-divider teacher-only"></div>
-        <a href="javascript:void(0)" class="dropdown-item" onclick="handleLogout()">退出登录</a>
+        <a href="administrator.html" class="dropdown-item admin-only">
+          <i class="fa fa-cog" style="margin-right: 8px; color: #e74c3c;"></i>系统管理
+        </a>
+        <div class="dropdown-divider admin-only"></div>
+        <a href="javascript:void(0)" class="dropdown-item" onclick="handleLogout()">
+          <i class="fa fa-sign-out" style="margin-right: 8px; color: #95a5a6;"></i>退出登录
+        </a>
       </div>
     </div>
     </div>
