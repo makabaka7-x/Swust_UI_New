@@ -146,84 +146,7 @@
       padding: 0;
     }
 
-    /* 搜索图标和搜索框样式 */
-    .nav-tools {
-      display: flex;
-      align-items: center;
-      margin-right: 15px;
-      position: relative;
-    }
 
-    .search-icon {
-      font-size: 18px;
-      color: #4a5568;
-      cursor: pointer;
-      padding: 5px;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .search-icon:hover {
-      color: #3498db;
-      background-color: rgba(52, 152, 219, 0.1);
-    }
-
-    .search-container {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      width: 300px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-      padding: 12px;
-      display: none;
-      z-index: 1000;
-      gap: 8px;
-      transform: scale(0.95);
-      transform-origin: top right;
-      transition: all 0.2s ease;
-      opacity: 0;
-    }
-
-    .search-container.show {
-      display: flex;
-      transform: scale(1);
-      opacity: 1;
-    }
-
-    .search-input {
-      flex: 1;
-      border: 1px solid #e2e8f0;
-      border-radius: 4px;
-      padding: 8px 12px;
-      font-size: 14px;
-      outline: none;
-    }
-
-    .search-input:focus {
-      border-color: #3498db;
-    }
-
-    .search-btn {
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 16px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    .search-btn:hover {
-      background-color: #2980b9;
-    }
 
     .user-dropdown {
       position: absolute;
@@ -1158,13 +1081,7 @@
         <a href="learning.html" class="nav-link">学习</a>
         <a href="team.html" class="nav-link">团队</a>
     </div>
-    <div class="nav-tools">
-      <div class="search-icon" id="search-icon">🔍</div>
-      <div class="search-container" id="search-container">
-        <input type="text" class="search-input" placeholder="搜索题目、竞赛、文章..." />
-        <button class="search-btn">搜索</button>
-      </div>
-    </div>
+
     <div class="auth-buttons">
       <a href="javascript:void(0)" class="btn btn-outline">登录</a>
       <a href="javascript:void(0)" class="btn btn-primary">注册</a>
@@ -2009,50 +1926,21 @@
         }
       });
 
-      // 搜索和用户下拉菜单功能
+      // 用户下拉菜单功能
       const userAvatar = document.querySelector('.avatar-img');
       const userDropdown = document.querySelector('.user-dropdown');
-      const searchIcon = document.getElementById('search-icon');
-      const searchContainer = document.getElementById('search-container');
 
       // 点击头像时显示/隐藏下拉菜单
       if (userAvatar && userDropdown) {
         userAvatar.addEventListener('click', function(event) {
           event.stopPropagation();
           userDropdown.classList.toggle('show');
-
-          // 隐藏搜索框
-          if (searchContainer && searchContainer.classList.contains('show')) {
-            searchContainer.classList.remove('show');
-          }
         });
       }
 
-      // 搜索图标点击功能
-      if (searchIcon && searchContainer) {
-        searchIcon.addEventListener('click', function(event) {
-          event.stopPropagation();
-          searchContainer.classList.toggle('show');
-
-          // 隐藏用户下拉菜单
-          if (userDropdown && userDropdown.classList.contains('show')) {
-            userDropdown.classList.remove('show');
-          }
-
-          // 自动聚焦到搜索输入框
-          if (searchContainer.classList.contains('show')) {
-            const searchInput = searchContainer.querySelector('.search-input');
-            if (searchInput) {
-              setTimeout(() => searchInput.focus(), 100);
-            }
-          }
-        });
-      }
-
-      // 点击页面其他地方关闭下拉菜单和搜索框
+      // 点击页面其他地方关闭下拉菜单
       document.addEventListener('click', function() {
         if (userDropdown) userDropdown.classList.remove('show');
-        if (searchContainer) searchContainer.classList.remove('show');
       });
 
       // 退出登录功能
