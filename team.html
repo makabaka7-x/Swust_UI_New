@@ -3338,6 +3338,41 @@
       document.getElementById(modalId).classList.remove('show');
     }
 
+    // 头像下拉菜单功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const userAvatar = document.querySelector('.user-avatar');
+      const userDropdown = document.querySelector('.user-dropdown');
+
+      if (userAvatar && userDropdown) {
+        // 点击头像切换下拉菜单
+        userAvatar.addEventListener('click', function(e) {
+          e.stopPropagation();
+          userDropdown.classList.toggle('show');
+        });
+
+        // 点击页面其他地方关闭下拉菜单
+        document.addEventListener('click', function(e) {
+          if (!userAvatar.contains(e.target)) {
+            userDropdown.classList.remove('show');
+          }
+        });
+      }
+    });
+
+    // 处理个人主页点击
+    function showProfile() {
+      window.location.href = 'profile.html';
+    }
+
+    // 处理退出登录
+    function handleLogout() {
+      if (confirm('确定要退出登录吗？')) {
+        // 这里可以添加退出登录的逻辑
+        alert('退出登录成功！');
+        window.location.href = 'index.html';
+      }
+    }
+
     // 点击模态框背景关闭
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('modal')) {
